@@ -1,0 +1,5 @@
+#!/bin/bash
+# My first script
+
+echo git push heroku master
+echo git push hostgator master
