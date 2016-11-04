@@ -4,7 +4,6 @@ var should = require('should');
 var requestsUtile = require('../../../utile/requests.server.utile.js');
 var offerController = require('../../../controllers/offer.server.controller.js');
 var assert = require("assert");
-var supertest = require("supertest")("https://www.walmart.com.br");
 var apiZanox = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=fogao+brastemp&programs=12011";
 
 

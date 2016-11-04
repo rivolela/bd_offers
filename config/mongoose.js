@@ -14,7 +14,6 @@ module.exports = function(){
       			//console.log ('Succeeded connected to: ' + uristring);
       			console.log ('Data Base succeeded connected in env >> ', process.env.NODE_ENV);
       			require('../app/models/offer.server.model');
-				require('../app/models/review.server.model');
       		}
 		});
 		

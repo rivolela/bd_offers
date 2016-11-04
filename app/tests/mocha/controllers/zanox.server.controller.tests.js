@@ -45,7 +45,7 @@ describe('Zanox Unit Tests:',function(done){
 
 	describe('Testing context about the searched offers >>',function(){
 		it('Should return totalItems > 0',function(done){
-			this.timeout(4000);
+			this.timeout(10000);
 			var itemsByPage = 50;
 			zanox.getOffersContext(apiZanox,itemsByPage,function(totalPaginacao,totalItems,itemsByPage){
 				totalItems.should.be.above(0);
@@ -79,7 +79,7 @@ describe('Zanox Unit Tests:',function(done){
 
 
 		it('Should return total items by pagination {0} > 10',function(done){
-			this.timeout(4000);
+			this.timeout(10000);
 			var currentPage = 0;
 			var totalPagination = 1;
 			var paginationArray = [];

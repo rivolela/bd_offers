@@ -4,7 +4,7 @@ module.exports = {
 	db:'mongodb://127.0.0.1:27017/bd_dev',
 	sessionSecret:'developmentSessionSecret',
 	connectid:'43EEF0445509C7205827',
-	timeRequest:4000,
+	timeRequest:1000,
 
 	// Crawler Options 
 	// programs ids
@@ -12,28 +12,28 @@ module.exports = {
 	// 13212 : Ricardo Eletro BR
 	// 16588 : Lojas Colombo BR
 	// 12781 : Ponto Frio
-	programs:'16588,12781',
-	query:'geladeira',
+	programs:'12011,13212,16588,12781',
 
-	// proxy vpn secure
-	proxyAuth:'rivolela:Rovel@1976',
-	proxyUrl:'proxy-br1.vpnsecure.me:8080',
-	proxy:'http://rivolela:Rovel@1976@proxy-br1.vpnsecure.me:8080',
+	//queries
+	query_offer_zanox:'geladeira' + ',' +
+					'fogão' + ',' +
+					'microondas' + ',' +
+					'ar condicionado' + ',' +
+					'lavadora' + ',' +
+					'secadora' + ',' + 
+					'aspirador' + ',' +
+					'liquidificador' + ',' +
+					'batedeira' + ',' +
+					'panela elétrica' + ',' +
+					'ventilador',
+
+
+	query_offer_crawler_zanox:'fogão',
 
 	// schedule offers jobs
-	zanox_schedule:'2 11 * * *',
+	zanox_offer_schedule:'22 16 * * *',
+	zanox_offer_crawler_schedule:'15 17 * * *',
 
-	//schedule reviews job
-	walmart_schedule:'46 12 * * *',
-	ricardo_eletro_schedule:'7 18 * * *',
-	lojas_colombo_schedule:'12 13 * * *',
-	ponto_frio_schedule:'55 17 * * *',
-
-	// urls crawler
-	ricardo_eletro_url: 'http://www.ricardoeletro.com.br/Produto/',
-	lojas_colombo: 'https://www.colombo.com.br',
-	walmart_url: 'https://www.walmart.com.br/item/',
-	ponto_frio_url: 'http://www.pontofrio.com.br/'
 };
 
 
