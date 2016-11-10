@@ -133,6 +133,9 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 	
 	try{
 		if(currentItem < data.items){
+
+			console.log(data.productItems.productItem[currentItem]);
+
 			var offer = new Object({
 				name : data.productItems.productItem[currentItem].name,
 				ean : data.productItems.productItem[currentItem].ean,
@@ -140,9 +143,11 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 				merchantProductId : data.productItems.productItem[currentItem].merchantProductId,
 				url : data.productItems.productItem[currentItem].trackingLinks.trackingLink[0].ppc,
 				manufacturer: data.productItems.productItem[currentItem].manufacturer,
-				image: data.productItems.productItem[currentItem].image.medium,
+				image_medium: data.productItems.productItem[currentItem].image.medium,
+				image_large: data.productItems.productItem[currentItem].image.large,
 				price: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
+				categoryBD: config.query_offer_crawler_zanox,
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
@@ -155,6 +160,7 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 				offer.category = utf8_decode(offer.category);
 				offer.advertiser = utf8_decode(offer.advertiser);
 			}
+
 
 			productsArray.push(offer);
 

@@ -12,7 +12,7 @@ module.exports = {
 	// 13212 : Ricardo Eletro BR
 	// 16588 : Lojas Colombo BR
 	// 12781 : Ponto Frio
-	programs:'12011,13212,16588,12781',
+	programs:'12781',
 
 	//queries
 	query_offer_zanox:'geladeira' + ',' +
@@ -31,7 +31,7 @@ module.exports = {
 	query_offer_crawler_zanox:'fogão',
 
 	// schedule offers jobs
-	zanox_offer_schedule:'22 16 * * *',
+	zanox_offer_schedule:'38 18 * * *',
 	zanox_offer_crawler_schedule:'15 17 * * *',
 
 };

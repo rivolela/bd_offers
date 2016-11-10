@@ -25,36 +25,52 @@ describe('Offer Crawler Unit Tests:',function(done){
 				name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
 	  			ean:77777777777777,
 	  			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
+	  			categoryBD: config.query_offer_crawler_zanox,
 	  			merchantProductId: 1109777,
 	  			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  			advertiser:"walmart"
+	  			advertiser:"walmart",
+	  			price: 742.9,
+	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+  				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 			});
 
 			var data2 = new Object ({
 				name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
 	  			ean:88888888888888,
 	  			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
+	  			categoryBD: config.query_offer_crawler_zanox,
 	  			merchantProductId: 1109777,
 	  			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  			advertiser:"walmart"
+	  			advertiser:"walmart",
+	  			price: 742.9,
+	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+  				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 			});
 
 			var data3 = new Object ({
 				name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
 	  			ean:88888888888888,
 	  			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
+	  			categoryBD: config.query_offer_crawler_zanox,
 	  			merchantProductId: 1109777,
 	  			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  			advertiser:"walmart"
+	  			advertiser:"walmart",
+	  			price: 742.9,
+	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+  				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 			});
 
 			var dataToRemove = new Object ({
 				name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
 	  			ean:9999999999999,
 	  			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
+	  			categoryBD: config.query_offer_crawler_zanox,
 	  			merchantProductId: 1109777,
 	  			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  			advertiser:"walmart"
+	  			advertiser:"walmart",
+	  			price: 742.9,
+	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+  				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 			});
 
 			Context.dataToRemove = dataToRemove; 

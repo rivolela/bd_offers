@@ -7,7 +7,11 @@ var Offer_CrawlerSchema = new Schema({
     trim: true,
   },
   ean: Number,
+  image_medium:String,
+  image_large: String,
+  price: String,
   category: String,
+  categoryBD: String,
   merchantProductId: String,
   manufacturer:String,
   url: {
