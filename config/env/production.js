@@ -28,7 +28,7 @@ module.exports = {
 					'ventilador',
 
 
-	query_offer_crawler_zanox:'microondas',
+	query_offer_crawler_zanox:'ventilador',
 
 	// schedule offers jobs
 	zanox_offer_schedule:'0 8 * * *',
