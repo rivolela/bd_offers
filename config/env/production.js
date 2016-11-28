@@ -28,7 +28,7 @@ module.exports = {
 					'ventilador',
 
 
-	query_offer_crawler_zanox:'ventilador',
+	query_offer_crawler_zanox:'panela elétrica',
 
 	// schedule offers jobs
 	zanox_offer_schedule:'0 8 * * *',
