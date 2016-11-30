@@ -11,6 +11,9 @@ var urlJson = 'http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445
 describe('Requests Utile Server Tests:',function(){
 
 	it('Should return status code 200 from getJson',function(done){
+
+		this.timeout(2000);
+		
 		var call = new RequestsUtile();
 		var timeRequest = 0;
 

@@ -127,11 +127,10 @@ module.exports = function(grunt){
 	grunt.registerTask('default',['env:dev']);
 	grunt.registerTask('dev',['env:dev','jshint','concurrent:debug']);
 	grunt.registerTask('mocha',['env:test','server','mochaTest']);
-	grunt.registerTask('test',['env:test','server','casperjs','mochaTest']);
 	grunt.registerTask('job',['env:test_job','server','watch']);
-	
-
 	grunt.registerTask('dev',['env:dev','server','watch']);
+
+	grunt.registerTask('test',['env:test','server','casperjs','mochaTest']);
 
 	// grunt.registerTask('lint',['jshint','csslint']);
 };
