@@ -31,7 +31,7 @@ module.exports = {
 	query_offer_crawler_zanox:'batedeira',
 
 	// schedule offers jobs
-	zanox_offer_schedule:'15 16 * * *',
+	zanox_offer_schedule:'0 8 * * *',
 	zanox_offer_crawler_schedule:'0 10 * * *',
 
 };
