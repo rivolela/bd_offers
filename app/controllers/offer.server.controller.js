@@ -31,6 +31,10 @@ var setReviewsCounterOffer = function(offer,next){
 				offer.countSad = result[0].countSad;
 				offer.countHappy = result[0].countHappy;
 				offer.totalReviews = result[0].totalReviews;
+			}else{
+				offer.countSad = 0;
+				offer.countHappy = 0;
+				offer.totalReviews = 0;
 			}
 
 			return next(offer);
