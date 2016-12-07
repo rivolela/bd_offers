@@ -96,7 +96,7 @@ describe('Offer Crawler Unit Tests:',function(done){
 		it('Should save array offers in bd >>',function(done){
 			this.timeout(4000);
 			var currentItem = 0;
-			offerController.saveOffersPickoout(currentItem,Context.arrayProducts,function(productsArray){
+			offerController.saveArray(currentItem,Context.arrayProducts,function(productsArray){
 				productsArray.length.should.be.equal(3);
 				done();
 			});

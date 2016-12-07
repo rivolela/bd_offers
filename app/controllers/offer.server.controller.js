@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var OfferSchema = require('../models/offer.server.model');
 var Offer = mongoose.model( 'Offer', OfferSchema);
+var reviewController = require('./review.server.controller.js');
 
 var flatten = require('flat'),
 	requestsUtile = require('../utile/requests.server.utile.js'),
@@ -17,14 +18,49 @@ var flatten = require('flat'),
 var call = new requestsUtile();
 
 
-var saveOffersPickoout = function(currentItem,productsArray,next){
+var setReviewsCounterOffer = function(offer,next){
 
-	if(currentItem < productsArray.length){
-		saveOfferBD(productsArray[currentItem],function(){
-			saveOffersPickoout(currentItem+1,productsArray,next);
+	console.log("offer",offer);
+
+	try{
+		reviewController.getReviewsCounterByEan(offer.ean,function(result){
+			
+			console.log("result",result);
+
+			if(result.length > 0){
+				offer.countSad = result[0].countSad;
+				offer.countHappy = result[0].countHappy;
+				offer.totalReviews = result[0].totalReviews;
+			}
+
+			return next(offer);
 		});
-	}else{
-		return next(productsArray);
+		
+	}catch(e){
+		console.log('An error has occurred: '+ e.message);
+	}
+};
+
+
+var saveArray = function(currentItem,productsArray,next){
+
+	try{
+		if(currentItem < productsArray.length){
+
+			var offer = productsArray[currentItem];
+
+			setReviewsCounterOffer(offer,function(offerWithReviews){
+
+				saveOfferBD(offerWithReviews,function(){
+					saveArray(currentItem+1,productsArray,next);
+				});
+			});
+
+		}else{
+			return next(productsArray);
+		}
+	}catch(e){
+		console.log('An error has occurred: ' + e.message);
 	}
 };
 
@@ -45,7 +81,7 @@ var saveOfferBD = function(data,next){
 		});
 
 	}catch(e){
-		console.log('An error has occurred: '+ e.message);
+		console.log('An error has occurred: ' + e.message);
 	}
 };
 
@@ -94,11 +130,12 @@ var getOffersBD = function(query,next){
 };
 
 
-exports.saveOffersPickoout = saveOffersPickoout;
+exports.saveArray = saveArray;
 exports.saveOfferBD = saveOfferBD;
 exports.getOffersBD = getOffersBD;
 exports.deleteOfferBD = deleteOfferBD;
 exports.deleteCollectionOffersBD = deleteCollectionOffersBD;
 exports.Offer = Offer;
+exports.setReviewsCounterOffer = setReviewsCounterOffer;
 
 

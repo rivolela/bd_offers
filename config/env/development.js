@@ -15,24 +15,24 @@ module.exports = {
 	programs:'12781',
 
 	//queries
-	query_offer_zanox:'geladeira' + ',' +
-					'fogão' + ',' +
-					'microondas' + ',' +
-					'ar condicionado' + ',' +
-					'lavadora' + ',' +
-					'secadora' + ',' + 
-					'aspirador' + ',' +
-					'liquidificador' + ',' +
-					'batedeira' + ',' +
-					'panela elétrica' + ',' +
-					'ventilador',
+	query_offer_zanox:'geladeira',
+					// 'fogão' + ',' +
+					// 'microondas' + ',' +
+					// 'ar condicionado' + ',' +
+					// 'lavadora' + ',' +
+					// 'secadora' + ',' + 
+					// 'aspirador' + ',' +
+					// 'liquidificador' + ',' +
+					// 'batedeira' + ',' +
+					// 'panela elétrica' + ',' +
+					// 'ventilador',
 
 
 	query_offer_crawler_zanox:'fogão',
 
 	// schedule offers jobs
-	zanox_offer_schedule:'12 18 * * *',
-	zanox_offer_crawler_schedule:'15 17 * * *',
+	zanox_offer_schedule:'11 11 * * *',
+	zanox_offer_crawler_schedule:'15 11 * * *',
 
 };
 

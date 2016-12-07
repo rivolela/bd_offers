@@ -58,9 +58,9 @@ function start(urlSearchOffers,next){
 
 		    				console.log("callback get products by pagination >>");
 
-		    				offerController.saveOffersPickoout(currentItem,productsArray,function(productsArray){
+		    				offerController.saveArray(currentItem,productsArray,function(productsArray){
 
-		    					console.log("callback saveOffersPickoout");
+		    					console.log("callback saveArray");
 
 		    					console.log("total offfers saved >> ",productsArray.length);
 

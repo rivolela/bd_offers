@@ -17,11 +17,11 @@ var flatten = require('flat'),
 var call = new requestsUtile();
 
 
-var saveOffersPickoout = function(currentItem,productsArray,next){
+var saveArray = function(currentItem,productsArray,next){
 
 	if(currentItem < productsArray.length){
 		saveOfferBD(productsArray[currentItem],function(){
-			saveOffersPickoout(currentItem+1,productsArray,next);
+			saveArray(currentItem+1,productsArray,next);
 		});
 	}else{
 		return next(productsArray);
@@ -94,7 +94,7 @@ var getOffersBD = function(query,next){
 };
 
 
-exports.saveOffersPickoout = saveOffersPickoout;
+exports.saveArray = saveArray;
 exports.saveOfferBD = saveOfferBD;
 exports.getOffersBD = getOffersBD;
 exports.deleteOfferBD = deleteOfferBD;

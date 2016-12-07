@@ -33,24 +33,12 @@ module.exports = function(grunt){
 		},
 		mochaTest:{
 			//src:'app/tests/mocha/utile/requests.server.utile.tests.js',
-			//src:'app/tests/mocha/controllers/offer.crawler.server.controller.tests.js',
+			//src:'app/tests/mocha/controllers/offer.server.controller.tests.js',
 			src:'app/tests/mocha/**/*.js',
 			options:{
 				reporter:'spec'
 			}
 		},
-		// karma:{
-		// 	unit:{
-		// 		configFile:'karma.conf.js'
-		// 	}
-		// },
-		// protractor:{
-		// 	e2e:{
-		// 		options:{
-		// 			configFile:'protractor.conf.js'
-		// 		}
-		// 	}
-		// },
 		jshint:{
 			options:{
 				esversion:6
@@ -61,24 +49,6 @@ module.exports = function(grunt){
 					'app/**/*.js']
 			}
 		},
-		// csslint:{
-		// 	all:{
-		// 		src:'public/modules/**/*.css'
-		// 	}
-		// },
-		// less: {
-  //     		dev: {
-  //       		options: {
-  //         			compress: true,
-  //         			yuicompress: true,
-  //         			optimization: 2
-  //       		},
-  //       		files: {
-  //         			"public/css/custom_bootstrap.css": "public/css/custom_bootstrap.less" // destination file and source file,
-
-  //       		}
-  //     		}
-  //  		},
 		watch:{
 			js:{
 				files:['server.js',
@@ -109,10 +79,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-env');
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-mocha-test');
-	//grunt.loadNpmTasks('grunt-karma');
-	grunt.loadNpmTasks('grunt-protractor-runner');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-node-inspector');
@@ -128,9 +95,9 @@ module.exports = function(grunt){
 	grunt.registerTask('dev',['env:dev','jshint','concurrent:debug']);
 	grunt.registerTask('mocha',['env:test','server','mochaTest']);
 	grunt.registerTask('job',['env:test_job','server','watch']);
-	grunt.registerTask('dev',['env:dev','server','watch']);
+	// grunt.registerTask('dev',['env:dev','server','watch']);
 
-	grunt.registerTask('test',['env:test','server','casperjs','mochaTest']);
+	grunt.registerTask('test',['env:test','jshint','server','mochaTest']);
 
 	// grunt.registerTask('lint',['jshint','csslint']);
 };

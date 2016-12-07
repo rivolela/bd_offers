@@ -30,6 +30,9 @@ var OfferSchema = new Schema({
     type:Date,
     default: Date.now
   },
+  countSad: Number,
+  countHappy: Number,
+  totalReviews: Number
 });
 
 // middleware to handle attributes before to save
@@ -46,6 +49,8 @@ OfferSchema.pre('save',function(next){
   next();
 });
 
+
+// index used to text searc
 OfferSchema.index({name: 'text',manufacturer:'text',category:'text'},
   {name: 'My text index', weights: {category: 10, name: 4, manufacturer: 2}});
 
