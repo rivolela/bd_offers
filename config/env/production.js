@@ -27,7 +27,7 @@ module.exports = {
 					'ventilador',
 
 
-	query_offer_crawler_zanox:'batedeira',
+	query_offer_crawler_zanox:'liquidificador',
 
 	// schedule offers jobs
 	zanox_offer_schedule:'0 8 * * *',
