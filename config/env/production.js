@@ -29,6 +29,7 @@ module.exports = {
 
 	query_offer_crawler_zanox:'liquidificador',
 
+
 	// schedule offers jobs
 	zanox_offer_schedule:'0 8 * * *',
 	zanox_offer_crawler_schedule:'0 10 * * *',
