@@ -116,7 +116,7 @@ describe('Offer Unit Tests:',function(done){
 			
 			offerController.getOffersBD(query,function(offersArray){
 				console.log(offersArray);
-				offersArray.length.should.be.equal(4);
+				offersArray.length.should.be.equal(1);
 				done();
 			});
 		});

@@ -24,9 +24,6 @@ var setReviewsCounterOffer = function(offer,next){
 
 	try{
 		reviewController.getReviewsCounterByEan(offer.ean,function(result){
-			
-			console.log("result",result);
-
 			if(result.length > 0){
 				offer.countSad = result[0].countSad;
 				offer.countHappy = result[0].countHappy;
@@ -45,23 +42,32 @@ var setReviewsCounterOffer = function(offer,next){
 	}
 };
 
-
-var saveArray = function(currentItem,productsArray,next){
+/**
+ * @description save array of offer ( pre-condition: offer needs to have totalReviews > 0) )
+ * @param  {currentItem}
+ * @param  {productsArray}
+ * @param  {next}
+ * @return {offersArray}
+ */
+var saveArray = function(currentItem,offersArray,next){
 
 	try{
-		if(currentItem < productsArray.length){
+		if(currentItem < offersArray.length){
 
-			var offer = productsArray[currentItem];
+			var offer = offersArray[currentItem];
 
 			setReviewsCounterOffer(offer,function(offerWithReviews){
-
-				saveOfferBD(offerWithReviews,function(){
-					saveArray(currentItem+1,productsArray,next);
-				});
+				if(offerWithReviews.totalReviews > 0){
+					saveOfferBD(offerWithReviews,function(){
+						saveArray(currentItem+1,offersArray,next);
+					});
+				}else{
+					saveArray(currentItem+1,offersArray,next);
+				}				
 			});
 
 		}else{
-			return next(productsArray);
+			return next(offersArray);
 		}
 	}catch(e){
 		console.log('An error has occurred: ' + e.message);

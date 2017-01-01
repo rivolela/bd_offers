@@ -27,7 +27,7 @@ module.exports = {
 					'ventilador',
 
 
-	query_offer_crawler_zanox:'secadora',
+	query_offer_crawler_zanox:'geladeira',
 
 
 	// schedule offers jobs

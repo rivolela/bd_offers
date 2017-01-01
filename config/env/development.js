@@ -1,7 +1,7 @@
 module.exports = {
 
 	// Development configuration options
-	db:'mongodb://127.0.0.1:27017/bd_dev',
+	db:'mongodb://teste1:teste1234@ds145138.mlab.com:45138/heroku_l4pp17t7',
 	sessionSecret:'developmentSessionSecret',
 	connectid:'43EEF0445509C7205827',
 	timeRequest:1000,
@@ -15,24 +15,24 @@ module.exports = {
 	programs:'12011,13212,16588,12781',
 
 	//queries
-	query_offer_zanox:'geladeira' + ',' +
-					'fogão' + ',' +
-					'microondas' + ',' +
-					'ar condicionado' + ',' +
-					'lavadora' + ',' +
-					'secadora' + ',' + 
-					'aspirador' + ',' +
-					'liquidificador' + ',' +
-					'batedeira' + ',' +
-					'panela elétrica' + ',' +
-					'ventilador',
+	query_offer_zanox:'geladeira',
+					// 'fogão' + ',' +
+					// 'microondas' + ',' +
+					// 'ar condicionado' + ',' +
+					// 'lavadora' + ',' +
+					// 'secadora' + ',' + 
+					// 'aspirador' + ',' +
+					// 'liquidificador' + ',' +
+					// 'batedeira' + ',' +
+					// 'panela elétrica' + ',' +
+					// 'ventilador',
 
 
-	query_offer_crawler_zanox:'fogão',
+	query_offer_crawler_zanox:'geladeira',
 
 	// schedule offers jobs
-	zanox_offer_schedule:'41 12 * * *',
-	zanox_offer_crawler_schedule:'15 11 * * *',
+	zanox_offer_schedule:'34 10 * * *',
+	zanox_offer_crawler_schedule:'23 11 * * *',
 
 };
 
