@@ -31,6 +31,7 @@ describe('Offer Unit Tests:',function(done){
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
+  			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 		});
@@ -44,6 +45,7 @@ describe('Offer Unit Tests:',function(done){
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
+  			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 		});
@@ -57,6 +59,7 @@ describe('Offer Unit Tests:',function(done){
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
+  			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 		});
@@ -70,6 +73,7 @@ describe('Offer Unit Tests:',function(done){
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
+  			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
 		});

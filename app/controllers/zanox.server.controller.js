@@ -146,6 +146,7 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 				image_medium: data.productItems.productItem[currentItem].image.medium,
 				image_large: data.productItems.productItem[currentItem].image.large,
 				price: data.productItems.productItem[currentItem].price,
+				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				categoryBD: config.query_offer_crawler_zanox,
 			});

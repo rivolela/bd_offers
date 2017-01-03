@@ -31,7 +31,7 @@ module.exports = {
 	query_offer_crawler_zanox:'geladeira',
 
 	// schedule offers jobs
-	zanox_offer_schedule:'34 10 * * *',
+	zanox_offer_schedule:'35 0 * * *',
 	zanox_offer_crawler_schedule:'23 11 * * *',
 
 };
