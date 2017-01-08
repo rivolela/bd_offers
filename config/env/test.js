@@ -3,7 +3,7 @@ module.exports = {
 	// Test configuration options
 	db:'mongodb://127.0.0.1:27017/bd_test',
 	sessionSecret:'testSessionSecret',
-	connectid:'43EEF0445509C7205827',
+	connectid:'A3697E2455EA755B758F',
 	timeRequest:1000,
 
 	// Crawler Options 
