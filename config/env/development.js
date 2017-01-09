@@ -15,8 +15,8 @@ module.exports = {
 	programs:'12011,13212,16588,12781',
 
 	//queries
-	query_offer_zanox:'geladeira',
-					// 'fogão' + ',' +
+	query_offer_zanox:'geladeira' + ',' +
+					'fogão',
 					// 'microondas' + ',' +
 					// 'ar condicionado' + ',' +
 					// 'lavadora' + ',' +
@@ -28,11 +28,11 @@ module.exports = {
 					// 'ventilador',
 
 
-	query_offer_crawler_zanox:'geladeira',
+	query_offer_crawler_zanox:'fogão',
 
 	// schedule offers jobs
 	zanox_offer_schedule:'35 0 * * *',
-	zanox_offer_crawler_schedule:'23 11 * * *',
+	zanox_offer_crawler_schedule:'15 0 * * *',
 
 };
 
