@@ -1,6 +1,5 @@
 var flatten = require('flat');
 var requestsUtile = require('../utile/requests.server.utile.js');
-var urlZanox;
 var Offer = require('../controllers/offer.server.controller.js');
 var config = require('../../config/config.js');
 var utf8_decode = require('locutus/php/xml/utf8_decode');
@@ -13,8 +12,6 @@ var getOffersContext = function(url,itemsByPage,next){
 
 		var call = new requestsUtile();
 		var timeRequest = 0;
-
-		urlZanox = url;
 
 		call.getJson(url,timeRequest,function(data){
 			var totalItems = Number(data.total);
@@ -38,32 +35,18 @@ var getOffersContext = function(url,itemsByPage,next){
 };
 
 
-var getPagination = function(currentPage,totalPaginacao,next){
+var getPagination = function(currentPage,totalPaginacao,url,next){
 	
-	var call = new requestsUtile();
-
 	console.log("currentPage >>",currentPage);
 
-	// currentPage 1 < totalPaginacao(10) 
 	if(currentPage < totalPaginacao){
 
 		var pagination = new Object();// jshint ignore:line
-		pagination.url = urlZanox + "&page=" + currentPage;
+		pagination.url = url + "&page=" + currentPage;
   		paginationArray.push(pagination);
   		console.log("pagination >>",pagination);
-		getPagination(currentPage+1,totalPaginacao,next);
+		getPagination(currentPage+1,totalPaginacao,url,next);
    
-    // totalPaginacao < 0
-	}else if(totalPaginacao < 0){
-
-		totalPaginacao = 0;
-		var pagination = new Object();// jshint ignore:line
-		pagination.url = urlZanox + "&page=" + currentPage;
-  		paginationArray.push(pagination);
-  		console.log("pagination >>",pagination);
-		getPagination(currentPage+1,totalPaginacao,next);
-
-	// currentPage 10 == totalPaginacao(10) 
 	}else{
 		return next(paginationArray);
 	}

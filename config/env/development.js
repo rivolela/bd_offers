@@ -42,8 +42,9 @@ module.exports = {
 	dep_eletro:'eletrodomésticos',
 
 	// schedule offers jobs
-	schedule_eletro_01:'16 20 * * *',
-	schedule_eletro_02:'44 18 * * *',
+	schedule_eletro_01:'37 10 * * *',
+	schedule_eletro_02:'18 10 * * *',
+	
 	zanox_offer_crawler_schedule:'15 0 * * *',
 
 };

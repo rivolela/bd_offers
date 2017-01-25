@@ -20,8 +20,6 @@ var call = new requestsUtile();
 
 var setReviewsCounterOffer = function(offer,next){
 
-	console.log("offer",offer);
-
 	try{
 		reviewController.getReviewsCounterByEan(offer.ean,function(result){
 			if(result.length > 0){
@@ -38,7 +36,7 @@ var setReviewsCounterOffer = function(offer,next){
 		});
 		
 	}catch(e){
-		console.log('An error has occurred: '+ e.message);
+		console.log('An error has occurred: setReviewsCounterOffer >> '+ e.message);
 	}
 };
 
@@ -102,10 +100,10 @@ var saveOfferBD = function(data,next){
   	
 	  	offer.save(function(err){
 			if(err){
-				console.log(err);
+				console.log("offer not saved >>",err);
 				return next(err);
 			}else{
-				console.log("offer saved:",offer);
+				console.log("offer saved");
 				return next();
 			}
 		});
@@ -134,10 +132,11 @@ var deleteOfferBD = function(data,next){
 
 var deleteCollectionOffersBD = function(group,departament,next){
 
+	console.log("deleteCollectionOffersBD >>",departament,">>",group);
 
   	Offer.remove({$and: [
           {programGroup: group},
-          {departament:departament}
+          {departamentBD:departament}
       ]},function(err){
 		if(err){
 			console.log(err);

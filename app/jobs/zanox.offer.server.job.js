@@ -61,7 +61,7 @@ function start(urlSearchOffers,query,programs,group,departament,next){
 				
 				console.log("callback getOffersContext >> ");
 				
-				zanoxController.getPagination(currentPage,totalPaginacao,function(paginationArray){
+				zanoxController.getPagination(currentPage,totalPaginacao,url,function(paginationArray){
 					
 	    			console.log("callback get items by page >>",paginationArray);
 	    			

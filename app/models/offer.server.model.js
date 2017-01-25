@@ -21,7 +21,6 @@ var OfferSchema = new Schema({
     type:String,
     index: true 
   },
-  categoryBD: String,
   merchantProductId: String,
   manufacturer:{
     type:String,

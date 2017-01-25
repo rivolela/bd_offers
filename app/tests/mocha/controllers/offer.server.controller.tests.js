@@ -26,56 +26,60 @@ describe('Offer Unit Tests:',function(done){
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
   			ean:77777777777777,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
-  			categoryBD: config.query_offer_crawler_zanox,
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
+			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			departamentBD: config.dep_eletro,
+  			programGroup: config.programs_label_01
 		});
 
 		var data2 = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
   			ean:88888888888888,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
-  			categoryBD: config.query_offer_crawler_zanox,
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
+			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			departamentBD: config.dep_eletro,
+  			programGroup: config.programs_label_01
 		});
 
 		var data3 = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
   			ean:88888888888888,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
-  			categoryBD: config.query_offer_crawler_zanox,
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
+			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			departamentBD: config.dep_eletro,
+  			programGroup: config.programs_label_01
 		});
 
 		var dataToRemove = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
   			ean:9999999999999,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
-  			categoryBD: config.query_offer_crawler_zanox,
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
   			price: 742.9,
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250"
+			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			departamentBD: config.dep_eletro,
+  			programGroup: config.programs_label_01
 		});
 
 		Context.dataToRemove = dataToRemove; 
@@ -90,21 +94,11 @@ describe('Offer Unit Tests:',function(done){
 	});
   
 
-	describe('Testing BD >>',function(){
-
+  	describe('Testing Offer Model Functions >>',function(){
+  		console.log("antes",Context.dataToRemove);
 		it('Should save one offer in bd >>',function(done){
-			offerController.saveOfferBD(Context.dataToRemove,function(err){
-				should.not.exist(err);
-				done();
-			});
-		});
-
-
-		it('Should save array offers in bd >>',function(done){
-			this.timeout(4000);
-			var currentItem = 0;
-			offerController.saveArray(currentItem,Context.arrayProducts,function(productsArray){
-				productsArray.length.should.be.equal(3);
+			offerController.saveOfferBD(Context.dataToRemove,function(error){
+				should.not.exist(error);
 				done();
 			});
 		});
@@ -129,13 +123,11 @@ describe('Offer Unit Tests:',function(done){
 		it('Should remove object BD and not return err >>',function(done){
 			this.timeout(4000);
 			var currentItem = 0;
-			console.log("object",Context.dataToRemove);
 			offerController.deleteOfferBD(Context.dataToRemove,function(err){
 				should.not.exist(err);
 				done();
 			});
 		});
-
 	});
 
 
@@ -248,19 +240,21 @@ describe('Offer Unit Tests:',function(done){
 		});
 
 
-		after(function(){
-			reviewController.deleteAllReviews(function(){
-				console.log("reviews removed from test BD");
+		it('Should save offer in bd with reviews >>',function(done){
+			offerController.saveOfferWithReviews(Context.arrayProducts[0],function(error){
+				should.not.exist(error);
+				done();
 			});
 		});
-
-	})
+	});
 
 
 	after(function(){
 		this.timeout(4000);
-		offerController.deleteCollectionOffersBD(function(){
-			console.log("bd clean");
+		offerController.deleteCollectionOffersBD(config.programs_label_01,config.dep_eletro,function(){
+		});
+
+		reviewController.deleteAllReviews(function(){
 		});
 	});
 
