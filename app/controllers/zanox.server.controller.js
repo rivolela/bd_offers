@@ -4,7 +4,8 @@ var urlZanox;
 var Offer = require('../controllers/offer.server.controller.js');
 var config = require('../../config/config.js');
 var utf8_decode = require('locutus/php/xml/utf8_decode');
-
+var offerController = require('../controllers/offer.server.controller.js');
+var paginationArray = [];
 
 var getOffersContext = function(url,itemsByPage,next){
 
@@ -37,70 +38,48 @@ var getOffersContext = function(url,itemsByPage,next){
 };
 
 
-var getPagination = function(currentPage,totalPaginacao,paginationArray,next){
+var getPagination = function(currentPage,totalPaginacao,next){
 	
 	var call = new requestsUtile();
 
+	console.log("currentPage >>",currentPage);
+
+	// currentPage 1 < totalPaginacao(10) 
 	if(currentPage < totalPaginacao){
+
 		var pagination = new Object();// jshint ignore:line
 		pagination.url = urlZanox + "&page=" + currentPage;
   		paginationArray.push(pagination);
-		getPagination(currentPage+1,totalPaginacao,paginationArray,next);
-	}else if( totalPaginacao < 0){
+  		console.log("pagination >>",pagination);
+		getPagination(currentPage+1,totalPaginacao,next);
+   
+    // totalPaginacao < 0
+	}else if(totalPaginacao < 0){
+
 		totalPaginacao = 0;
 		var pagination = new Object();// jshint ignore:line
 		pagination.url = urlZanox + "&page=" + currentPage;
   		paginationArray.push(pagination);
-		getPagination(currentPage+1,totalPaginacao,paginationArray,next);
-		
+  		console.log("pagination >>",pagination);
+		getPagination(currentPage+1,totalPaginacao,next);
+
+	// currentPage 10 == totalPaginacao(10) 
 	}else{
 		return next(paginationArray);
 	}
 };
 
 
-var getItemsByPagination = function(currentPage,paginationArray,next){
-
-	try{
-		var call = new requestsUtile();
-
-		if(currentPage < paginationArray.length){
-
-			console.log("getItemsByPagination >> ",paginationArray[currentPage].url);
-
-			call.getJson(paginationArray[currentPage].url,config.timeRequest,function(json,response,error) {
-	    		if(error) {
-	        		console.log('error: '+ error.message);
-	      		}
-	      		else {
-	      			flatten(json),{ 
-		   				maxDepth: 10 
-		   			};// jshint ignore:line
-		   			paginationArray[currentPage].items = json.items;
-
-		   			getItemsByPagination(currentPage+1,paginationArray,next);
-				}
-	    	});
-		}else{
-			return next(paginationArray);
-		}
-	}catch(error){
-		console.log(error);
-	}
-};
-
-
-var getProductsByPagination = function(currentPage,paginationArray,productsArray,next){
+var getOffersPagination = function(currentPage,paginationArray,group,departament,next){
 
 	try{
 		if(currentPage < paginationArray.length){
 
 			var call = new requestsUtile();
-			var timeRequest = 0;
 
-			call.getJson(paginationArray[currentPage].url,timeRequest,function(json,response,error) {
+			call.getJson(paginationArray[currentPage].url,config.timeRequest,function(json,response,error) {
 
-				console.log("getProductsByPagination >> ",paginationArray[currentPage].url);
+				console.log("getOffersPagination >> ",paginationArray[currentPage].url);
 
 	    		if(error) {
 	        		console.log('error: '+ error);
@@ -112,24 +91,25 @@ var getProductsByPagination = function(currentPage,paginationArray,productsArray
 
 		   			var currentItem = 0;
 
-		   			getDetailsProductsArray(currentItem,json,productsArray,function(productsArray){
-						getProductsByPagination(currentPage+1,paginationArray,productsArray,next);
+		   			saveOffersPagination(currentItem,json,group,departament,function(){
+						getOffersPagination(currentPage+1,paginationArray,group,departament,next);
 					});
 
 				}
 		  	});
 		}	
 		else{
-			return next(productsArray);
+			return next();
 		}
 	}catch(error){
 		console.log(error);
+		throw error;
 	}
 	
 };
 
 
-var getDetailsProductsArray = function(currentItem,data,productsArray,next){
+var saveOffersPagination = function(currentItem,data,group,departament,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -148,7 +128,8 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 				price: data.productItems.productItem[currentItem].price,
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
-				categoryBD: config.query_offer_crawler_zanox,
+				departamentBD: departament,
+				programGroup: group
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
@@ -162,25 +143,24 @@ var getDetailsProductsArray = function(currentItem,data,productsArray,next){
 				offer.advertiser = utf8_decode(offer.advertiser);
 			}
 
-
-			productsArray.push(offer);
-
-			getDetailsProductsArray(currentItem+1,data,productsArray,next);
+			offerController.saveOfferWithReviews(offer,function(){
+				saveOffersPagination(currentItem+1,data,group,departament,next);
+			});
 
 		}else{
-		  return next(productsArray);
+		  return next();
 		}
 	}catch(error){
 		console.log(error);
+		throw error;
 	}
 	
 };
 
 
 
-exports.getProductsByPagination = getProductsByPagination;
-exports.getItemsByPagination = getItemsByPagination;
-exports.getDetailsProductsArray = getDetailsProductsArray;
+exports.getOffersPagination = getOffersPagination;
+exports.saveOffersPagination = saveOffersPagination;
 exports.getPagination = getPagination;
 exports.getOffersContext = getOffersContext;
 

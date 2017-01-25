@@ -98,20 +98,19 @@ describe('Zanox Unit Tests:',function(done){
 
 
 	describe('Testing get offers >>',function(){
-		it('Should return array of products > 10 from pagination {0}',function(done){
+		it('Should not to return error',function(done){
 			this.timeout(6000);
 			var currentPage = 0;
 			var currentItem = 0;
 			var paginationArray = [];
-			var productsArray = [];
 
 			var pagination = new Object();
 			pagination.url = "https://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&programs=12011&q=geladeira%20brastemp&merchantcategory=Eletrodomésticos / Fogões / Fogão 4 bocas&items=50&page=0";
 			pagination.items = 10;
 			paginationArray.push(pagination);
 
-			zanox.getProductsByPagination(currentPage,paginationArray,productsArray,function(productsArray){
-				productsArray.length.should.be.above(10);
+			zanox.getOffersPagination(currentPage,paginationArray,function(error){
+				should.not.exist(error);
 				done();
 			});
 		});

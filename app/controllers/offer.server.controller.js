@@ -75,6 +75,26 @@ var saveArray = function(currentItem,offersArray,next){
 };
 
 
+var saveOfferWithReviews = function(offer,next){
+
+	try{
+
+		setReviewsCounterOffer(offer,function(offerWithReviews){
+			if(offerWithReviews.totalReviews > 0){
+				saveOfferBD(offerWithReviews,function(){
+					return next();
+				});
+			}else{
+				return next();
+			}				
+		});
+
+	}catch(e){
+		console.log('An error has occurred: ' + e.message);
+	}
+};
+
+
 var saveOfferBD = function(data,next){
 
 	try{
@@ -112,9 +132,13 @@ var deleteOfferBD = function(data,next){
 };
 
 
-var deleteCollectionOffersBD = function(next){
+var deleteCollectionOffersBD = function(group,departament,next){
 
-  	Offer.remove({},function(err){
+
+  	Offer.remove({$and: [
+          {programGroup: group},
+          {departament:departament}
+      ]},function(err){
 		if(err){
 			console.log(err);
 			return next(err);
@@ -147,5 +171,6 @@ exports.deleteOfferBD = deleteOfferBD;
 exports.deleteCollectionOffersBD = deleteCollectionOffersBD;
 exports.Offer = Offer;
 exports.setReviewsCounterOffer = setReviewsCounterOffer;
+exports.saveOfferWithReviews = saveOfferWithReviews;
 
 

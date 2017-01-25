@@ -38,7 +38,9 @@ var OfferSchema = new Schema({
   },
   countSad: Number,
   countHappy: Number,
-  totalReviews: Number
+  totalReviews: Number,
+  departamentBD: String,
+  programGroup: String
 });
 
 
@@ -82,7 +84,6 @@ function formatPrice(price_display){
   }
 
   retorno += inteiros+""+separdor_decimal+""+centavos;
-  console.log("retorno",retorno);
  
   return 'R$ ' + retorno;
 };

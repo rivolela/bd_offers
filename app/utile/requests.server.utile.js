@@ -14,7 +14,6 @@ module.exports = function(){
 		timeRequestHtml = timeRequest;
 
 		setTimeout(timeControlCrawler,timeRequestHtml,function(){
-
 			request({
 	  			url: searchUrl, //URL to hit
 	 			method: 'GET', //Specify the method

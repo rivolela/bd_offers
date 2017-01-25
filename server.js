@@ -5,7 +5,8 @@ var mongoose = require('./config/mongoose'),
  	cron = require('node-cron'),
  	async = require('async'),
  	// job to get offer
- 	zanoxOfferJob = require('./app/jobs/zanox.offer.server.job.js')
+ 	job_eletro_01 = require('./app/jobs/zanox.offer.server.job.js'),
+ 	job_eletro_02 = require('./app/jobs/zanox.offer.server.job.js'),
 	zanoxOfferCrawlerJob = require('./app/jobs/zanox.offer.crawler.server.job.js');
 
 
@@ -28,7 +29,8 @@ app.listen(server_port,function() {
 
 
 // job to get offer
-zanoxOfferJob.starJob();
+job_eletro_01.startEletroJob_01();
+job_eletro_02.startEletroJob_02();
 zanoxOfferCrawlerJob.starJob();
 
 

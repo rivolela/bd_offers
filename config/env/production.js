@@ -31,7 +31,7 @@ module.exports = {
 
 
 	// schedule offers jobs
-	zanox_offer_schedule:'1 12 * * *',
+	zanox_offer_schedule:'52 12 * * *',
 	zanox_offer_crawler_schedule:'0 10 * * *',
 
 };
