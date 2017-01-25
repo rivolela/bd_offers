@@ -43,7 +43,7 @@ module.exports = {
 
 	// schedule offers jobs
 	schedule_eletro_01:'37 10 * * *',
-	schedule_eletro_02:'18 10 * * *',
+	schedule_eletro_02:'13 13 * * *',
 	
 	zanox_offer_crawler_schedule:'15 0 * * *',
 

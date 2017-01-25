@@ -27,7 +27,7 @@ module.exports = {
 	query_eletro:'geladeira' + ',' +
 					'fogão' + ',' +
 					'microondas' + ',' +
-					'ar condicionado' + ',' +
+					'depurador de ar' + ',' +
 					'lavadora' + ',' +
 					'secadora' + ',' + 
 					'aspirador' + ',' +
@@ -38,10 +38,12 @@ module.exports = {
 
 	query_offer_crawler_zanox:'geladeira',
 
+	//departaments
+	dep_eletro:'eletrodomésticos',
 
 	// schedule offers jobs
-	schedule_eletro_01:'58 12 * * *',
-	schedule_eletro_02:'18 10 * * *',
+	schedule_eletro_01:'0 1 * * *',
+	schedule_eletro_02:'0 2 * * *',
 	
 	zanox_offer_crawler_schedule:'0 10 * * *',
 
