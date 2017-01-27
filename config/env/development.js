@@ -24,6 +24,8 @@ module.exports = {
 	programs_group_02:'12785,12784,13604,18878,13602',
 	programs_label_02:'group_02',
 	
+	// offer crawler job
+	
 	//queries
 	query_eletro:'geladeira' + ',' +
 					'fogão' + ',' +
@@ -36,17 +38,25 @@ module.exports = {
 					'batedeira' + ',' +
 					'ventilador',
 
-	query_offer_crawler_zanox:'fogão',
-
 	//departaments
 	dep_eletro:'eletrodomésticos',
 
 	// schedule offers jobs
-	schedule_eletro_01:'37 10 * * *',
+	schedule_eletro_01:'34 9 * * *',
 	schedule_eletro_02:'13 13 * * *',
-	
-	zanox_offer_crawler_schedule:'15 0 * * *',
 
+	// end offer crawler job
+
+
+	// crawler job
+
+	query_crawler_group_01:'aspirador',
+	query_crawler_group_02:'aspirador',
+	
+	schedule_crawler_group_01:'40 11 * * *',
+	schedule_crawler_group_02:'42 11 * * *',
+
+	// end crawler job
 };
 
 

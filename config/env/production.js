@@ -35,17 +35,25 @@ module.exports = {
 					'batedeira' + ',' +
 					'ventilador',
 
-
-	query_offer_crawler_zanox:'geladeira',
-
 	//departaments
 	dep_eletro:'eletrodomésticos',
 
 	// schedule offers jobs
 	schedule_eletro_01:'0 1 * * *',
 	schedule_eletro_02:'0 2 * * *',
+
+	// end offer crawler job
+
+
+	// crawler job
+
+	query_crawler_group_01:'aspirador',
+	query_crawler_group_02:'aspirador',
 	
-	zanox_offer_crawler_schedule:'0 10 * * *',
+	schedule_crawler_group_01:'0 3 * * *',
+	schedule_crawler_group_02:'0 4 * * *',
+
+	// end crawler job
 
 };
 

@@ -46,24 +46,24 @@ describe('Zanox Unit Tests:',function(done){
 	});
 
 
-	describe('Testing pagination == 0 >>',function(){
-		it('Should return array Pagination == 0',function(done){
+	describe('Testing pagination == 1 >>',function(){
+		it('Should return array Pagination == 1',function(done){
 			this.timeout(4000);
 			var totalPagination = 0;
 			zanox.getPagination(currentPage,totalPagination,apiZanox,function(paginationArray){
-				paginationArray.should.have.lengthOf(0);
+				paginationArray.should.have.lengthOf(1);
 				done();
 			});
 		});
 	});
 
 
-	describe('Testing pagination == 10 >>',function(){
-		it('Should return array Pagination == 10',function(done){
+	describe('Testing pagination == 12 >>',function(){
+		it('Should return array Pagination == 12',function(done){
 			this.timeout(4000);
 			var totalPagination = 10;
 			zanox.getPagination(currentPage,totalPagination,apiZanox,function(paginationArray){
-				paginationArray.should.have.lengthOf(10);
+				paginationArray.should.have.lengthOf(12);
 				done();
 			});
 		});

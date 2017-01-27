@@ -1,5 +1,5 @@
 var config = require('../../config/config.js');
-var offerController = require('../controllers/offer.crawler.server.controller.js');
+var offerCrawlerController = require('../controllers/offer.crawler.server.controller.js');
 var zanoxController = require('../controllers/zanox.server.controller.js');
 var request = require('request');
 var flatten = require('flat');
@@ -9,15 +9,33 @@ var cheerio = require('cheerio');
 var async = require('async');
 var cron = require('node-cron');
 
-var taskZanox = cron.schedule(config.zanox_offer_crawler_schedule, function(err){
-  console.log('starting zanox job ...');
+
+var job_crawler_group_01 = cron.schedule(config.schedule_crawler_group_01, function(err){
+  console.log('starting job_crawler_group_01 ...');
   var url = null;
-  start(url,function(){
-  	console.log(" Zanox job finished !");
+  start(url,
+  		config.query_crawler_group_01,
+  		config.programs_group_01,
+  		config.programs_label_01,
+  		config.dep_eletro,
+  		function(){
+  	console.log(" job_crawler_group_01 !");
   });
 },false);
 
 
+var job_crawler_group_02 = cron.schedule(config.schedule_crawler_group_02, function(err){
+  console.log('starting job_crawler_group_02 ...');
+  var url = null;
+  start(url,
+  		config.query_crawler_group_02,
+  		config.programs_group_02,
+  		config.programs_label_02,
+  		config.dep_eletro,
+  		function(){
+  	console.log(" job_crawler_group_02 !");
+  });
+},false);
  // if(process.env.NODE_ENV == 'test_job'){
 	// start(urlTeste,function(){
 	// 	console.log("end test zanox job");
@@ -25,49 +43,33 @@ var taskZanox = cron.schedule(config.zanox_offer_crawler_schedule, function(err)
  // }
 
 
+function start(urlSearchOffers,query,programs,group,departament,next){
 
-function start(urlSearchOffers,next){
-
-	var productsArray = [];
 	var currentPage = 0;
 	var currentItem = 0;
-	var paginationArray = [];
 
-	offerController.deleteCollectionOffersBD(function(){
+	offerCrawlerController.deleteCollectionOffersBD(group,departament,function(){
 
 		console.log("callback deleteCollectionOffersBD >>");
 
-		setUrlOffers(urlSearchOffers,function(url){
+		setUrlOffers(urlSearchOffers,query,programs,function(url){
 
 			console.log("callback setUrlOffers >> ",url);
 
 			zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
 				
 				console.log("callback getOffersContext >> ");
-				//var paginationArray = [];
 				
-				zanoxController.getPagination(currentPage,totalPaginacao,paginationArray,function(paginationArray){
+				zanoxController.getPagination(currentPage,totalPaginacao,url,function(paginationArray){
 					
-					console.log("callback Zanox Pagination >>");
+	    			console.log("callback get items by page >>",paginationArray);
+	    			
+	    			zanoxController.getOffersCrawlerPagination(currentPage,paginationArray,group,departament,function(){
 
-					zanoxController.getItemsByPagination(currentPage,paginationArray,function(paginationArray){
+	    				console.log("callback get offers by pagination >>");
 
-		    			console.log("callback get items by page >>");
-		    			
-		    			zanoxController.getProductsByPagination(currentPage,paginationArray,productsArray,function(productsArray){
+	    				return next();
 
-		    				console.log("callback get products by pagination >>");
-
-		    				offerController.saveArray(currentItem,productsArray,function(productsArray){
-
-		    					console.log("callback saveArray");
-
-		    					console.log("total offfers saved >> ",productsArray.length);
-
-		    					return next(productsArray);
-
-		    				});
-			    		});
 		    		});
 				});
 			});
@@ -78,7 +80,8 @@ function start(urlSearchOffers,next){
 }
 
 
-var setUrlOffers = function(urlSearchOffers,next){
+
+var setUrlOffers = function(urlSearchOffers,query,programs,next){
 
 	try{
 		//if urlSearchOffers is null or empty, set url default
@@ -86,8 +89,8 @@ var setUrlOffers = function(urlSearchOffers,next){
 			var host = 'api.zanox.com/json/2011-03-01/';
 			var uri = 'products';
 			var connectid = 'connectid=' + config.connectid;
-			var programs = 'programs=' + config.programs;
-			var query = 'q=' + config.query_offer_crawler_zanox;
+			var programs = 'programs=' + programs;
+			var query = 'q=' + query;
 			//var category = '';
 			var items = 'items=50';
 			var url = 'https://' + host + uri + '?' + connectid + '&' + programs + '&' + query + '&' + items ;
@@ -102,14 +105,20 @@ var setUrlOffers = function(urlSearchOffers,next){
 };
 
 
-var starJob = function(next){
-	return (taskZanox.start());
+var statrCrawlerJob01 = function(next){
+	return (job_crawler_group_01.start());
+};
+
+
+var statrCrawlerJob02 = function(next){
+	return (job_crawler_group_02.start());
 };
 
 
 
  
 exports.setUrlOffers = setUrlOffers;
-exports.starJob = starJob;
+exports.statrCrawlerJob01 = statrCrawlerJob01;
+exports.statrCrawlerJob02 = statrCrawlerJob02;
 
 

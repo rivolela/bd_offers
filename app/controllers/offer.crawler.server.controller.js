@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-var Offer_CrawlerSchema = require('../models/offer.crawler.server.model');
-var Offer = mongoose.model( 'Offer_Crawler', Offer_CrawlerSchema);
+var OfferCrawlerSchema = require('../models/offer.crawler.server.model');
+var Offer = mongoose.model( 'Offer_Crawler', OfferCrawlerSchema);
+var reviewController = require('./review.server.controller.js');
 
 var flatten = require('flat'),
 	requestsUtile = require('../utile/requests.server.utile.js'),
@@ -17,14 +18,29 @@ var flatten = require('flat'),
 var call = new requestsUtile();
 
 
-var saveArray = function(currentItem,productsArray,next){
+/**
+ * @description save array of offer)
+ * @param  {currentItem}
+ * @param  {productsArray}
+ * @param  {next}
+ * @return {offersArray}
+ */
+var saveArray = function(currentItem,offersArray,next){
 
-	if(currentItem < productsArray.length){
-		saveOfferBD(productsArray[currentItem],function(){
-			saveArray(currentItem+1,productsArray,next);
-		});
-	}else{
-		return next(productsArray);
+	try{
+		if(currentItem < offersArray.length){
+
+			var offer = offersArray[currentItem];
+
+			saveOfferBD(offer,function(){
+				saveArray(currentItem+1,offersArray,next);
+			});
+							
+		}else{
+			return next(offersArray);
+		}
+	}catch(e){
+		console.log('An error has occurred: ' + e.message);
 	}
 };
 
@@ -36,16 +52,16 @@ var saveOfferBD = function(data,next){
   	
 	  	offer.save(function(err){
 			if(err){
-				console.log(err);
+				console.log("offer not saved >>",err);
 				return next(err);
 			}else{
-				console.log("offer saved:",offer);
+				console.log("offer saved");
 				return next();
 			}
 		});
 
 	}catch(e){
-		console.log('An error has occurred: '+ e.message);
+		console.log('An error has occurred: ' + e.message);
 	}
 };
 
@@ -66,9 +82,14 @@ var deleteOfferBD = function(data,next){
 };
 
 
-var deleteCollectionOffersBD = function(next){
+var deleteCollectionOffersBD = function(group,departament,next){
 
-  	Offer.remove({},function(err){
+	console.log("deleteCollectionOffersBD >>",departament,">>",group);
+
+  	Offer.remove({$and: [
+          {programGroup: group},
+          {departamentBD:departament}
+      ]},function(err){
 		if(err){
 			console.log(err);
 			return next(err);
@@ -100,5 +121,6 @@ exports.getOffersBD = getOffersBD;
 exports.deleteOfferBD = deleteOfferBD;
 exports.deleteCollectionOffersBD = deleteCollectionOffersBD;
 exports.Offer = Offer;
+
 
 
