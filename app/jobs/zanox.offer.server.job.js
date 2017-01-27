@@ -9,30 +9,30 @@ var cheerio = require('cheerio');
 var async = require('async');
 var cron = require('node-cron');
 
-var job_zanox_eletro_01 = cron.schedule(config.schedule_eletro_01, function(err){
-  console.log('starting job_zanox_eletro_01 ...');
+var job_eletrodomesticos = cron.schedule(config.schedule_eletrodomesticos, function(err){
+  console.log('starting job_eletrodomesticos ...');
   var url = null;
   start(url,
-  		config.query_eletro,
-  		config.programs_group_01,
-  		config.programs_label_01,
-  		config.dep_eletro,
+  		config.query_eletrodomesticos,
+  		config.programs,
+  		config.programs_all,
+  		config.dep_eletrodomesticos,
   		function(){
-  	console.log(" job_zanox_eletro_01 finished !");
+  	console.log(" job_eletrodomesticos finished !");
   });
 },false);
 
 
-var job_zanox_eletro_02 = cron.schedule(config.schedule_eletro_02, function(err){
-  console.log('starting job_zanox_eletro_02 ...');
+var job_eletroportateis = cron.schedule(config.schedule_eletroportateis, function(err){
+  console.log('starting job_eletroportateis ...');
   var url = null;
   start(url,
-  		config.query_eletro,
-  		config.programs_group_02,
-  		config.programs_label_02,
-  		config.dep_eletro,
+  		config.query_eletroportateis,
+  		config.programs,
+  		config.programs_all,
+  		config.dep_eletroportateis,
   		function(){
-  	console.log(" job_zanox_eletro_02 finished !");
+  	console.log(" job_eletroportateis finished !");
   });
 },false);
 
@@ -105,18 +105,18 @@ var setUrlOffers = function(urlSearchOffers,query,programs,next){
 };
 
 
-var startEletroJob_01 = function(next){
-	return (job_zanox_eletro_01.start());
+var startEletrodomesticos = function(next){
+	return (job_eletrodomesticos.start());
 };
 
-var startEletroJob_02 = function(next){
-	return (job_zanox_eletro_02.start());
+var startEletroportateis = function(next){
+	return (job_eletroportateis.start());
 };
 
 
  
 exports.setUrlOffers = setUrlOffers;
-exports.startEletroJob_01 = startEletroJob_01;
-exports.startEletroJob_02 = startEletroJob_02;
+exports.startEletrodomesticos = startEletrodomesticos;
+exports.startEletroportateis = startEletroportateis;
 
 

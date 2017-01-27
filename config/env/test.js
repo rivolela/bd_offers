@@ -12,46 +12,47 @@ module.exports = {
 	// 13212 : Ricardo Eletro BR
 	// 16588 : Lojas Colombo BR
 	// 12781 : Ponto Frio
-	programs_group_01:'12011,13212,16588,12781',
-	programs_label_01:'group_01',
-	// programs ids
 	// 12785 : Casas Bahia BR
 	// 12784 : Extra BR
 	// 13604 : Brastemp BR
 	// 18878 : Girafa BR
 	// 13602 : Consul BR
-	programs_group_02:'12785,12784,13604,18878,13602',
-	programs_label_02:'group_02',
 
+	// all programs
+	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602',
+	programs_all:'group_all',
+	
+	// offer crawler job
+	
 	//queries
-	query_eletro:'geladeira' + ',' +
+	query_eletrodomesticos:'geladeira' + ',' +
 					'fogão' + ',' +
 					'microondas' + ',' +
 					'ar condicionado' + ',' +
 					'lavadora' + ',' +
-					'secadora' + ',' + 
-					'aspirador' + ',' +
+					'secadora',
+
+	query_eletroportateis:'aspirador pó' + ',' +
 					'liquidificador' + ',' +
 					'batedeira' + ',' +
 					'ventilador',
 
 	//departaments
-	dep_eletro:'eletrodomésticos',
+	dep_eletrodomesticos:'eletrodomésticos',
+	dep_eletroportateis:'eletroportáteis',
 
 	// schedule offers jobs
-	schedule_eletro_01:'34 9 * * *',
-	schedule_eletro_02:'13 13 * * *',
+	schedule_eletrodomesticos:'53 13 * * *',
+	schedule_eletroportateis:'13 13 * * *',
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler_group_01:'aspirador',
-	query_crawler_group_02:'aspirador',
+	query_crawler:'aspirador',
 	
-	schedule_crawler_group_01:'40 11 * * *',
-	schedule_crawler_group_02:'42 11 * * *',
+	schedule_crawler:'46 13 * * *',
 
 	// end crawler job
 

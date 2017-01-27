@@ -10,32 +10,20 @@ var async = require('async');
 var cron = require('node-cron');
 
 
-var job_crawler_group_01 = cron.schedule(config.schedule_crawler_group_01, function(err){
-  console.log('starting job_crawler_group_01 ...');
+var job_crawler = cron.schedule(config.schedule_crawler, function(err){
+  console.log('starting job_crawler ...');
   var url = null;
   start(url,
-  		config.query_crawler_group_01,
-  		config.programs_group_01,
-  		config.programs_label_01,
-  		config.dep_eletro,
+  		config.query_crawler,
+  		config.programs,
+  		config.programs_all,
+  		config.dep_eletroportateis,
   		function(){
-  	console.log(" job_crawler_group_01 !");
+  	console.log(" end job_crawler !");
   });
 },false);
 
 
-var job_crawler_group_02 = cron.schedule(config.schedule_crawler_group_02, function(err){
-  console.log('starting job_crawler_group_02 ...');
-  var url = null;
-  start(url,
-  		config.query_crawler_group_02,
-  		config.programs_group_02,
-  		config.programs_label_02,
-  		config.dep_eletro,
-  		function(){
-  	console.log(" job_crawler_group_02 !");
-  });
-},false);
  // if(process.env.NODE_ENV == 'test_job'){
 	// start(urlTeste,function(){
 	// 	console.log("end test zanox job");
@@ -105,20 +93,13 @@ var setUrlOffers = function(urlSearchOffers,query,programs,next){
 };
 
 
-var statrCrawlerJob01 = function(next){
-	return (job_crawler_group_01.start());
+var startCrawlerJob = function(next){
+	return (job_crawler.start());
 };
-
-
-var statrCrawlerJob02 = function(next){
-	return (job_crawler_group_02.start());
-};
-
-
 
  
 exports.setUrlOffers = setUrlOffers;
-exports.statrCrawlerJob01 = statrCrawlerJob01;
-exports.statrCrawlerJob02 = statrCrawlerJob02;
+exports.startCrawlerJob = startCrawlerJob;
+
 
 

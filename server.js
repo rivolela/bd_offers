@@ -4,11 +4,11 @@ var mongoose = require('./config/mongoose'),
  	express = require('./config/express'),
  	cron = require('node-cron'),
  	async = require('async'),
- 	// job to get offer
- 	job_eletro_01 = require('./app/jobs/zanox.offer.server.job.js'),
- 	job_eletro_02 = require('./app/jobs/zanox.offer.server.job.js'),
-	job_crawler_01 = require('./app/jobs/zanox.offer.crawler.server.job.js');
-	job_crawler_02 = require('./app/jobs/zanox.offer.crawler.server.job.js');
+ 	// jobs offer bd
+ 	job_eletrodomesticos = require('./app/jobs/zanox.offer.server.job.js'),
+ 	job_eletroportateis = require('./app/jobs/zanox.offer.server.job.js'),
+ 	// jobs offer crawler
+	job_crawler = require('./app/jobs/zanox.offer.crawler.server.job.js');
 
 var db = mongoose();
 var app = express();
@@ -28,12 +28,13 @@ app.listen(server_port,function() {
 });
 
 
-// job to get offer
-job_eletro_01.startEletroJob_01();
-job_eletro_02.startEletroJob_02();
+// jobs offer bd
+job_eletrodomesticos.startEletrodomesticos();
+job_eletroportateis.startEletroportateis();
 
-job_crawler_01.statrCrawlerJob01();
-job_crawler_02.statrCrawlerJob02();
+// jobs offer crawler
+job_crawler.startCrawlerJob();
+
 
 module.exports = app;
 
