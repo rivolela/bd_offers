@@ -27,7 +27,7 @@ module.exports = {
 	query_eletro:'geladeira' + ',' +
 					'fogão' + ',' +
 					'microondas' + ',' +
-					'depurador de ar' + ',' +
+					'ar condicionado' + ',' +
 					'lavadora' + ',' +
 					'secadora' + ',' + 
 					'aspirador' + ',' +
