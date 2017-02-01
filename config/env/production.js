@@ -32,10 +32,16 @@ module.exports = {
 					'lavadora' + ',' +
 					'secadora',
 
-	query_eletroportateis:'aspirador pó' + ',' +
-					'liquidificador' + ',' +
+	query_eletroportateis:'ventilador' + ',' +
+					'aspirador pó' + ',' +
+					'fritadeiras óleo' + ',' +
+					'cafeteira' + ',' +
+					'máquina costura' + ',' +
+					'purificador' + ',' +
 					'batedeira' + ',' +
-					'ventilador',
+					'liquidificador' + ',' +
+					'mixer' + ',' +
+					'ferro',
 
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
@@ -43,16 +49,16 @@ module.exports = {
 
 	// schedule offers jobs
 	schedule_eletrodomesticos:'0 1 * * *',
-	schedule_eletroportateis:'0 2 * * *',
+	schedule_eletroportateis:'0 3 * * *',
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler:'aspirador',
+	query_crawler:'ferros',
 	
-	schedule_crawler:'0 3 * * *',
+	schedule_crawler:'0 5 * * *',
 
 	// end crawler job
 
