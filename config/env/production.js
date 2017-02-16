@@ -70,7 +70,7 @@ module.exports = {
 
 	query_crawler:'motorola',
 	dictionary_crawler:dic_smartphones.motorola,
-	schedule_crawler:'0 7 * * *',
+	schedule_crawler:'0 16 * * *',
 
 	// end crawler job
 
