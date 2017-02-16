@@ -61,7 +61,7 @@ module.exports = {
 	schedule_smartphones:'0 5 * * *',
 
 	dictionary_offers:'',
-	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
+	dictionary_smartphones:dic_smartphones.iphone  + '&' + dic_smartphones.motorola,
 
 	// end offer crawler job
 
