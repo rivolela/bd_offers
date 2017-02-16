@@ -19,7 +19,7 @@ module.exports = function(grunt){
 				script:'server.js',
 				options:{
 					ext:'js,html',
-					watch:['server.js','config/**/*.js','app/**/*.js','public/**/*.html','public/css/**/*.less']
+					watch:['server.js','config/**/*.js','app/**/*.js']
 				}
 			},
 			debug:{
@@ -34,6 +34,7 @@ module.exports = function(grunt){
 		mochaTest:{
 			//src:'app/tests/mocha/utile/requests.server.utile.tests.js',
 			//src:'app/tests/mocha/controllers/zanox.server.controller.tests.js',
+			//src:'app/tests/mocha/models/pagination.server.model.tests.js',
 			src:'app/tests/mocha/**/*.js',
 			options:{
 				reporter:'spec'
@@ -101,7 +102,6 @@ module.exports = function(grunt){
 
 	// grunt.registerTask('lint',['jshint','csslint']);
 };
-
 
 
 

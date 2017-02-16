@@ -7,6 +7,7 @@ var mongoose = require('./config/mongoose'),
  	// jobs offer bd
  	job_eletrodomesticos = require('./app/jobs/zanox.offer.server.job.js'),
  	job_eletroportateis = require('./app/jobs/zanox.offer.server.job.js'),
+ 	job_smartphones = require('./app/jobs/zanox.offer.server.job.js'),
  	// jobs offer crawler
 	job_crawler = require('./app/jobs/zanox.offer.crawler.server.job.js');
 
@@ -31,6 +32,7 @@ app.listen(server_port,function() {
 // jobs offer bd
 job_eletrodomesticos.startEletrodomesticos();
 job_eletroportateis.startEletroportateis();
+job_smartphones.startSmartphones();
 
 // jobs offer crawler
 job_crawler.startCrawlerJob();

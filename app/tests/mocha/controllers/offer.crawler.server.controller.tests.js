@@ -32,8 +32,8 @@ describe('Offer Crawler Unit Tests:',function(done){
 	  			price: 742.9,
 	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
   				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-  				departamentBD: config.dep_eletro,
-  				programGroup: config.programs_label_01
+  				departamentBD: config.dep_eletrodomesticos,
+  				programGroup: config.programs_all
 			});
 
 			var data2 = new Object ({
@@ -47,8 +47,8 @@ describe('Offer Crawler Unit Tests:',function(done){
 	  			price: 742.9,
 	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
   				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-  				departamentBD: config.dep_eletro,
-  				programGroup: config.programs_label_01
+  				departamentBD: config.dep_eletrodomesticos,
+  				programGroup: config.programs_all
 			});
 
 			var data3 = new Object ({
@@ -62,8 +62,8 @@ describe('Offer Crawler Unit Tests:',function(done){
 	  			price: 742.9,
 	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
   				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-  				departamentBD: config.dep_eletro,
-  				programGroup: config.programs_label_01
+  				departamentBD: config.dep_eletrodomesticos,
+  				programGroup: config.programs_all
 			});
 
 			var dataToRemove = new Object ({
@@ -77,8 +77,8 @@ describe('Offer Crawler Unit Tests:',function(done){
 	  			price: 742.9,
 	  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
   				image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-  				departamentBD: config.dep_eletro,
-  				programGroup: config.programs_label_01
+  				departamentBD: config.dep_eletrodomesticos,
+  				programGroup: config.programs_all
 			});
 
 			Context.dataToRemove = dataToRemove; 
@@ -140,7 +140,7 @@ describe('Offer Crawler Unit Tests:',function(done){
 
 		after(function(){
 			this.timeout(4000);
-			offerController.deleteCollectionOffersBD(config.programs_label_01,config.dep_eletro,function(){
+			offerController.deleteCollectionOffersBD(function(){
 			});
 
 		});

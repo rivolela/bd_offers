@@ -20,7 +20,7 @@ describe('Offer Unit Tests:',function(done){
 
 	before(function(){
 
-		this.timeout(2000);
+		this.timeout(4000);
 
 		var data1 = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
@@ -33,8 +33,8 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.dep_eletro,
-  			programGroup: config.programs_label_01
+			departamentBD: config.programs_all,
+  			programGroup: config.programs_all
 		});
 
 		var data2 = new Object ({
@@ -48,8 +48,8 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.dep_eletro,
-  			programGroup: config.programs_label_01
+			departamentBD: config.programs_all,
+  			programGroup: config.programs_all
 		});
 
 		var data3 = new Object ({
@@ -63,8 +63,8 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.dep_eletro,
-  			programGroup: config.programs_label_01
+			departamentBD: config.programs_all,
+  			programGroup: config.programs_all
 		});
 
 		var dataToRemove = new Object ({
@@ -78,8 +78,8 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.dep_eletro,
-  			programGroup: config.programs_label_01
+			departamentBD: config.programs_all,
+  			programGroup: config.programs_all
 		});
 
 		Context.dataToRemove = dataToRemove; 
@@ -95,7 +95,7 @@ describe('Offer Unit Tests:',function(done){
   
 
   	describe('Testing Offer Model Functions >>',function(){
-  		console.log("antes",Context.dataToRemove);
+  		this.timeout(4000);
 		it('Should save one offer in bd >>',function(done){
 			offerController.saveOfferBD(Context.dataToRemove,function(error){
 				should.not.exist(error);
@@ -145,7 +145,6 @@ describe('Offer Unit Tests:',function(done){
   				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
   				advertiser:"walmart",
   				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-  				advertiser:"walmart",
   				manufacturer: "brastemp",
   				rating:1,
 			});
@@ -160,7 +159,6 @@ describe('Offer Unit Tests:',function(done){
   				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
   				advertiser:"walmart",
   				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-  				advertiser:"walmart",
   				manufacturer: "brastemp",
   				rating:2,
 			});
@@ -175,7 +173,6 @@ describe('Offer Unit Tests:',function(done){
   				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
   				advertiser:"walmart",
   				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-  				advertiser:"walmart",
   				manufacturer: "brastemp",
   				rating:3,
 			});
@@ -190,7 +187,6 @@ describe('Offer Unit Tests:',function(done){
   				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
   				advertiser:"walmart",
   				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-  				advertiser:"walmart",
   				manufacturer: "brastemp",
   				rating:4,
 			});
@@ -205,7 +201,6 @@ describe('Offer Unit Tests:',function(done){
   				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
   				advertiser:"walmart",
   				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-  				advertiser:"walmart",
   				manufacturer: "brastemp",
   				rating:5,
 			});
@@ -251,7 +246,7 @@ describe('Offer Unit Tests:',function(done){
 
 	after(function(){
 		this.timeout(4000);
-		offerController.deleteCollectionOffersBD(config.programs_label_01,config.dep_eletro,function(){
+		offerController.deleteCollectionOffersBD(config.programs_all,config.programs_all,function(){
 		});
 
 		reviewController.deleteAllReviews(function(){

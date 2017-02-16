@@ -1,11 +1,13 @@
-var flatten = require('flat');
-var requestsUtile = require('../utile/requests.server.utile.js');
-var Offer = require('../controllers/offer.server.controller.js');
-var OfferCrawler = require('../controllers/offer.crawler.server.controller.js');
-var config = require('../../config/config.js');
-var utf8_decode = require('locutus/php/xml/utf8_decode');
-var offerController = require('../controllers/offer.server.controller.js');
-var paginationArray = [];
+var flatten = require('flat'),
+	config = require('../../config/config.js'),
+ 	requestsUtile = require('../utile/requests.server.utile.js'),
+ 	Offer = require('../controllers/offer.server.controller.js'),
+ 	OfferCrawler = require('../controllers/offer.crawler.server.controller.js'),
+ 	config = require('../../config/config.js'),
+ 	utf8_decode = require('locutus/php/xml/utf8_decode'),
+ 	offerController = require('../controllers/offer.server.controller.js'),
+ 	call = new requestsUtile();
+
 
 var getOffersContext = function(url,itemsByPage,next){
 
@@ -36,53 +38,26 @@ var getOffersContext = function(url,itemsByPage,next){
 };
 
 
-var getPagination = function(currentPage,totalPaginacao,url,next){
-	
-	console.log("currentPage >>",currentPage);
-
-	if(currentPage <= totalPaginacao){
-
-		var pagination = new Object();// jshint ignore:line
-		pagination.url = url + "&page=" + currentPage;
-  		paginationArray.push(pagination);
-  		console.log("pagination >>",pagination);
-		getPagination(currentPage+1,totalPaginacao,url,next);
-   
-	}else{
-		return next(paginationArray);
-	}
-};
-
-
-var getOffersPagination = function(currentPage,paginationArray,group,departament,next){
+var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,next){
 
 	try{
-		if(currentPage < paginationArray.length){
+		console.log("currentPage >>",currentPage);
 
-			var call = new requestsUtile();
+		if(currentPage <= totalPaginacao){
 
-			call.getJson(paginationArray[currentPage].url,config.timeRequest,function(json,response,error) {
+			// var pagination = new Object();// jshint ignore:line
+			var url_offers = url + "&page=" + currentPage;
+			console.log('\n');
 
-				console.log("getOffersPagination >> ",paginationArray[currentPage].url);
-
-	    		if(error) {
-	        		console.log('error: '+ error);
-	      		} 
-	      		else {
-	      			flatten(json),{ 
-		   				maxDepth: 10 
-		   			};// jshint ignore:line
-
-		   			var currentItem = 0;
-
-		   			saveOffersPagination(currentItem,json,group,departament,function(){
-						getOffersPagination(currentPage+1,paginationArray,group,departament,next);
-					});
-
-				}
-		  	});
-		}	
-		else{
+			call.getJson(url_offers,config.timeRequest,function(json,response,error) {
+				console.log("callback getOffersCrawlerPagination >> ");
+				var currentItem = 0;
+				saveOffersCrawler(currentItem,json,function(){
+					console.log("callback saveOffersCrawler >> ");
+					getOffersCrawlerPagination(currentPage+1,totalPaginacao,url,next);
+				});
+			});
+		}else{
 			return next();
 		}
 	}catch(error){
@@ -92,7 +67,37 @@ var getOffersPagination = function(currentPage,paginationArray,group,departament
 };
 
 
-var saveOffersPagination = function(currentItem,data,group,departament,next){
+var getOffersPagination = function(currentPage,totalPaginacao,url,group,departament,next){
+	
+	try{
+		console.log("currentPage >>",currentPage);
+
+		if(currentPage <= totalPaginacao){
+
+			// var pagination = new Object();// jshint ignore:line
+			var url_offers = url + "&page=" + currentPage;
+			console.log('\n');
+
+			call.getJson(url_offers,config.timeRequest,function(json,response,error) {
+				console.log("callback getOffersPagination >> ");
+				var currentItem = 0;
+				saveOffers(currentItem,json,group,departament,function(){
+					console.log("callback saveOffers >> ");
+					getOffersPagination(currentPage+1,totalPaginacao,url,group,departament,next);
+				});
+			});
+		}else{
+			return next();
+		}
+	}catch(error){
+		console.log(error);
+		throw error;
+	}
+};
+
+
+
+var saveOffers = function(currentItem,data,group,departament,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -127,7 +132,7 @@ var saveOffersPagination = function(currentItem,data,group,departament,next){
 			}
 
 			offerController.saveOfferWithReviews(offer,function(){
-				saveOffersPagination(currentItem+1,data,group,departament,next);
+				saveOffers(currentItem+1,data,group,departament,next);
 			});
 
 		}else{
@@ -140,45 +145,7 @@ var saveOffersPagination = function(currentItem,data,group,departament,next){
 };
 
 
-var getOffersCrawlerPagination = function(currentPage,paginationArray,group,departament,next){
-
-	try{
-		if(currentPage < paginationArray.length){
-
-			var call = new requestsUtile();
-
-			call.getJson(paginationArray[currentPage].url,config.timeRequest,function(json,response,error) {
-
-				console.log("getOffersPagination >> ",paginationArray[currentPage].url);
-
-	    		if(error) {
-	        		console.log('error: '+ error);
-	      		} 
-	      		else {
-	      			flatten(json),{ 
-		   				maxDepth: 10 
-		   			};// jshint ignore:line
-
-		   			var currentItem = 0;
-
-		   			saveOffersCrawlerPagination(currentItem,json,group,departament,function(){
-						getOffersCrawlerPagination(currentPage+1,paginationArray,group,departament,next);
-					});
-
-				}
-		  	});
-		}	
-		else{
-			return next();
-		}
-	}catch(error){
-		console.log(error);
-		throw error;
-	}
-};
-
-
-var saveOffersCrawlerPagination = function(currentItem,data,group,departament,next){
+var saveOffersCrawler = function(currentItem,data,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -197,8 +164,6 @@ var saveOffersCrawlerPagination = function(currentItem,data,group,departament,ne
 				price: data.productItems.productItem[currentItem].price,
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
-				departamentBD: departament,
-				programGroup: group
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
@@ -213,7 +178,7 @@ var saveOffersCrawlerPagination = function(currentItem,data,group,departament,ne
 			}
 
 			OfferCrawler.saveOfferBD(offer,function(){
-				saveOffersCrawlerPagination(currentItem+1,data,group,departament,next);
+				saveOffersCrawler(currentItem+1,data,next);
 			});
 
 		}else{
@@ -225,12 +190,11 @@ var saveOffersCrawlerPagination = function(currentItem,data,group,departament,ne
 	}
 };
 
-exports.getOffersPagination = getOffersPagination;
-exports.saveOffersPagination = saveOffersPagination;
-exports.getPagination = getPagination;
 exports.getOffersContext = getOffersContext;
+exports.getOffersPagination = getOffersPagination;
 exports.getOffersCrawlerPagination = getOffersCrawlerPagination;
-exports.saveOffersCrawlerPagination = saveOffersCrawlerPagination;
+exports.saveOffersCrawler = saveOffersCrawler;
+exports.saveOffers= saveOffers;
 
 
 

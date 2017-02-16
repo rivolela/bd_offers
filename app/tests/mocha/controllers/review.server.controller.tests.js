@@ -56,7 +56,6 @@ describe('Reviews Controller Unit Tests:',function(done){
 	  				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
 	  				advertiser:"walmart",
 	  				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  				advertiser:"walmart",
 	  				manufacturer: "brastemp",
 	  				rating:1,
 				});
@@ -71,7 +70,6 @@ describe('Reviews Controller Unit Tests:',function(done){
 	  				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
 	  				advertiser:"walmart",
 	  				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  				advertiser:"walmart",
 	  				manufacturer: "brastemp",
 	  				rating:2,
 				});
@@ -86,7 +84,6 @@ describe('Reviews Controller Unit Tests:',function(done){
 	  				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
 	  				advertiser:"walmart",
 	  				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  				advertiser:"walmart",
 	  				manufacturer: "brastemp",
 	  				rating:3,
 				});
@@ -101,7 +98,6 @@ describe('Reviews Controller Unit Tests:',function(done){
 	  				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
 	  				advertiser:"walmart",
 	  				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  				advertiser:"walmart",
 	  				manufacturer: "brastemp",
 	  				rating:4,
 				});
@@ -116,7 +112,6 @@ describe('Reviews Controller Unit Tests:',function(done){
 	  				category: "Eletrodomésticos / Fogões / Embutir 5 Bocas",
 	  				advertiser:"walmart",
 	  				url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
-	  				advertiser:"walmart",
 	  				manufacturer: "brastemp",
 	  				rating:5,
 				});

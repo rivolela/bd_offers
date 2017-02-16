@@ -74,7 +74,7 @@ function formatPrice(price_display){
     var inteiros =  parseInt(parseInt(valor * (Math.pow(10,casas))) / parseFloat(Math.pow(10,casas)));
     var centavos = parseInt(parseInt(valor * (Math.pow(10,casas))) % parseFloat(Math.pow(10,casas)));
    
-    if(centavos%10 == 0 && centavos+"".length<2 ){
+    if(centavos%10 === 0 && centavos+"".length<2 ){
       centavos = centavos+"0";
     }else if(centavos<10){
       centavos = "0"+centavos;
@@ -86,8 +86,8 @@ function formatPrice(price_display){
     var retorno = "";
    
     if(milhares>0){
-      retorno = milhares+""+separador_milhar+""+retorno
-    if(inteiros == 0){
+      retorno = milhares+""+separador_milhar+""+retorno;
+    if(inteiros === 0){
       inteiros = "000";
     } else if(inteiros < 10){
       inteiros = "00"+inteiros; 
@@ -99,7 +99,7 @@ function formatPrice(price_display){
   retorno += inteiros+""+separdor_decimal+""+centavos;
  
   return 'R$ ' + retorno;
-};
+}
 
 module.exports = mongoose.model('Offer_Crawler', Offer_CrawlerSchema);
 

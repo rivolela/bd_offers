@@ -1,39 +1,71 @@
-var config = require('../../config/config.js');
-var offerController = require('../controllers/offer.server.controller.js');
-var zanoxController = require('../controllers/zanox.server.controller.js');
-var request = require('request');
-var flatten = require('flat');
-var flatten2 = require('flat');
-var urlTeste = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=ventilador&programs=12011,13212,16588&items=50";
-var cheerio = require('cheerio');
-var async = require('async');
-var cron = require('node-cron');
+var config = require('../../config/config.js'),
+ 	offerController = require('../controllers/offer.server.controller.js'),
+ 	zanoxController = require('../controllers/zanox.server.controller.js'),
+	request = require('request'),
+	flatten = require('flat'),
+	flatten2 = require('flat'),
+	urlTeste = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=ventilador&programs=12011,13212,16588&items=50",
+	cheerio = require('cheerio'),
+	async = require('async'),
+	cron = require('node-cron'),
+	DateUtile = require('../utile/date.server.utile.js');
+
 
 var job_eletrodomesticos = cron.schedule(config.schedule_eletrodomesticos, function(err){
   console.log('starting job_eletrodomesticos ...');
+  var time_start = new Date();	
+  var dateUtile = new DateUtile();
   var url = null;
   start(url,
   		config.query_eletrodomesticos,
   		config.programs,
   		config.programs_all,
   		config.dep_eletrodomesticos,
+  		config.dictionary_offers,
   		function(){
-  	console.log(" job_eletrodomesticos finished !");
-  });
+  			dateUtile.getJobTime(time_start,function(){
+  				console.log(" job_eletrodomesticos finished !");
+  			});
+  		});
 },false);
+
 
 
 var job_eletroportateis = cron.schedule(config.schedule_eletroportateis, function(err){
   console.log('starting job_eletroportateis ...');
+  var time_start = new Date();
+  var dateUtile = new DateUtile();
   var url = null;
   start(url,
   		config.query_eletroportateis,
   		config.programs,
   		config.programs_all,
   		config.dep_eletroportateis,
+  		config.dictionary_offers,
   		function(){
-  	console.log(" job_eletroportateis finished !");
-  });
+  			dateUtile.getJobTime(time_start,function(){
+  				console.log(" job_eletroportateis finished !");
+  			});
+  		});
+},false);
+
+
+var job_smartphones = cron.schedule(config.schedule_smartphones, function(err){
+  console.log('starting job >> ',config.dep_smartphones);
+  var time_start = new Date();
+  var dateUtile = new DateUtile();
+  var url = null;
+  start(url,
+  		config.query_smartphones,
+  		config.programs,
+  		config.programs_all,
+  		config.dep_smartphones,
+  		config.dictionary_smartphones,
+  		function(){
+  			dateUtile.getJobTime(time_start,function(){
+  				console.log(" job_smartphones finished !");
+  			});
+  		});
 },false);
 
  // if(process.env.NODE_ENV == 'test_job'){
@@ -44,7 +76,7 @@ var job_eletroportateis = cron.schedule(config.schedule_eletroportateis, functio
 
 
 
-function start(urlSearchOffers,query,programs,group,departament,next){
+function start(urlSearchOffers,query,programs,group,departament,dictionary,next){
 
 	var currentPage = 0;
 	var currentItem = 0;
@@ -53,7 +85,7 @@ function start(urlSearchOffers,query,programs,group,departament,next){
 
 		console.log("callback deleteCollectionOffersBD >>");
 
-		setUrlOffers(urlSearchOffers,query,programs,function(url){
+		setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
 
 			console.log("callback setUrlOffers >> ",url);
 
@@ -61,17 +93,12 @@ function start(urlSearchOffers,query,programs,group,departament,next){
 				
 				console.log("callback getOffersContext >> ");
 				
-				zanoxController.getPagination(currentPage,totalPaginacao,url,function(paginationArray){
+				zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
 					
-	    			console.log("callback get items by page >>",paginationArray);
+	    			console.log("callback get items by page >>");
+
+	    			return next();
 	    			
-	    			zanoxController.getOffersPagination(currentPage,paginationArray,group,departament,function(){
-
-	    				console.log("callback get offers by pagination >>");
-
-	    				return next();
-
-		    		});
 				});
 			});
 		});
@@ -81,7 +108,7 @@ function start(urlSearchOffers,query,programs,group,departament,next){
 }
 
 
-var setUrlOffers = function(urlSearchOffers,query,programs,next){
+var setUrlOffers = function(urlSearchOffers,query,programs,dictionary,next){
 
 	try{
 		//if urlSearchOffers is null or empty, set url default
@@ -89,11 +116,12 @@ var setUrlOffers = function(urlSearchOffers,query,programs,next){
 			var host = 'api.zanox.com/json/2011-03-01/';
 			var uri = 'products';
 			var connectid = 'connectid=' + config.connectid;
-			var programs = 'programs=' + programs;
-			var query = 'q=' + query;
-			//var category = '';
+			var set_programs = 'programs=' + programs;
+			var set_query = 'q=' + query;
+			var searchtype = 'searchtype=' + config.searchtype;
+			var merchantcategory = dictionary;
 			var items = 'items=50';
-			var url = 'https://' + host + uri + '?' + connectid + '&' + programs + '&' + query + '&' + items ;
+			var url = 'https://' + host + uri + '?' + connectid + '&' + set_programs + '&' + set_query + '&' + merchantcategory + '&' + searchtype + '&' + items ;
 			return next(url);
 		}else{
 			return next(urlSearchOffers);
@@ -113,10 +141,13 @@ var startEletroportateis = function(next){
 	return (job_eletroportateis.start());
 };
 
+var startSmartphones = function(next){
+	return (job_smartphones.start());
+};
 
  
 exports.setUrlOffers = setUrlOffers;
 exports.startEletrodomesticos = startEletrodomesticos;
 exports.startEletroportateis = startEletroportateis;
-
+exports.startSmartphones = startSmartphones;
 

@@ -1,17 +1,21 @@
+var dic_eletrodomesticos = require('../dictionaries/eletrodomesticos.js');
+var dic_smartphones = require('../dictionaries/smartphones.js');
+
 module.exports = {
 	
 	// Production configuration options
 	db:'mongodb://bdeciding:rovel1954@ds035776.mlab.com:35776/heroku_5lt8spw4',
 	sessionSecret:'productSessionSecret',
 	connectid:'A3697E2455EA755B758F',
-	timeRequest:1000,
+	timeRequest:0,
+	searchtype:'contextual',
 
 	// Crawler Options 
 	// programs ids
 	// 12011 : Walmart BR
 	// 13212 : Ricardo Eletro BR
 	// 16588 : Lojas Colombo BR
-	// 12781 : Ponto Frio
+	// 12781 : Pontofrio BR
 	// 12785 : Casas Bahia BR
 	// 12784 : Extra BR
 	// 13604 : Brastemp BR
@@ -43,22 +47,30 @@ module.exports = {
 					'mixer' + ',' +
 					'ferro',
 
+	query_smartphones:'iphone' + ',' +
+					'motorola',
+
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
 	dep_eletroportateis:'eletroportáteis',
+	dep_smartphones:'smartphones',
 
 	// schedule offers jobs
 	schedule_eletrodomesticos:'0 1 * * *',
 	schedule_eletroportateis:'0 3 * * *',
+	schedule_smartphones:'0 5 * * *',
+
+	dictionary_offers:'',
+	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler:'ferros',
-	
-	schedule_crawler:'0 5 * * *',
+	query_crawler:'motorola',
+	dictionary_crawler:dic_smartphones.motorola,
+	schedule_crawler:'0 7 * * *',
 
 	// end crawler job
 

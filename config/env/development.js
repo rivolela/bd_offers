@@ -1,11 +1,15 @@
+var dic_eletrodomesticos = require('../dictionaries/eletrodomesticos.js');
+var dic_smartphones = require('../dictionaries/smartphones.js');
+
 module.exports = {
 
 	// Development configuration options
-	// db:'mongodb://teste1:teste1234@ds145138.mlab.com:45138/heroku_l4pp17t7',
-	db:'mongodb://127.0.0.1:27017/bd_dev',
+	db:'mongodb://teste1:teste1234@ds145138.mlab.com:45138/heroku_l4pp17t7',
+	// db:'mongodb://127.0.0.1:27017/bd_dev',
 	sessionSecret:'developmentSessionSecret',
 	connectid:'A3697E2455EA755B758F',
-	timeRequest:1000,
+	timeRequest:0,
+	searchtype:'contextual',
 
 	// Crawler Options 
 	// programs ids
@@ -38,22 +42,30 @@ module.exports = {
 					'batedeira' + ',' +
 					'ventilador',
 
+	query_smartphones:'iphone' + ',' +
+					'motorola',
+
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
 	dep_eletroportateis:'eletroportáteis',
+	dep_smartphones:'smartphones',
 
 	// schedule offers jobs
-	schedule_eletrodomesticos:'53 13 * * *',
+	schedule_eletrodomesticos:'55 11 * * *',
 	schedule_eletroportateis:'13 13 * * *',
+	schedule_smartphones:'31 16 * * *',
+
+	dictionary_offers:'',
+	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler:'aspirador',
-	
-	schedule_crawler:'46 13 * * *',
+	query_crawler:'iphone',
+	dictionary_crawler:dic_smartphones.iphone,
+	schedule_crawler:'38 9 * * *',
 
 	// end crawler job
 };

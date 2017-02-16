@@ -6,6 +6,7 @@ var Offer = require('../../../controllers/offer.server.controller.js');
 var config = require('../../../../config/config.js');
 var assert = require("assert");
 
+
 var supertest = require("supertest")("https://www.walmart.com.br");
 
 var apiZanox = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=fogao+brastemp&programs=12011";
@@ -20,10 +21,14 @@ describe('Zanox Unit Tests:',function(done){
 	var currentItem = 0;
 
 	var Context = {};
+
+	var group = config.programs_all;
+	var departament = config.dep_eletrodomesticos;
+  
   
 	describe('Testing connection api zanox >>',function(){
 		it('Should return items == 10',function(done){
-			//this.timeout(6000);
+			this.timeout(6000);
 			var call = new requestsUtile();
 			var timeRequest = 0;
 			call.getJson(apiZanox,timeRequest,function(data,response,error){
@@ -47,41 +52,10 @@ describe('Zanox Unit Tests:',function(done){
 
 
 	describe('Testing pagination == 1 >>',function(){
-		it('Should return array Pagination == 1',function(done){
-			this.timeout(4000);
+		it('Should not exists error',function(done){
+			this.timeout(8000);
 			var totalPagination = 0;
-			zanox.getPagination(currentPage,totalPagination,apiZanox,function(paginationArray){
-				paginationArray.should.have.lengthOf(1);
-				done();
-			});
-		});
-	});
-
-
-	describe('Testing pagination == 12 >>',function(){
-		it('Should return array Pagination == 12',function(done){
-			this.timeout(4000);
-			var totalPagination = 10;
-			zanox.getPagination(currentPage,totalPagination,apiZanox,function(paginationArray){
-				paginationArray.should.have.lengthOf(12);
-				done();
-			});
-		});
-	});
-
-	describe('Testing get offers >>',function(){
-		it('Should not to return error',function(done){
-			this.timeout(6000);
-			var currentPage = 0;
-			var currentItem = 0;
-			var paginationArray = [];
-
-			var pagination = new Object();
-			pagination.url = "https://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&programs=12011&q=geladeira%20brastemp&merchantcategory=Eletrodomésticos / Fogões / Fogão 4 bocas&items=50&page=0";
-			pagination.items = 10;
-			paginationArray.push(pagination);
-
-			zanox.getOffersPagination(currentPage,paginationArray,config.programs_label_01,config.dep_eletro,function(error){
+			zanox.getOffersPagination(currentPage,totalPagination,apiZanox,group,departament,function(error){
 				should.not.exist(error);
 				done();
 			});

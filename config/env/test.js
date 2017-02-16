@@ -1,3 +1,6 @@
+var dic_eletrodomesticos = require('../dictionaries/eletrodomesticos.js');
+var dic_smartphones = require('../dictionaries/smartphones.js');
+
 module.exports = {
 	
 	// Test configuration options
@@ -5,6 +8,7 @@ module.exports = {
 	sessionSecret:'testSessionSecret',
 	connectid:'A3697E2455EA755B758F',
 	timeRequest:1000,
+	searchtype:'contextual',
 
 	// Crawler Options 
 	// programs ids
@@ -37,21 +41,29 @@ module.exports = {
 					'batedeira' + ',' +
 					'ventilador',
 
+	query_smartphones:'iphone',
+
+
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
 	dep_eletroportateis:'eletroportáteis',
+	dep_smartphones:'smartphones',
 
 	// schedule offers jobs
 	schedule_eletrodomesticos:'53 13 * * *',
 	schedule_eletroportateis:'13 13 * * *',
+	schedule_smartphones:'31 16 * * *',
+
+	dictionary_offers:'',
+	dictionary_smartphones:dic_smartphones.iphone,
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler:'aspirador',
-	
+	query_crawler:'iphone',
+	dictionary_crawler:dic_eletrodomesticos.ar_condicionado,
 	schedule_crawler:'46 13 * * *',
 
 	// end crawler job

@@ -82,14 +82,9 @@ var deleteOfferBD = function(data,next){
 };
 
 
-var deleteCollectionOffersBD = function(group,departament,next){
+var deleteCollectionOffersBD = function(next){
 
-	console.log("deleteCollectionOffersBD >>",departament,">>",group);
-
-  	Offer.remove({$and: [
-          {programGroup: group},
-          {departamentBD:departament}
-      ]},function(err){
+  	Offer.remove({},function(err){
 		if(err){
 			console.log(err);
 			return next(err);
