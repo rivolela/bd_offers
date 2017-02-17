@@ -48,7 +48,8 @@ module.exports = {
 					'ferro',
 
 	query_smartphones:'iphone' + ',' +
-					'motorola',
+					'motorola'  + ',' +
+					'samsung galaxy',
 
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
@@ -61,14 +62,16 @@ module.exports = {
 	schedule_smartphones:'0 5 * * *',
 
 	dictionary_offers:'',
-	dictionary_smartphones:dic_smartphones.iphone  + '&' + dic_smartphones.motorola,
+	dictionary_smartphones:dic_smartphones.iphone  + '&' + 
+							dic_smartphones.motorola + '&' + 
+							dic_smartphones.samsung,
 
 	// end offer crawler job
 
 
 	// crawler job
 
-	query_crawler:'motorola',
+	query_crawler:'samsung galaxy',
 	dictionary_crawler:dic_smartphones.motorola,
 	schedule_crawler:'0 16 * * *',
 

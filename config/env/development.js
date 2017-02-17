@@ -53,7 +53,7 @@ module.exports = {
 	// schedule offers jobs
 	schedule_eletrodomesticos:'55 11 * * *',
 	schedule_eletroportateis:'13 13 * * *',
-	schedule_smartphones:'31 16 * * *',
+	schedule_smartphones:'46 11 * * *',
 
 	dictionary_offers:'',
 	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
@@ -65,7 +65,7 @@ module.exports = {
 
 	query_crawler:'iphone',
 	dictionary_crawler:dic_smartphones.iphone,
-	schedule_crawler:'38 9 * * *',
+	schedule_crawler:'8 11 * * *',
 
 	// end crawler job
 };
