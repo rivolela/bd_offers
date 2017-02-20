@@ -107,7 +107,7 @@ OfferSchema.pre('save',function(next){
 OfferSchema.index(
   {name: 'text',manufacturer:'text',category:'text'},
   {default_language: "portuguese"},
-  {name: 'My text index', weights: {category: 10, name: 4, manufacturer: 2}
+  {name: 'My text index', weights: {category: 10, name: 2, manufacturer: 1}
 });
 
 

@@ -51,9 +51,9 @@ module.exports = {
 	dep_smartphones:'smartphones',
 
 	// schedule offers jobs
-	schedule_eletrodomesticos:'55 11 * * *',
+	schedule_eletrodomesticos:'14 14 * * *',
 	schedule_eletroportateis:'13 13 * * *',
-	schedule_smartphones:'46 11 * * *',
+	schedule_smartphones:'28 15 * * *',
 
 	dictionary_offers:'',
 	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
