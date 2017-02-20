@@ -58,7 +58,7 @@ module.exports = {
 	dep_smartphones:'smartphones',
 
 	// schedule offers jobs
-	schedule_eletrodomesticos:'0 1 * * *',
+	schedule_eletrodomesticos:'33 16 * * *',
 	schedule_eletroportateis:'0 3 * * *',
 	schedule_smartphones:'0 5 * * *',
 
