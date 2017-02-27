@@ -43,7 +43,8 @@ module.exports = {
 					'ventilador',
 
 	query_smartphones:'iphone' + ',' +
-					'motorola',
+					'motorola'  + ',' +
+					'samsung galaxy',
 
 	//departaments
 	dep_eletrodomesticos:'eletrodomésticos',
@@ -53,10 +54,12 @@ module.exports = {
 	// schedule offers jobs
 	schedule_eletrodomesticos:'14 14 * * *',
 	schedule_eletroportateis:'13 13 * * *',
-	schedule_smartphones:'28 15 * * *',
+	schedule_smartphones:'31 13 * * *',
 
 	dictionary_offers:'',
-	dictionary_smartphones:dic_smartphones.iphone + dic_smartphones.motorola,
+	dictionary_smartphones:dic_smartphones.iphone  + '&' + 
+							dic_smartphones.motorola + '&' + 
+							dic_smartphones.samsung,
 
 	// end offer crawler job
 

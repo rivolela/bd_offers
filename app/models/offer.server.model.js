@@ -11,11 +11,12 @@ var OfferSchema = new Schema({
   image_medium: String,
   image_large: String,
   price: {
-    type:String,
+    type:Number,
   },
   price_display:{
     type:String,
-    set: formatPrice
+    set: formatPrice,
+    index: true
   },
   category: {
     type:String,
@@ -103,9 +104,9 @@ OfferSchema.pre('save',function(next){
 });
 
 
-// index used to text searc
+// index used to text search
 OfferSchema.index(
-  {name: 'text',manufacturer:'text',category:'text'},
+  {name: 'text',manufacturer:'text',category:'text',price_display:'text'},
   {default_language: "portuguese"},
   {name: 'My text index', weights: {name: 10, category: 2, manufacturer: 1}
 });

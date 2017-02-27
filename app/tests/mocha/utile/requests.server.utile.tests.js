@@ -12,7 +12,7 @@ describe('Requests Utile Server Tests:',function(){
 
 	it('Should return status code 200 from getJson',function(done){
 
-		this.timeout(2000);
+		this.timeout(4000);
 		
 		var call = new RequestsUtile();
 		var timeRequest = 0;
