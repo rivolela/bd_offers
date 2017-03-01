@@ -8,7 +8,8 @@ var config = require('../../config/config.js'),
 	cheerio = require('cheerio'),
 	async = require('async'),
 	cron = require('node-cron'),
-	DateUtile = require('../utile/date.server.utile.js');
+	DateUtile = require('../utile/date.server.utile.js'),
+	async = require('async');
 
 
 var job_eletrodomesticos = cron.schedule(config.schedule_eletrodomesticos, function(err){
@@ -81,29 +82,83 @@ function start(urlSearchOffers,query,programs,group,departament,dictionary,next)
 	var currentPage = 0;
 	var currentItem = 0;
 
-	offerController.deleteCollectionOffersBD(group,departament,function(){
-
-		console.log("callback deleteCollectionOffersBD >>");
-
-		setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
-
-			console.log("callback setUrlOffers >> ",url);
-
-			zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
-				
-				console.log("callback getOffersContext >> ");
-				
-				zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
-					
-	    			console.log("callback get items by page >>");
-
-	    			return next();
-	    			
-				});
+	async.waterfall([
+		// step_01 >> delelte all offers
+		function(callback){
+			offerController.deleteCollectionOffersBD(group,departament,function(){
+				console.log("callback deleteCollectionOffersBD >>");
+				callback(null, 'arg');
 			});
-		});
-
+		},
+		// step_02 >> set offer's url
+		function(arg,callback){
+			setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
+				console.log("callback setUrlOffers >> ",url);
+				callback(null,url);
+			});
+		},
+		// step_03 >> get offers context
+	    function(url, callback) {
+	    	zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
+	    		console.log("callback getOffersContext >> ");
+	    		callback(null,totalPaginacao,url);
+	    	});
+	    },
+	    // step_04 >> getOffers BY Pagination
+	    function(totalPaginacao,url,callback){
+	    	var currentPage = 0;
+	    	zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
+				console.log("callback get items by page >>");
+				callback(null,'arg');
+			});
+	    },
+	    // step_05 >> get offers
+	    function(arg,callback){
+	    	offerController.getOffersBD({},function(offersArray){
+				console.log("offersArray >>",offersArray);
+				callback(null,offersArray);
+			});
+	    },
+	    // step_06 >> save minor price in offers
+	    function(offersArray,callback){
+	    	var currentItem = 0;
+			offerController.saveMinorPriceOffers(currentItem,offersArray,function(){
+				console.log("callback saveMinorPriceOffers >>");
+				callback(null,'arg');
+			});
+	    }
+	], function (err, result) {
+		if(err){
+			console.log("err >>",err);
+			return next(err);
+		}else{
+			return next();
+		}
 	});
+
+	// offerController.deleteCollectionOffersBD(group,departament,function(){
+
+		// console.log("callback deleteCollectionOffersBD >>");
+
+		// setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
+
+			// console.log("callback setUrlOffers >> ",url);
+
+			// zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
+				
+				// console.log("callback getOffersContext >> ");
+				
+				// zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
+					
+	   //  			console.log("callback get items by page >>");
+
+	   //  			return next();
+	    			
+				// });
+			// });
+		// });
+
+	// });
 
 }
 

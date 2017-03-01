@@ -54,7 +54,7 @@ describe('Offer Unit Tests:',function(done){
 
 		var data3 = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
-  			ean:88888888888888,
+  			ean:18888888888889,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
@@ -67,69 +67,33 @@ describe('Offer Unit Tests:',function(done){
   			programGroup: config.programs_all
 		});
 
-		var dataToRemove = new Object ({
+
+		var data4 = new Object ({
 			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
-  			ean:9999999999999,
+  			ean:18888888888889,
   			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
   			merchantProductId: 1109777,
   			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
   			advertiser:"walmart",
-  			price: 742.9,
-  			price_display: 742.9,
+  			price: 100.9,
+  			price_display: 100.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			departamentBD: config.programs_all,
   			programGroup: config.programs_all
 		});
 
-		Context.dataToRemove = dataToRemove; 
 
 		var arrayProducts = [];
 		arrayProducts.push(data1);
 		arrayProducts.push(data2);
 		arrayProducts.push(data3);
+		arrayProducts.push(data4);
 
 		Context.arrayProducts = arrayProducts; 
 
 	});
   
-
-  	describe('Testing Offer Model Functions >>',function(){
-  		this.timeout(4000);
-		it('Should save one offer in bd >>',function(done){
-			offerController.saveOfferBD(Context.dataToRemove,function(error){
-				should.not.exist(error);
-				done();
-			});
-		});
-
-
-		it('Should get array walmart offers from DB >>',function(done){
-
-			this.timeout(5000);
-
-			query = {
-				advertiser:'walmart'
-			};
-			
-			offerController.getOffersBD(query,function(offersArray){
-				console.log(offersArray);
-				offersArray.length.should.be.equal(1);
-				done();
-			});
-		});
-
-
-		it('Should remove object BD and not return err >>',function(done){
-			this.timeout(4000);
-			var currentItem = 0;
-			offerController.deleteOfferBD(Context.dataToRemove,function(err){
-				should.not.exist(err);
-				done();
-			});
-		});
-	});
-
 
 	describe('Testing reviews conter in offer controller >>',function(){
 
@@ -238,6 +202,56 @@ describe('Offer Unit Tests:',function(done){
 		it('Should save offer in bd with reviews >>',function(done){
 			offerController.saveOfferWithReviews(Context.arrayProducts[0],function(error){
 				should.not.exist(error);
+				done();
+			});
+		});
+	});
+	
+
+	describe('Testing saveArrayOffers >>',function(){
+ 		this.timeout(10000);
+		it('Should return offersArray === 3',function(done){
+			offerController.saveArrayOffers(0,Context.arrayProducts,function(offersArray){
+				offersArray.length.should.be.equal(4);
+				done();
+			});
+		});
+	});
+
+
+	describe('Testing saveMinorPriceInArray >>',function(){
+
+		before(function(done){
+
+			this.timeout(5000);
+
+			query = {
+				advertiser:'walmart'
+			};
+
+			var arrayOffers = [];
+			Context.arrayOffers = arrayOffers; 
+
+			offerController.getOffersBD({},function(offersArray){
+				Context.arrayOffers = offersArray; 
+				done();
+			});
+		});
+
+ 		
+		it('Should save minor price without error >>',function(done){
+			this.timeout(20000);
+			offerController.saveMinorPriceOffers(0,Context.arrayOffers,function(error){
+				should.not.exist(error);
+				done();
+			});
+		});
+
+
+		it('should get offers array with minor price set >>',function(done){
+			this.timeout(10000);
+			offerController.getOffersBD({},function(offersArray){
+				console.log("offersArray >>",offersArray);
 				done();
 			});
 		});
