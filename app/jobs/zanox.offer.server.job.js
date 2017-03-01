@@ -114,7 +114,7 @@ function start(urlSearchOffers,query,programs,group,departament,dictionary,next)
 	    },
 	    // step_05 >> get offers
 	    function(arg,callback){
-	    	offerController.getOffersBD({},function(offersArray){
+	    	offerController.getOffersBD({departamentBD:departament},function(offersArray){
 				console.log("offersArray >>",offersArray);
 				callback(null,offersArray);
 			});
@@ -135,31 +135,6 @@ function start(urlSearchOffers,query,programs,group,departament,dictionary,next)
 			return next();
 		}
 	});
-
-	// offerController.deleteCollectionOffersBD(group,departament,function(){
-
-		// console.log("callback deleteCollectionOffersBD >>");
-
-		// setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
-
-			// console.log("callback setUrlOffers >> ",url);
-
-			// zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
-				
-				// console.log("callback getOffersContext >> ");
-				
-				// zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
-					
-	   //  			console.log("callback get items by page >>");
-
-	   //  			return next();
-	    			
-				// });
-			// });
-		// });
-
-	// });
-
 }
 
 
