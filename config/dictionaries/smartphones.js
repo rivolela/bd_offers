@@ -25,7 +25,13 @@ module.exports = {
 				'merchantcategory=' + 'Smartphones / Samsung / Galaxy A',
 
 
-	// iphone:'merchantcategory=' + 'iOS%20%26%20iPhone',
+	zenfone: 	'merchantcategory=' + 'Telefonia / Celulares e Smartphones / Smartphones' + '&' +
+				'merchantcategory=' + 'Mid' + '&' +
+				'merchantcategory=' + 'Smartphones' + '&' +
+				'merchantcategory=' + 'Smartphones / Asus / ZenFone 3' + '&' +
+				'merchantcategory=' + 'Android' + '&' +
+				'merchantcategory=' + 'Telefonia',
+
 };
 
 

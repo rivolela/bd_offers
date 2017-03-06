@@ -22,9 +22,10 @@ module.exports = {
 	// 13604 : Brastemp BR
 	// 18878 : Girafa BR
 	// 13602 : Consul BR
+	// 13314 : Fastshop BR
 
 	// all programs
-	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602',
+	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602,13314',
 	programs_all:'group_all',
 	
 	// offer crawler job
@@ -44,6 +45,7 @@ module.exports = {
 
 	query_smartphones:'iphone' + ',' +
 					'motorola'  + ',' +
+					'zenfone'  + ',' +
 					'samsung galaxy',
 
 	//departaments
@@ -59,6 +61,7 @@ module.exports = {
 	dictionary_offers:'',
 	dictionary_smartphones:dic_smartphones.iphone  + '&' + 
 							dic_smartphones.motorola + '&' + 
+							dic_smartphones.zenfone + '&' + 
 							dic_smartphones.samsung,
 
 	// end offer crawler job
@@ -66,7 +69,7 @@ module.exports = {
 
 	// crawler job
 
-	query_crawler:'iphone',
+	query_crawler:'zenfone',
 	dictionary_crawler:dic_smartphones.iphone,
 	schedule_crawler:'8 11 * * *',
 

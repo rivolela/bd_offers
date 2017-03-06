@@ -50,6 +50,7 @@ module.exports = {
 
 	query_smartphones:'iphone' + ',' +
 					'motorola'  + ',' +
+					'zenfone'  + ',' +
 					'samsung galaxy',
 
 	//departaments
@@ -65,6 +66,7 @@ module.exports = {
 	dictionary_offers:'',
 	dictionary_smartphones:dic_smartphones.iphone  + '&' + 
 							dic_smartphones.motorola + '&' + 
+							dic_smartphones.zenfone + '&' + 
 							dic_smartphones.samsung,
 
 	// end offer crawler job
@@ -72,8 +74,8 @@ module.exports = {
 
 	// crawler job
 
-	query_crawler:'samsung galaxy',
-	dictionary_crawler:dic_smartphones.motorola,
+	query_crawler:'zenfone',
+	dictionary_crawler:dic_smartphones.zenfone,
 	schedule_crawler:'0 16 * * *',
 
 	// end crawler job
