@@ -158,6 +158,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,n
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				departamentBD: departament,
+				nameURL: data.productItems.productItem[currentItem].name,
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8

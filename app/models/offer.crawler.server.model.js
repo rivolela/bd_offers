@@ -39,7 +39,7 @@ var Offer_CrawlerSchema = new Schema({
   countHappy: Number,
   totalReviews: Number,
   departamentBD: String,
-  programGroup: String
+  programGroup: String,
 });
 
 // middleware to handle attributes before to save

@@ -5,7 +5,7 @@ module.exports = function(){
  * @param  {price_display}
  * @return {price_display formated}
  */
-function formatBrazilCurrency(price_display,next){
+function formatBrazilCurrency(price_display){
     //config
     var valor = Number(price_display);
     var casas = 2;
@@ -41,7 +41,7 @@ function formatBrazilCurrency(price_display,next){
 
   retorno += inteiros+""+separdor_decimal+""+centavos;
  
-  return next('R$ ' + retorno);
+  return ('R$ ' + retorno);
 }
 
 return {

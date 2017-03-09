@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var StringUtile = require('../utile/string.server.utile.js');
+var stringUtile = new StringUtile();
+var CurrecyUtile = require('../utile/currency.server.utile.js');
+var currencyUtile = new CurrecyUtile();
+
 
 var OfferSchema = new Schema({
 	name: {
@@ -15,7 +20,7 @@ var OfferSchema = new Schema({
   },
   price_display:{
     type:String,
-    set: formatPrice
+    set: currencyUtile.formatBrazilCurrency
   },
   category: {
     type:String,
@@ -43,52 +48,13 @@ var OfferSchema = new Schema({
   minorPriceEAN:{
     type:String
   },
+  nameURL: {
+    type:String,
+    set: stringUtile.makeslug
+  },
 });
 
 
-/**
- * @description formart price to brazil pattern
- * @param  {price_display}
- * @return {price_display formated}
- */
-function formatPrice(price_display){
-    //config
-    var valor = Number(price_display);
-    var casas = 2;
-    var separdor_decimal = ',';
-    var separador_milhar = '.';
-
-
-    var valor_total = parseInt(valor * (Math.pow(10,casas)));
-    var inteiros =  parseInt(parseInt(valor * (Math.pow(10,casas))) / parseFloat(Math.pow(10,casas)));
-    var centavos = parseInt(parseInt(valor * (Math.pow(10,casas))) % parseFloat(Math.pow(10,casas)));
-   
-    if(centavos%10 === 0 && centavos+"".length<2 ){
-      centavos = centavos+"0";
-    }else if(centavos<10){
-      centavos = "0"+centavos;
-    }
-  
-    var milhares = parseInt(inteiros/1000);
-    inteiros = inteiros % 1000; 
-   
-    var retorno = "";
-   
-    if(milhares>0){
-      retorno = milhares+""+separador_milhar+""+retorno;
-    if(inteiros === 0){
-      inteiros = "000";
-    } else if(inteiros < 10){
-      inteiros = "00"+inteiros; 
-    } else if(inteiros < 100){
-      inteiros = "0"+inteiros; 
-    }
-  }
-
-  retorno += inteiros+""+separdor_decimal+""+centavos;
- 
-  return 'R$ ' + retorno;
-}
 
 
 // middleware to handle attributes before to save

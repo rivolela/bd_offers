@@ -269,9 +269,8 @@ var saveMinorPriceOffers = function(currentItem,offersArray,next){
 				function(minorPrice, callback){
 					var currencyUtile = new CurrencyUtile();
 					var price = minorPrice[0].menor_preco;
-					currencyUtile.formatBrazilCurrency(price,function(brazilianPrice){
-						callback(null, brazilianPrice);
-					});
+					var brazilianPrice = currencyUtile.formatBrazilCurrency(price);
+					callback(null, brazilianPrice);
 				},
 				// step_03 >> update offer with minor preco of EAN
 			    function(brazilianPrice, callback) {
