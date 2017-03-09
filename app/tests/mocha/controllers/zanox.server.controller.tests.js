@@ -55,7 +55,7 @@ describe('Zanox Unit Tests:',function(done){
 		it('Should not exists error',function(done){
 			this.timeout(8000);
 			var totalPagination = 0;
-			zanox.getOffersPagination(currentPage,totalPagination,apiZanox,group,departament,function(error){
+			zanox.parseJSONtoArrayOffers(currentPage,totalPagination,apiZanox,departament,function(error){
 				should.not.exist(error);
 				done();
 			});

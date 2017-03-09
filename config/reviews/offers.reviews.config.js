@@ -1,13 +1,13 @@
+var Smartphones = require('../departaments/smartphones.js');
+
 module.exports = {
 	
-	// Test configuration options
-	db:'mongodb://127.0.0.1:27017/bd_test',
-	sessionSecret:'testSessionSecret',
-	connectid:'A3697E2455EA755B758F',
-	timeRequest:1000,
-	searchtype:'contextual',
-
+	query:'sony',
+	dictionary:Smartphones.sony,
+	
+	
 };
+
 
 // var task = cron.schedule('* * * * *', function() {
 //   console.log('immediately started');

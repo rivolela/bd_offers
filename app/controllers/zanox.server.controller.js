@@ -6,6 +6,7 @@ var flatten = require('flat'),
  	config = require('../../config/config.js'),
  	utf8_decode = require('locutus/php/xml/utf8_decode'),
  	offerController = require('../controllers/offer.server.controller.js'),
+ 	async = require('async'),
  	call = new requestsUtile();
 
 
@@ -67,25 +68,65 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,next){
 };
 
 
-var getOffersPagination = function(currentPage,totalPaginacao,url,group,departament,next){
+var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,next){
 	
 	try{
 		console.log("currentPage >>",currentPage);
+		var currentItem = 0;
+		var url_offers = url + "&page=" + currentPage;
+		console.log('\n');
+		
 
 		if(currentPage <= totalPaginacao){
 
-			// var pagination = new Object();// jshint ignore:line
-			var url_offers = url + "&page=" + currentPage;
-			console.log('\n');
+			async.waterfall([
+				// step_01 >> get offers pagination
+				function(callback){
+					call.getJson(url_offers,config.timeRequest,function(json,response,error){
+						console.log("callback getJson >> ");
+						callback(null,json);
+					});
+				},
+				// step_02 >> parse offer from json to offer bd model
+				function(json,callback){
+					var offersArray = [];
+					parseJSONtoArrayOffers(currentItem,json,departament,offersArray,function(offersResult){
+						console.log("callback parseJSONtoArrayOffers >> ");
+						console.log("total of offers pagination >> ",json.items);
+						console.log("total of offers com EAN >> ",offersResult.length);
+						console.log('\n');
+						callback(null,offersResult);
+					});
+				},
+				// step_03 >> set offer's url
+				function(offersResult,callback){
 
-			call.getJson(url_offers,config.timeRequest,function(json,response,error) {
-				console.log("callback getOffersPagination >> ");
-				var currentItem = 0;
-				saveOffers(currentItem,json,group,departament,function(){
-					console.log("callback saveOffers >> ");
-					getOffersPagination(currentPage+1,totalPaginacao,url,group,departament,next);
-				});
+					async.forEachOf(offersResult, function (value, key, callback) {
+
+						offerController.saveOfferWithReviews(value,function(){
+							// console.log("key",key);
+							// console.log("value",value.name);
+							callback(null,'arg');
+						});
+
+					}, function (err) {
+					    if (err) console.error(err.message);
+					    // configs is now a map of JSON data
+					    //doSomethingWith(configs);
+					    callback(null,url);
+					});
+				},
+
+			], function (err, result) {
+				if(err){
+					console.log("err >>",err);
+					return next(err);
+				}else{
+					saveOffersPagination(currentPage+1,totalPaginacao,url,departament,next);
+					// return next();
+				}
 			});
+
 		}else{
 			return next();
 		}
@@ -97,12 +138,12 @@ var getOffersPagination = function(currentPage,totalPaginacao,url,group,departam
 
 
 
-var saveOffers = function(currentItem,data,group,departament,next){
+var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,next){
 	
 	try{
-		if(currentItem < data.items){
+		if((currentItem < data.items) && (data.productItems.productItem[currentItem].ean !== undefined)){
 
-			console.log(data.productItems.productItem[currentItem]);
+			// console.log(data.productItems.productItem[currentItem]);
 
 			var offer = new Object({
 				name : data.productItems.productItem[currentItem].name,
@@ -117,7 +158,6 @@ var saveOffers = function(currentItem,data,group,departament,next){
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				departamentBD: departament,
-				programGroup: group
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
@@ -131,12 +171,12 @@ var saveOffers = function(currentItem,data,group,departament,next){
 				offer.advertiser = utf8_decode(offer.advertiser);
 			}
 
-			offerController.saveOfferWithReviews(offer,function(){
-				saveOffers(currentItem+1,data,group,departament,next);
-			});
+			offersArray.push(offer);
 
+			parseJSONtoArrayOffers(currentItem+1,data,departament,offersArray,next);
+		
 		}else{
-		  return next();
+		  return next(offersArray);
 		}
 	}catch(error){
 		console.log(error);
@@ -191,10 +231,10 @@ var saveOffersCrawler = function(currentItem,data,next){
 };
 
 exports.getOffersContext = getOffersContext;
-exports.getOffersPagination = getOffersPagination;
+exports.saveOffersPagination = saveOffersPagination;
 exports.getOffersCrawlerPagination = getOffersCrawlerPagination;
 exports.saveOffersCrawler = saveOffersCrawler;
-exports.saveOffers= saveOffers;
+exports.parseJSONtoArrayOffers = parseJSONtoArrayOffers;
 
 
 

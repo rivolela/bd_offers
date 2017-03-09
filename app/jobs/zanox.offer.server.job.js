@@ -1,4 +1,9 @@
 var config = require('../../config/config.js'),
+	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
+	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
+	Smartphones = require('../../config/departaments/smartphones.js'),
+	Zanox = require('../../config/partners/zanox.js'),
+	JobConfig = require('../../config/jobs/job.config.js'),
  	offerController = require('../controllers/offer.server.controller.js'),
  	zanoxController = require('../controllers/zanox.server.controller.js'),
 	request = require('request'),
@@ -12,17 +17,16 @@ var config = require('../../config/config.js'),
 	async = require('async');
 
 
-var job_eletrodomesticos = cron.schedule(config.schedule_eletrodomesticos, function(err){
+var job_eletrodomesticos = cron.schedule(JobConfig.schedule_eletrodomesticos, function(err){
   console.log('starting job_eletrodomesticos ...');
   var time_start = new Date();	
   var dateUtile = new DateUtile();
   var url = null;
   start(url,
-  		config.query_eletrodomesticos,
-  		config.programs,
-  		config.programs_all,
-  		config.dep_eletrodomesticos,
-  		config.dictionary_offers,
+  		Eletrodomesticos.query,
+  		Zanox.programs,
+  		Eletrodomesticos.name,
+  		Eletrodomesticos.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" job_eletrodomesticos finished !");
@@ -32,17 +36,16 @@ var job_eletrodomesticos = cron.schedule(config.schedule_eletrodomesticos, funct
 
 
 
-var job_eletroportateis = cron.schedule(config.schedule_eletroportateis, function(err){
+var job_eletroportateis = cron.schedule(JobConfig.schedule_eletroportateis, function(err){
   console.log('starting job_eletroportateis ...');
   var time_start = new Date();
   var dateUtile = new DateUtile();
   var url = null;
   start(url,
-  		config.query_eletroportateis,
-  		config.programs,
-  		config.programs_all,
-  		config.dep_eletroportateis,
-  		config.dictionary_offers,
+  		Eletroportateis.query,
+  		Zanox.programs,
+  		Eletroportateis.name,
+  		Eletroportateis.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" job_eletroportateis finished !");
@@ -51,17 +54,16 @@ var job_eletroportateis = cron.schedule(config.schedule_eletroportateis, functio
 },false);
 
 
-var job_smartphones = cron.schedule(config.schedule_smartphones, function(err){
-  console.log('starting job >> ',config.dep_smartphones);
+var job_smartphones = cron.schedule(JobConfig.schedule_smartphones, function(err){
+  console.log('starting job >> ',Smartphones.name);
   var time_start = new Date();
   var dateUtile = new DateUtile();
   var url = null;
   start(url,
-  		config.query_smartphones,
-  		config.programs,
-  		config.programs_all,
-  		config.dep_smartphones,
-  		config.dictionary_smartphones,
+  		Smartphones.query,
+  		Zanox.programs,
+  		Smartphones.name,
+  		Smartphones.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" job_smartphones finished !");
@@ -77,7 +79,7 @@ var job_smartphones = cron.schedule(config.schedule_smartphones, function(err){
 
 
 
-function start(urlSearchOffers,query,programs,group,departament,dictionary,next){
+function start(urlSearchOffers,query,programs,departament,dictionary,next){
 
 	var currentPage = 0;
 	var currentItem = 0;
@@ -85,7 +87,7 @@ function start(urlSearchOffers,query,programs,group,departament,dictionary,next)
 	async.waterfall([
 		// step_01 >> delelte all offers
 		function(callback){
-			offerController.deleteCollectionOffersBD(group,departament,function(){
+			offerController.deleteCollectionOffersBD(departament,function(){
 				console.log("callback deleteCollectionOffersBD >>");
 				callback(null, 'arg');
 			});
@@ -107,7 +109,7 @@ function start(urlSearchOffers,query,programs,group,departament,dictionary,next)
 	    // step_04 >> getOffers BY Pagination
 	    function(totalPaginacao,url,callback){
 	    	var currentPage = 0;
-	    	zanoxController.getOffersPagination(currentPage,totalPaginacao,url,group,departament,function(){
+	    	zanoxController.saveOffersPagination(currentPage,totalPaginacao,url,departament,function(){
 				console.log("callback get items by page >>");
 				callback(null,'arg');
 			});

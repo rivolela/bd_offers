@@ -141,7 +141,7 @@ var getReviewsCounterByEan = function(ean,next){
         console.log(err);
         return next(err);
       }else{
-        console.log(res);
+        // console.log(res);
         return next(res);
       } 
     }

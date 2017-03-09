@@ -1,6 +1,21 @@
 
 module.exports = {
 
+	
+	//departaments
+	name:'eletrodomésticos',
+
+	//queries
+	query:'geladeira' + ',' +
+					'fogão' + ',' +
+					'microondas' + ',' +
+					'ar condicionado' + ',' +
+					'lavadora' + ',' +
+					'secadora',
+
+	dictionary:'',
+
+	// dictionaries 
 	ar_condicionado:'merchantcategory=' + 'Inverter' + '&' +
 					'merchantcategory=' + 'Janela' + '&' +
 					'merchantcategory=' + 'Split' + '&' +
@@ -13,4 +28,5 @@ module.exports = {
 					'merchantcategory=' + 'Eletrodomésticos - Ar Condicionado - Split' + '&' +
 					'merchantcategory=' + 'Eletrodomésticos - Ar Condicionado - Janela',
 };
+
 

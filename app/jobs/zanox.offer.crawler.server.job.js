@@ -8,20 +8,21 @@ var config = require('../../config/config.js'),
  	cheerio = require('cheerio'),
  	async = require('async'),
  	cron = require('node-cron'),
+ 	Zanox = require('../../config/partners/zanox.js'),
+ 	JobConfig = require('../../config/jobs/job.config.js'),
+ 	OfferReviews = require('../../config/reviews/offers.reviews.config.js'),
 	DateUtile = require('../utile/date.server.utile.js');
 
 
-var job_crawler = cron.schedule(config.schedule_crawler,  function(err){
+var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err){
   console.log('starting job_crawler ...');
   var time_start = new Date();
   var dateUtile = new DateUtile();	
   var url = null;
   start(url,
-  		config.query_crawler,
-  		config.programs,
-  		config.programs_all,
-  		config.dep_eletroportateis,
-  		config.dictionary_crawler,
+  		OfferReviews.query,
+  		Zanox.programs,
+  		OfferReviews.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" end job_crawler !");
@@ -37,35 +38,49 @@ var job_crawler = cron.schedule(config.schedule_crawler,  function(err){
  // }
 
 
-function start(urlSearchOffers,query,programs,group,departament,dictionary,next){
+function start(urlSearchOffers,query,programs,dictionary,next){
 
 	var currentPage = 0;
 	var currentItem = 0;
 
-	offerCrawlerController.deleteCollectionOffersBD(function(){
 
-		console.log("callback deleteCollectionOffersBD >>");
-
-		setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
-
-			console.log("callback setUrlOffers >> ",url);
-			console.log('\n');
-
-			zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
-				
-				console.log("callback getOffersContext >> ");
-				
-				zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,function(){
-
-					console.log("callback getOffersPagination >>");
-					
-	    			return next();
-				});
+	async.waterfall([
+		// step_01 >> delelte all offers
+		function(callback){
+			offerCrawlerController.deleteCollectionOffersBD(function(){
+				console.log("callback deleteCollectionOffersBD >>");
+				callback(null, 'arg');
 			});
-		});
-
+		},
+		// step_02 >> set offer's url
+		function(arg,callback){
+			setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
+				console.log("callback setUrlOffers >> ",url);
+				callback(null,url);
+			});
+		},
+		// step_03 >> get offers context
+	    function(url, callback) {
+	    	zanoxController.getOffersContext(url,50,function(totalPaginacao,totalItems,itemsByPage){
+	    		console.log("callback getOffersContext >> ");
+	    		callback(null,totalPaginacao,url);
+	    	});
+	    },
+	    // step_04 >> getOffersCrawlerPagination
+	    function(totalPaginacao,url,callback){
+	    	zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,function(){
+				console.log("callback getOffersPagination >>");
+				callback(null,'arg');
+			});
+	    }
+		], function (err, result) {
+			if(err){
+				console.log("err >>",err);
+				return next(err);
+			}else{
+				return next();
+			}
 	});
-
 }
 
 

@@ -32,6 +32,7 @@ var setReviewsCounterOffer = function(offer,next){
 				offer.countSad = 0;
 				offer.countHappy = 0;
 				offer.totalReviews = 0;
+				console.log("ofertas com ean :", offer.ean, " sem reviews");
 			}
 
 			return next(offer);
@@ -97,14 +98,28 @@ var saveArrayOffers = function(currentItem,offersArray,next){
 var saveOfferWithReviews = function(offer,next){
 
 	try{
-		setReviewsCounterOffer(offer,function(offerWithReviews){
-			if(offerWithReviews.totalReviews > 0){
-				saveOfferBD(offerWithReviews,function(){
-					return next();
+		async.waterfall([
+			// step_01 >> get offers pagination
+			function(callback){
+				setReviewsCounterOffer(offer,function(offerWithReviews){
+					console.log("callback setReviewsCounterOffer >> ");
+					callback(null,offerWithReviews);
 				});
+			},
+			// step_02 >> parse offer from json to offer bd model
+			function(offerWithReviews,callback){
+				saveOfferBD(offerWithReviews,function(){
+					callback(null,'arg');
+				});
+			},
+
+		], function (err, result) {
+			if(err){
+				console.log("err >>",err);
+				return next(err);
 			}else{
 				return next();
-			}				
+			}
 		});
 
 	}catch(e){
@@ -123,7 +138,7 @@ var saveOfferBD = function(data,next){
 				console.log("offer not saved >>",err);
 				return next(err);
 			}else{
-				console.log("offer saved");
+				console.log("offer with EAN >> ", offer.ean ," saved");
 				return next();
 			}
 		});
@@ -150,14 +165,11 @@ var deleteOfferBD = function(data,next){
 };
 
 
-var deleteCollectionOffersBD = function(group,departament,next){
+var deleteCollectionOffersBD = function(departament,next){
 
-	console.log("deleteCollectionOffersBD >>",departament,">>",group);
+	console.log("deleteCollectionOffersBD >>",departament,">>");
 
-  	Offer.remove({$and: [
-          {programGroup: group},
-          {departamentBD:departament}
-      ]},function(err){
+  	Offer.remove({departamentBD:departament},function(err){
 		if(err){
 			console.log(err);
 			return next(err);

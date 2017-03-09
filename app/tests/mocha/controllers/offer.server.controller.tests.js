@@ -4,6 +4,7 @@ var should = require('should');
 var requestsUtile = require('../../../utile/requests.server.utile.js');
 var offerController = require('../../../controllers/offer.server.controller.js');
 var reviewController = require('../../../controllers/review.server.controller.js');
+var Eletrodomesticos = require('../../../../config/departaments/eletrodomesticos.js');
 var assert = require("assert");
 var apiZanox = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=fogao+brastemp&programs=12011";
 
@@ -33,8 +34,7 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.programs_all,
-  			programGroup: config.programs_all
+			departamentBD: Eletrodomesticos.name,
 		});
 
 		var data2 = new Object ({
@@ -48,8 +48,7 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.programs_all,
-  			programGroup: config.programs_all
+			departamentBD: Eletrodomesticos.name,
 		});
 
 		var data3 = new Object ({
@@ -63,8 +62,7 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 742.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.programs_all,
-  			programGroup: config.programs_all
+			departamentBD: Eletrodomesticos.name,
 		});
 
 
@@ -79,8 +77,7 @@ describe('Offer Unit Tests:',function(done){
   			price_display: 100.9,
   			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
 			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
-			departamentBD: config.programs_all,
-  			programGroup: config.programs_all
+			departamentBD: Eletrodomesticos.name,
 		});
 
 
@@ -260,7 +257,7 @@ describe('Offer Unit Tests:',function(done){
 
 	after(function(){
 		this.timeout(4000);
-		offerController.deleteCollectionOffersBD(config.programs_all,config.programs_all,function(){
+		offerController.deleteCollectionOffersBD(Eletrodomesticos.name,function(){
 		});
 
 		reviewController.deleteAllReviews(function(){
