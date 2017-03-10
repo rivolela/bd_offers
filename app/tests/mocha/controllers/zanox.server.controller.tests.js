@@ -5,11 +5,9 @@ var zanox = require('../../../controllers/zanox.server.controller.js');
 var Offer = require('../../../controllers/offer.server.controller.js');
 var config = require('../../../../config/config.js');
 var assert = require("assert");
-
-
+var Eletroportateis = require('../../../../config/departaments/eletroportateis.js');
 var supertest = require("supertest")("https://www.walmart.com.br");
-
-var apiZanox = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=fogao+brastemp&programs=12011";
+var apiZanox = "https://api.zanox.com/json/2011-03-01/products?connectid=A3697E2455EA755B758F&programs=12011,13212,16588,12781,12785,12784,13604,18878,13602,13314&q=ventilador,aspirador%20pó,fritadeiras%20óleo,cafeteira,máquina%20costura,purificador,batedeira,liquidificador,mixer,ferro&&searchtype=contextual&items=50&page=4";
 
 
 // Code here will be linted with JSHint.
@@ -22,45 +20,48 @@ describe('Zanox Unit Tests:',function(done){
 
 	var Context = {};
 
-	var group = config.programs_all;
 	var departament = config.dep_eletrodomesticos;
   
   
 	describe('Testing connection api zanox >>',function(){
 		it('Should return items == 10',function(done){
-			this.timeout(6000);
+			this.timeout(10000);
 			var call = new requestsUtile();
 			var timeRequest = 0;
 			call.getJson(apiZanox,timeRequest,function(data,response,error){
-				data.items.should.be.equal(10);
+				Context.json = data;
+				data.items.should.be.equal(50);
 				done();
 			});
 		});
 	});
 
 
-	describe('Testing context about the searched offers >>',function(){
-		it('Should return totalItems > 0',function(done){
-			this.timeout(10000);
-			var itemsByPage = 50;
-			zanox.getOffersContext(apiZanox,itemsByPage,function(totalPaginacao,totalItems,itemsByPage){
-				totalItems.should.be.above(0);
+	describe('Testing parseJSONtoArrayOffers function >>',function(){
+		it('Should return offersResult == 45 offers ( offers with EAN )',function(done){
+			// this.timeout(100000);
+			var currentItem = 0;
+			var offersArray = [];
+			zanox.parseJSONtoArrayOffers(currentItem,Context.json,Eletroportateis.name,offersArray,function(offersResult){
+				offersResult.length.should.be.equal(42);
 				done();
 			});
 		});
 	});
 
 
-	describe('Testing pagination == 1 >>',function(){
-		it('Should not exists error',function(done){
-			this.timeout(8000);
-			var totalPagination = 0;
-			zanox.parseJSONtoArrayOffers(currentPage,totalPagination,apiZanox,departament,function(error){
-				should.not.exist(error);
-				done();
-			});
-		});
-	});
+
+	// describe('Testing context about the searched offers >>',function(){
+	// 	it('Should return totalItems > 0',function(done){
+	// 		this.timeout(20000);
+	// 		var itemsByPage = 50;
+	// 		zanox.getOffersContext(apiZanox,itemsByPage,function(totalPaginacao,totalItems,itemsByPage){
+	// 			totalPaginacao.should.be.equal(782);
+	// 			// totalItems.should.be.equal(39146);
+	// 			// itemsByPage.should.be.equal(50);
+	// 		});
+	// 	});
+	// });
 
 });
 // Code here will be ignored by JSHint.

@@ -141,7 +141,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,n
 var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,next){
 	
 	try{
-		if((currentItem < data.items) && (data.productItems.productItem[currentItem].ean !== undefined)){
+		if(currentItem < data.items){
 
 			// console.log(data.productItems.productItem[currentItem]);
 
@@ -172,7 +172,9 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,n
 				offer.advertiser = utf8_decode(offer.advertiser);
 			}
 
-			offersArray.push(offer);
+			if (data.productItems.productItem[currentItem].ean !== undefined){
+				offersArray.push(offer);
+			}
 
 			parseJSONtoArrayOffers(currentItem+1,data,departament,offersArray,next);
 		
