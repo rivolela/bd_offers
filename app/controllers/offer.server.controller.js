@@ -99,7 +99,7 @@ var saveOfferWithReviews = function(offer,next){
 
 	try{
 		async.waterfall([
-			// step_01 >> get offers pagination
+			// step_01 >> get total os reviews, total of reviews positives and negatives
 			function(callback){
 				setReviewsCounterOffer(offer,function(offerWithReviews){
 					console.log("callback setReviewsCounterOffer >> ");
@@ -108,11 +108,12 @@ var saveOfferWithReviews = function(offer,next){
 			},
 			// step_02 >> parse offer from json to offer bd model
 			function(offerWithReviews,callback){
-				saveOfferBD(offerWithReviews,function(){
-					callback(null,'arg');
-				});
+				if(offerWithReviews.totalReviews > 0){
+					saveOfferBD(offerWithReviews,function(){
+						callback(null,'arg');
+					});
+				}
 			},
-
 		], function (err, result) {
 			if(err){
 				console.log("err >>",err);
