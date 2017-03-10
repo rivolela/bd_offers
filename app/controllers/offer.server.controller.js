@@ -112,6 +112,8 @@ var saveOfferWithReviews = function(offer,next){
 					saveOfferBD(offerWithReviews,function(){
 						callback(null,'arg');
 					});
+				}else{
+					callback(null,'arg');
 				}
 			},
 		], function (err, result) {

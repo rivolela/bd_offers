@@ -10,7 +10,7 @@ module.exports = {
 	
 	
 	// schedule offers jobs
-	schedule_eletrodomesticos:'0 1 * * *',
+	schedule_eletrodomesticos:'58 9 * * *',
 	schedule_eletroportateis:'0 5 * * *',
 	schedule_smartphones:'5 20 * * *',
 
