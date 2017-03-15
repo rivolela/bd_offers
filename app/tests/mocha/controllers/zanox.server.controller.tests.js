@@ -38,8 +38,8 @@ describe('Zanox Unit Tests:',function(done){
 
 
 	describe('Testing parseJSONtoArrayOffers function >>',function(){
-		it('Should return offersResult == 45 offers ( offers with EAN )',function(done){
-			// this.timeout(100000);
+		it('Should return offersResult == 42 offers ( offers with EAN )',function(done){
+			this.timeout(4000);
 			var currentItem = 0;
 			var offersArray = [];
 			zanox.parseJSONtoArrayOffers(currentItem,Context.json,Eletroportateis.name,offersArray,function(offersResult){

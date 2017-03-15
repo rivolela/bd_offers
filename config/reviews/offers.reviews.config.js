@@ -2,8 +2,8 @@ var Smartphones = require('../departaments/smartphones.js');
 
 module.exports = {
 	
-	query:'sony',
-	dictionary:Smartphones.sony,
+	query:'lg',
+	dictionary:Smartphones.lg,
 	
 	
 };

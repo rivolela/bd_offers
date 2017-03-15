@@ -10,6 +10,7 @@ module.exports = {
 			'motorola'  + ',' +
 			'zenfone'  + ',' +
 			'sony'  + ',' +
+			'lg'  + ',' +
 			'samsung galaxy',
 
 
@@ -55,6 +56,15 @@ module.exports = {
 			'merchantcategory=' + 'Telefonia',
 
 
+
+	lg: 	'merchantcategory=' + 'Telefonia / Celulares e Smartphones / Smartphones' + '&' +
+			'merchantcategory=' + 'Smartphones' + '&' +
+			'merchantcategory=' + 'Smartphones / LG / LG X' + '&' +
+			'merchantcategory=' + 'Celulares' + '&' +
+			'merchantcategory=' + 'Outros / Smartphones' + '&' +
+			'merchantcategory=' + 'Telefonia',
+
+
 	// dictionaries 
 	
 	// dictionary:iphone  + '&' + 
@@ -64,7 +74,8 @@ module.exports = {
 	// 			samsung,
 
 	get dictionary() {
-        return this.iphone  + '&' + this.motorola + '&' + this.zenfone + '&' + this.sony + '&' + this.samsung;
+        return this.iphone  + '&' + this.motorola + '&' + this.zenfone + '&' + this.sony + '&' + 
+        this.lg + '&' + this.samsung;
     },
 };
 
