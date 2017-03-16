@@ -52,6 +52,10 @@ var OfferSchema = new Schema({
     type:String,
     set: stringUtile.makeslug
   },
+  product:{
+    type: Schema.ObjectId,
+    ref: 'Product'
+  }
 });
 
 

@@ -4,20 +4,9 @@ var Offer = mongoose.model( 'Offer', OfferSchema);
 var reviewController = require('./review.server.controller.js');
 var async = require('async');
 var CurrencyUtile = require('../utile/currency.server.utile.js');
-
-var flatten = require('flat'),
-	requestsUtile = require('../utile/requests.server.utile.js'),
- 	host = 'api.zanox.com/json/2011-03-01/',
- 	uri = 'products',
- 	connectid = 'connectid=43EEF0445509C7205827',
- 	programs = 'programs=12011',
- 	query = 'q=geladeira%20brastemp',
- 	category = 'merchantcategory=Eletrodomésticos / Fogões / Fogão 4 bocas',	
- 	items = 'items=50',
- 	url = 'https://' + host + uri + '?' + connectid + '&' + programs + '&' + query + '&' + category + '&' + items;
-
-
-var call = new requestsUtile();
+var Config = require('../../config/config.js');
+var RequestsUtile = require('../utile/requests.server.utile.js');
+var call = new RequestsUtile();
 
 
 var setReviewsCounterOffer = function(offer,next){
@@ -296,6 +285,50 @@ var saveMinorPriceOffers = function(currentItem,offersArray,next){
 };
 
 
+
+var saveProductsOffersArray = function(currentItem,offersArray,next){
+
+	try{
+		if(currentItem < offersArray.length){
+
+			var offer = offersArray[currentItem];
+
+			async.waterfall([
+				// step_01 >> get product by offer ean
+				function(callback){
+					var urlService = Config.bdService + "products/ean/" + offer.ean;
+					console.log("urlService >>",urlService);
+					call.getJson(urlService,Config.timeRequest,function(json,response,error){
+						console.log("callback getJson >> ");
+						console.log("json >> ",json.docs[0]);
+						callback(null,json.docs[0]);
+					});
+				},
+				// step_02 >> update offer
+				function(product, callback){
+					if(product !== undefined){
+						var updateFields = {product:product._id};
+	  					updateOffer(offer,updateFields,function(offerUpdated){
+							callback(null);
+	  					});
+					}else{
+						callback(null);
+					}
+				},
+			], function (err, result) {
+			    saveProductsOffersArray(currentItem+1,offersArray,next);
+			});
+
+		}else{
+			return next();
+		}
+	}catch(e){
+		console.log('An error has occurred >>  saveProductsOffersArray >> ' + e.message);
+		throw e;
+	}
+};
+
+
 exports.saveArray = saveArray;
 exports.saveOfferBD = saveOfferBD;
 exports.getOffersBD = getOffersBD;
@@ -308,3 +341,4 @@ exports.getMinorPrice = getMinorPrice;
 exports.saveMinorPriceOffers = saveMinorPriceOffers;
 exports.saveArrayOffers = saveArrayOffers;
 exports.updateOffer = updateOffer;
+exports.saveProductsOffersArray = saveProductsOffersArray;

@@ -126,8 +126,15 @@ function start(urlSearchOffers,query,programs,departament,dictionary,next){
 	    	var currentItem = 0;
 			offerController.saveMinorPriceOffers(currentItem,offersArray,function(){
 				console.log("callback saveMinorPriceOffers >>");
-				callback(null,'arg');
+				callback(null,offersArray);
 			});
+	    },
+	    // step_07 >> save product for each offer
+	    function(offersArray,callback){
+	    	var currentItem = 0;
+	    	offerController.saveProductsOffersArray(currentItem,offersArray,function(){
+				callback(null,'arg');
+	    	});
 	    }
 	], function (err, result) {
 		if(err){

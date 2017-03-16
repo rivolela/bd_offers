@@ -6,6 +6,7 @@ module.exports = {
 	connectid:'A3697E2455EA755B758F',
 	timeRequest:0,
 	searchtype:'contextual',
+	bdService: "https://bd-services.herokuapp.com/api/",
 };
 
 
