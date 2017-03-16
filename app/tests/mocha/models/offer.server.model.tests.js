@@ -11,11 +11,15 @@ var app = require('../../../../server.js'),
 
 describe('Offer Model Unit Tests:',function(){
 
+	var Context = {};
+
 	before(function(done){
+
+		this.timeout(4000);
 
 		product_01 = new Product({
 			name: 'Smartphone Motorola Moto X 2ª Geracao Xt1097 Preto Android 4.4.4, Camera 13mp, Tela 5.2\", Quadcore 2.5 Ghz, 32gb Memoria, 3g e 4g',
-			ean: 7892597336616,
+			ean: 888888888888,
 			manufacturer: 'Motorola',
 			image: 'https://static.wmobjects.com.br/imgres/arquivos/ids/10538240-250-250',
 			departamentBD: "smartphones",
@@ -63,28 +67,46 @@ describe('Offer Model Unit Tests:',function(){
   			totalReviews: 80,
 		});
 
-		async.series([
-			function(callback) {
-    			product_01.save(function(){
-    				callback(null, 'product_01 saved >>');
-				});
-    		},
+
+		offer_03 = new Offer({
+			urlOffer: '1929076/sk',
+			name: 'Smartphone Motorola Moto X (2ª Geração) XT1097 Preto Single Chip Android 4.4.4 4G Wi-Fi Tela 5.2\" 32GB',
+			ean: 888888888888,
+			category: 'Telefonia / Celulares e Smartphones / Smartphones',
+			merchantProductId: '1929076',
+			url: 'http://ad.zanox.com/ppc/?41049933C87969835&ULP=[[1929076/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[A3697E2455EA755B758F]]',
+			manufacturer: 'Motorola',
+			image_medium: 'https://static.wmobjects.com.br/imgres/arquivos/ids/10538240-250-250',
+			price: 999.9,
+			price_display: "R$ 2000,90",
+			advertiser: "Walmart BR",
+			departamentBD: "smartphones",
+			programGroup: "group_all",
+			countSad: 9,
+  			countHappy: 71,
+  			totalReviews: 80,
+		});
+
+		async.waterfall([
     		function(callback) {
-    			offer_01.product = product_01;
     			offer_01.save(function(){
-    				callback(null, 'offer_01 saved >>');
+    				callback(null,'offer 1 saved');
 				});
     		},
-    		function(callback) {
-    			offer_02.product = product_01;
+    		function(arg,callback) {
     			offer_02.save(function(){
-    				callback(null, 'offer_02 saved >>');
+    				callback(null,'offer 2 saved');
 				});
-    		}
+    		},
+    		function(arg,callback) {
+    			offer_03.save(function(){
+    				callback(null,'offer 3 saved');
+				});
+    		},
 		],
 		// optional callback
 		function(err, results) {
-			console.log("results >>",results);
+			// console.log("results >>",results);
 			done();
 		    // results is now equal to ['one', 'two']
 		});
@@ -106,16 +128,39 @@ describe('Offer Model Unit Tests:',function(){
 
 
 	describe('test get product from offer >>',function(){
+
+		before(function(done){
+			async.waterfall([
+	    		function(callback) {
+	    			product_01.save(function(err,product){
+	    				callback(null,product);
+					});
+	    		},
+	    		function(product,callback) {
+	    			offer_02.product = product._id;
+	    			offer_02.save(function(){
+	    				callback(null,'arg');
+					});
+	    		},
+			],
+			// optional callback
+			function(err, results) {
+				// console.log("results >>",results);
+				done();
+			    // results is now equal to ['one', 'two']
+			});
+		});
+
 		it('Should be able to get the product_01 name from offer_01',function(){
 			Offer.find({ean:7892597336616}).populate('product','name').exec(function(err,offers){
-				offers[0].product.name.should.be.equal('Smartphone Motorola Moto X 2ª Geracao Xt1097 Preto Android 4.4.4, Camera 13mp, Tela 5.2", Quadcore 2.5 Ghz, 32gb Memoria, 3g e 4g');
+				offers[1].product.name.should.be.equal('Smartphone Motorola Moto X 2ª Geracao Xt1097 Preto Android 4.4.4, Camera 13mp, Tela 5.2", Quadcore 2.5 Ghz, 32gb Memoria, 3g e 4g');
 			});
 		});
 	});
 
 
 	after(function(done){
-		Product.remove({},function(){
+		Product.remove({ean:7892597336616},function(){
 			Offer.remove({},function(){
 				done();
 			});
