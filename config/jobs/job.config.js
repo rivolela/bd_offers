@@ -10,9 +10,9 @@ module.exports = {
 	
 	
 	// schedule offers jobs
-	schedule_eletrodomesticos:'0 1 * * *',
-	schedule_eletroportateis:'0 5 * * *',
-	schedule_smartphones:'0 7 * * *',
+	schedule_eletrodomesticos:'18 18 * * *',
+	schedule_eletroportateis:'10 19 * * *',
+	schedule_smartphones:'25 10 * * *',
 
 	// schedule offers reviews jobs
 	schedule_offers_reviews:'0 10 * * *',
