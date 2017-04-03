@@ -16,7 +16,7 @@ module.exports = {
 	schedule_informatica:'0 9 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'0 16 * * *',
+	schedule_offers_reviews:'20 16 * * *',
 };
 
 
