@@ -34,8 +34,8 @@ module.exports = function(grunt){
 		mochaTest:{
 			//src:'app/tests/mocha/utile/requests.server.utile.tests.js',
 			// src:'app/tests/mocha/controllers/offer.server.controller.tests.js',
-			src:'app/tests/mocha/models/*.js',
-			// src:'app/tests/mocha/**/*.js',
+			// src:'app/tests/mocha/models/*.js',
+			src:'app/tests/mocha/**/*.js',
 			options:{
 				reporter:'spec'
 			}

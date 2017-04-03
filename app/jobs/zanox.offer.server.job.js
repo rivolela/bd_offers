@@ -2,6 +2,7 @@ var config = require('../../config/config.js'),
 	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
 	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
 	Smartphones = require('../../config/departaments/smartphones.js'),
+	Informatica = require('../../config/departaments/informatica.js'),
 	Zanox = require('../../config/partners/zanox.js'),
 	JobConfig = require('../../config/jobs/job.config.js'),
  	offerController = require('../controllers/offer.server.controller.js'),
@@ -67,6 +68,24 @@ var job_smartphones = cron.schedule(JobConfig.schedule_smartphones, function(err
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" job_smartphones finished !");
+  			});
+  		});
+},false);
+
+
+var job_informatica = cron.schedule(JobConfig.schedule_informatica, function(err){
+  console.log('starting job >> ',Informatica.name);
+  var time_start = new Date();
+  var dateUtile = new DateUtile();
+  var url = null;
+  start(url,
+  		Informatica.query,
+  		Zanox.programs,
+  		Informatica.name,
+  		Informatica.dictionary,
+  		function(){
+  			dateUtile.getJobTime(time_start,function(){
+  				console.log(" job_informatica finished !");
   			});
   		});
 },false);
@@ -184,9 +203,13 @@ var startSmartphones = function(next){
 	return (job_smartphones.start());
 };
 
+var startInformatica = function(next){
+	return (job_informatica.start());
+};
  
 exports.setUrlOffers = setUrlOffers;
 exports.startEletrodomesticos = startEletrodomesticos;
 exports.startEletroportateis = startEletroportateis;
 exports.startSmartphones = startSmartphones;
+exports.startInformatica = startInformatica;
 

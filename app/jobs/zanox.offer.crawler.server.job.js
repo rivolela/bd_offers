@@ -11,6 +11,9 @@ var config = require('../../config/config.js'),
  	Zanox = require('../../config/partners/zanox.js'),
  	JobConfig = require('../../config/jobs/job.config.js'),
  	OfferReviews = require('../../config/reviews/offers.reviews.config.js'),
+ 	Smartphones = require('../../config/departaments/smartphones.js'),
+ 	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
+	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
 	DateUtile = require('../utile/date.server.utile.js');
 
 
@@ -20,9 +23,9 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
   var dateUtile = new DateUtile();	
   var url = null;
   start(url,
-  		OfferReviews.query,
+  		Eletroportateis.query,
   		Zanox.programs,
-  		OfferReviews.dictionary,
+  		Eletroportateis.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" end job_crawler !");

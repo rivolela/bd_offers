@@ -299,7 +299,7 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 					var urlService = Config.bdService + "products/ean/" + offer.ean;
 					console.log("urlService >>",urlService);
 					call.getJson(urlService,Config.timeRequest,function(json,response,error){
-						console.log("callback getJson >> ");
+						console.log("callback get product >> ");
 						console.log("json >> ",json.docs[0]);
 						callback(null,json.docs[0]);
 					});
