@@ -14,6 +14,7 @@ var config = require('../../config/config.js'),
  	Smartphones = require('../../config/departaments/smartphones.js'),
  	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
 	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
+	Informatica = require('../../config/departaments/informatica.js'),
 	DateUtile = require('../utile/date.server.utile.js');
 
 
@@ -23,9 +24,9 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
   var dateUtile = new DateUtile();	
   var url = null;
   start(url,
-  		Eletroportateis.query,
+  		Informatica.query,
   		Zanox.programs,
-  		Eletroportateis.dictionary,
+  		Informatica.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" end job_crawler !");
