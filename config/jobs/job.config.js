@@ -13,7 +13,8 @@ module.exports = {
 	schedule_eletrodomesticos:'0 1 * * *',
 	schedule_eletroportateis:'0 3 * * *',
 	schedule_smartphones:'0 5 * * *',
-	schedule_informatica:'10 17 * * *',
+	schedule_informatica:'0 7 * * *',
+	schedule_games:'0 9 * * *',
 
 	// schedule offers reviews jobs
 	schedule_offers_reviews:'30 16 * * *',

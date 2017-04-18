@@ -200,7 +200,7 @@ var saveOffersCrawler = function(currentItem,data,next){
 				ean : data.productItems.productItem[currentItem].ean,
 				category :  data.productItems.productItem[currentItem].merchantCategory,
 				merchantProductId : data.productItems.productItem[currentItem].merchantProductId,
-				url : data.productItems.productItem[currentItem].trackingLinks.trackingLink[0].ppc,
+				url : data.productItems.productItem[currentItem].trackingLinks.trackingLink[1].ppc,
 				manufacturer: data.productItems.productItem[currentItem].manufacturer,
 				image_medium: data.productItems.productItem[currentItem].image.medium,
 				image_large: data.productItems.productItem[currentItem].image.large,

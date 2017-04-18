@@ -9,8 +9,6 @@ module.exports = {
 	query:'tablet' + ',' +
 			'notebook' + ',' +
 			'macbook apple' + ',' +
-			// 'acessorios Informática' + ',' +
-			// 'acessorios Apple' + ',' +
 			'impressoras' + ',' +
 			'multifuncionais' + ',' +
 			'GPS' + ',' +
@@ -58,23 +56,6 @@ module.exports = {
 			'merchantcategory=' + 'Informática' + '&' +
 			'merchantcategory=' + 'Notebook',
 
-	// acessoriosInformatica:'merchantcategory=' + 'Informática / Suprimentos / Acessórios' + '&' +
-	// 					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Películas Protetoras' + '&' +
-	// 					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Mochilas Bolsas e Capas' + '&' +
-	// 					'merchantcategory=' + 'Acessórios e Periféricos' + '&' +
-	// 					'merchantcategory=' + 'Acessórios para Celular' + '&' +
-	// 					'merchantcategory=' + 'Informatica / Acessorios / Pen Drive' + '&' +
-	// 					'merchantcategory=' + 'Informática' + '&' +
-	// 					'merchantcategory=' + 'Acessorios / InformÃ¡tica / Capa/Case',
-
-	// acessoriosApple:'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Cabos' + '&' +
-	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Capas e Estojos' + '&' +
-	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Tablets / Películas' + '&' +
-	// 				'merchantcategory=' + 'Acessórios para Celular' + '&' +
-	// 				'merchantcategory=' + 'Acessórios p/ iPod' + '&' +
-	// 				'merchantcategory=' + 'Acessórios Apple' + '&' +
-	// 				'merchantcategory=' + 'Informática' + '&' +
-	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Películas Protetoras',
 
 	impressoras:'merchantcategory=' + 'Jato de Tinta' + '&' +
 				'merchantcategory=' + 'Laser Monocromática' + '&' +
@@ -91,8 +72,6 @@ module.exports = {
 				'merchantcategory=' + 'Multifuncional' + '&' +
 				'merchantcategory=' + 'Informatica / Impressoras / Impressora' + '&' +
 				'merchantcategory=' + 'Informatica / Impressoras / Multifuncional' + '&' +
-				// 'merchantcategory=' + 'Toners' + '&' +
-				// 'merchantcategory=' + 'Cartuchos' + '&' +
 				'merchantcategory=' + 'Informática / Impressão / Impressoras',
 
 	navegadoresGPS:'merchantcategory=' + 'Automotivo / GPS e Acessórios / GPS' + '&' +
@@ -106,8 +85,6 @@ module.exports = {
         return this.tablet  +  '&' +
         this.notebook + '&' + 
         this.macbook + '&' + 
-        // this.acessoriosInformatica + '&' + 
-        // this.acessoriosApple + '&' + 
         this.impressoras + '&' + 
         this.multifuncionais + '&' + 
         this.navegadoresGPS;
