@@ -15,6 +15,7 @@ var config = require('../../config/config.js'),
  	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
 	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
 	Informatica = require('../../config/departaments/informatica.js'),
+	CategoryReview = require('../../config/category/category_review.js'),
 	DateUtile = require('../utile/date.server.utile.js');
 
 

@@ -8,13 +8,13 @@ module.exports = {
 	//queries
 	query:'tablet' + ',' +
 			'notebook' + ',' +
-			'macbook' + ',' +
-			'acessorios Informática' + ',' +
-			'acessorios Apple' + ',' +
+			'macbook apple' + ',' +
+			// 'acessorios Informática' + ',' +
+			// 'acessorios Apple' + ',' +
 			'impressoras' + ',' +
 			'multifuncionais' + ',' +
-			'navegadores GPS' + ',' +
-			'ipad',
+			'GPS' + ',' +
+			'ipad apple',
 
 	// dictionaries 
 	tablet:'merchantcategory=' + 'Tablets / iPads e Tablets / Tablets' + '&' +
@@ -32,6 +32,9 @@ module.exports = {
 			'merchantcategory=' + 'Escolha por Marca',
 
 	ipad:'merchantcategory=' + 'Tablets / iPads e Tablets / Tablets' + '&' +
+			'merchantcategory=' + 'Tablets / iPads e Tablets / iPads' + '&' +
+			'merchantcategory=' + 'Tablet iOS-iPad' + '&' +
+			'merchantcategory=' + 'Informática' + '&' +
 			'merchantcategory=' + 'pad / Mini / Wi-fi / + / 3g / & / 4g',
 
 	notebook:'merchantcategory=' + 'Informática / Notebooks e Conversíveis / Notebooks' + '&' +
@@ -52,45 +55,50 @@ module.exports = {
 
 	macbook:'merchantcategory=' + 'Informática / Notebooks e Conversíveis / Notebooks' + '&' +
 			'merchantcategory=' + 'Mochilas para Notebook' + '&' +
+			'merchantcategory=' + 'Informática' + '&' +
 			'merchantcategory=' + 'Notebook',
 
-	acessoriosInformatica:'merchantcategory=' + 'Informática / Suprimentos / Acessórios' + '&' +
-						'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Películas Protetoras' + '&' +
-						'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Mochilas Bolsas e Capas' + '&' +
-						'merchantcategory=' + 'Acessórios e Periféricos' + '&' +
-						'merchantcategory=' + 'Acessórios para Celular' + '&' +
-						'merchantcategory=' + 'Informatica / Acessorios / Pen Drive' + '&' +
-						'merchantcategory=' + 'Informática' + '&' +
-						'merchantcategory=' + 'Acessorios / InformÃ¡tica / Capa/Case',
+	// acessoriosInformatica:'merchantcategory=' + 'Informática / Suprimentos / Acessórios' + '&' +
+	// 					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Películas Protetoras' + '&' +
+	// 					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Periféricos Informática / Mochilas Bolsas e Capas' + '&' +
+	// 					'merchantcategory=' + 'Acessórios e Periféricos' + '&' +
+	// 					'merchantcategory=' + 'Acessórios para Celular' + '&' +
+	// 					'merchantcategory=' + 'Informatica / Acessorios / Pen Drive' + '&' +
+	// 					'merchantcategory=' + 'Informática' + '&' +
+	// 					'merchantcategory=' + 'Acessorios / InformÃ¡tica / Capa/Case',
 
-	acessoriosApple:'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Cabos' + '&' +
-					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Capas e Estojos' + '&' +
-					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Tablets / Películas' + '&' +
-					'merchantcategory=' + 'Acessórios para Celular' + '&' +
-					'merchantcategory=' + 'Acessórios p/ iPod' + '&' +
-					'merchantcategory=' + 'Acessórios Apple' + '&' +
-					'merchantcategory=' + 'Informática' + '&' +
-					'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Películas Protetoras',
+	// acessoriosApple:'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Cabos' + '&' +
+	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Capas e Estojos' + '&' +
+	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Tablets / Películas' + '&' +
+	// 				'merchantcategory=' + 'Acessórios para Celular' + '&' +
+	// 				'merchantcategory=' + 'Acessórios p/ iPod' + '&' +
+	// 				'merchantcategory=' + 'Acessórios Apple' + '&' +
+	// 				'merchantcategory=' + 'Informática' + '&' +
+	// 				'merchantcategory=' + 'Acessórios de Tecnologia / Acessório Celulares Smartphones / Películas Protetoras',
 
-	impressoras:'merchantcategory=' + 'Informática' + '&' +
-				'merchantcategory=' + 'Acessórios e Periféricos' + '&' +
-				'merchantcategory=' + 'Multifuncional' + '&' +
-				'merchantcategory=' + 'Informatica / Impressoras / Impressora' + '&' +
+	impressoras:'merchantcategory=' + 'Jato de Tinta' + '&' +
+				'merchantcategory=' + 'Laser Monocromática' + '&' +
+				'merchantcategory=' + 'Laser Colorida' + '&' +
+				'merchantcategory=' + 'Laser P&B' + '&' +
 				'merchantcategory=' + 'Informatica / Impressoras / Multifuncional' + '&' +
-				'merchantcategory=' + 'Toners' + '&' +
-				'merchantcategory=' + 'Cartuchos' + '&' +
-				'merchantcategory=' + 'Informática / Impressão / Impressoras',
+				'merchantcategory=' + 'Informática' + '&' +
+				'merchantcategory=' + 'Informática / Impressão / Impressoras' + '&' +
+				'merchantcategory=' + 'Informatica / Impressoras / Impressora',
+
 
 	multifuncionais:'merchantcategory=' + 'Informática' + '&' +
 				'merchantcategory=' + 'Acessórios e Periféricos' + '&' +
 				'merchantcategory=' + 'Multifuncional' + '&' +
 				'merchantcategory=' + 'Informatica / Impressoras / Impressora' + '&' +
 				'merchantcategory=' + 'Informatica / Impressoras / Multifuncional' + '&' +
-				'merchantcategory=' + 'Toners' + '&' +
-				'merchantcategory=' + 'Cartuchos' + '&' +
+				// 'merchantcategory=' + 'Toners' + '&' +
+				// 'merchantcategory=' + 'Cartuchos' + '&' +
 				'merchantcategory=' + 'Informática / Impressão / Impressoras',
 
 	navegadoresGPS:'merchantcategory=' + 'Automotivo / GPS e Acessórios / GPS' + '&' +
+				'merchantcategory=' + 'Automotivo / GPS / GPS' + '&' +
+				'merchantcategory=' + 'Esporte-e-Lazer / GPS Esportivo / GPS' + '&' +
+				'merchantcategory=' + 'Informática' + '&' +
 				'merchantcategory=' + 'GPS',
 
 
@@ -98,8 +106,8 @@ module.exports = {
         return this.tablet  +  '&' +
         this.notebook + '&' + 
         this.macbook + '&' + 
-        this.acessoriosInformatica + '&' + 
-        this.acessoriosApple + '&' + 
+        // this.acessoriosInformatica + '&' + 
+        // this.acessoriosApple + '&' + 
         this.impressoras + '&' + 
         this.multifuncionais + '&' + 
         this.navegadoresGPS;
