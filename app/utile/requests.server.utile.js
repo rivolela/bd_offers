@@ -27,10 +27,53 @@ module.exports = function(){
     				console.log("response",response);
  				}else{
     				var data = JSON.parse(body);
-    				return next(data,response,error);
+    				return next(error,response,data);
    				}	
 	  		});
 		});
+	}
+
+
+	function postJson(searchUrl,data,next) {
+
+		console.log(data);
+		console.log(searchUrl);
+
+		request.post({
+  			headers: {'User-Agent': 'request','Content-Type' : 'application/json;charset=UTF-8'},
+  			url: searchUrl,
+  			form:{
+  				data
+  			}
+		}, function(error, response, body){
+		  	if(error) {
+    				console.log("error",error);
+    				console.log("response",response);
+ 			}else{
+    			// var data = JSON.parse(body);
+    			return next(error, response, body);
+   			}	
+		});
+
+		// setTimeout(timeControlCrawler,timeRequestHtml,function(){
+		// 	request({
+	 //  			url: searchUrl, //URL to hit
+	 // 			method: 'POST', //Specify the method
+	 //    		headers: { //We can define headers too
+	 //    			'User-Agent': 'request',
+	 //    			'Content-Type': 'application/json;charset=UTF-8',
+	 //    		},
+	 //    		form:{data
+	 //  		},function(error,response,body){
+  // 				if(error) {
+  //   				console.log("error",error);
+  //   				console.log("response",response);
+ 	// 			}else{
+  //   				var data = JSON.parse(body);
+  //   				return next(data,response,error);
+  //  				}	
+	 //  		});
+		// });
 	}
 
 
@@ -111,6 +154,7 @@ module.exports = function(){
         getJson: getJson,
         getHtml: getHtml,
         getHtmlGzip: getHtmlGzip,
+        postJson: postJson
     };
 };
 

@@ -25,9 +25,9 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
   var dateUtile = new DateUtile();	
   var url = null;
   start(url,
-  		Informatica.query,
+  		CategoryReview.query,
   		Zanox.programs,
-  		Informatica.dictionary,
+  		CategoryReview.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" end job_crawler !");

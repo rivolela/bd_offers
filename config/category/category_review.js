@@ -5,18 +5,18 @@ module.exports = {
 	name:'informática',
 
 	//queries
-	query:'impressora',
+	query:'ipad apple',
 
 
-	dictionary:'merchantcategory=' + 'Jato de Tinta' + '&' +
-				'merchantcategory=' + 'Laser Monocromática' + '&' +
-				'merchantcategory=' + 'Laser Colorida' + '&' +
-				'merchantcategory=' + 'Laser P&B' + '&' +
-				'merchantcategory=' + 'Informatica / Impressoras / Multifuncional' + '&' +
-				'merchantcategory=' + 'Informática' + '&' +
-				'merchantcategory=' + 'Informática / Impressão / Impressoras' + '&' +
-				'merchantcategory=' + 'Informatica / Impressoras / Impressora',				
+	dictionary:'merchantcategory=' + 'Tablets / iPads e Tablets / Tablets' + '&' +
+			'merchantcategory=' + 'Tablets / iPads e Tablets / iPads' + '&' +
+			'merchantcategory=' + 'Tablet iOS-iPad' + '&' +
+			'merchantcategory=' + 'Informática' + '&' +
+			'merchantcategory=' + 'pad / Mini / Wi-fi / + / 3g / & / 4g',
 
 };
+
+
+
 
 

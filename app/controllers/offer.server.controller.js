@@ -6,6 +6,7 @@ var async = require('async');
 var CurrencyUtile = require('../utile/currency.server.utile.js');
 var Config = require('../../config/config.js');
 var RequestsUtile = require('../utile/requests.server.utile.js');
+var request = require('request');
 var call = new RequestsUtile();
 
 
@@ -296,24 +297,36 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 			async.waterfall([
 				// step_01 >> get product by offer ean
 				function(callback){
-					var urlService = Config.bdService + "products/ean/" + offer.ean;
+					var urlService = Config.bdProductSrv + "products/ean/" + offer.ean + "?connectid=" + Config.connectid;
 					console.log("urlService >>",urlService);
-					call.getJson(urlService,Config.timeRequest,function(json,response,error){
-						console.log("callback get product >> ");
-						console.log("json >> ",json.docs[0]);
-						callback(null,json.docs[0]);
+					call.getJson(urlService,Config.timeRequest,function(error,response,body){
+						console.log("callback get json product >> ");
+						callback(null,body);
 					});
 				},
-				// step_02 >> update offer
-				function(product, callback){
-					if(product !== undefined){
-						var updateFields = {product:product._id};
-	  					updateOffer(offer,updateFields,function(offerUpdated){
-							callback(null);
-	  					});
+				// step_02 >> save new product
+				function(body, callback){
+					var idProduct;
+					console.log("body.total",body.total);
+					if(body.total == 1){
+						idProduct = body.docs[0]._id;
+						console.log("idProduct already exists >> ");
+						callback(null,idProduct);
 					}else{
-						callback(null);
+						createProduct(offer,function(error, response, body){
+							idProduct = body._id;
+							console.log("new product created >> ",idProduct);
+							callback(null,idProduct);
+						});
 					}
+				},
+				// step_03 >> update offer
+				function(idProduct,callback){
+					var updateFields = {product:idProduct};
+	  				updateOffer(offer,updateFields,function(offerUpdated){
+	  					console.log("offer's product saved >> ",offerUpdated);
+						callback(null);
+	  				});
 				},
 			], function (err, result) {
 			    saveProductsOffersArray(currentItem+1,offersArray,next);
@@ -326,6 +339,42 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 		console.log('An error has occurred >>  saveProductsOffersArray >> ' + e.message);
 		throw e;
 	}
+};
+
+
+var createProduct = function(offer,next){
+
+	var url = 'https://da-product-srv-test.herokuapp.com/api/products?connectid=A3697E2455EA755B758F';
+
+	if(offer.image_medium !== undefined){
+		image = offer.image_medium;
+	}else{
+		image = offer.image_large;
+	}
+
+	request.post({
+		headers: {'User-Agent': 'request','Content-Type' : 'application/json;charset=UTF-8'},
+		url: url,
+		form:{
+			name: offer.name,
+			ean: offer.ean,
+			manufacturer: offer.manufacturer,
+			departamentBD: offer.departamentBD,
+			countSad: offer.countSad,
+			countHappy: offer.countHappy,
+			totalReviews: offer.totalReviews,
+			nameURL: offer.name,
+			image: image
+		}
+	}, function(error, response, body){
+	  	if(error) {
+			console.log("error",error);
+			console.log("response",response);
+		}else{
+			// var data = JSON.parse(body);
+			return next(error, response, body);
+		}
+	});
 };
 
 

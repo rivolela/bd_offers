@@ -28,7 +28,7 @@ describe('Zanox Unit Tests:',function(done){
 			this.timeout(10000);
 			var call = new requestsUtile();
 			var timeRequest = 0;
-			call.getJson(apiZanox,timeRequest,function(data,response,error){
+			call.getJson(apiZanox,timeRequest,function(error,response,data){
 				Context.json = data;
 				data.items.should.be.equal(50);
 				done();

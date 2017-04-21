@@ -17,7 +17,7 @@ var getOffersContext = function(url,itemsByPage,next){
 		var call = new requestsUtile();
 		var timeRequest = 0;
 
-		call.getJson(url,timeRequest,function(data){
+		call.getJson(url,timeRequest,function(error,response,data){
 			var totalItems = Number(data.total);
 			var totalItemsByPage = Number(data.items);
 
@@ -50,7 +50,7 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,next){
 			var url_offers = url + "&page=" + currentPage;
 			console.log('\n');
 
-			call.getJson(url_offers,config.timeRequest,function(json,response,error) {
+			call.getJson(url_offers,config.timeRequest,function(error,response,json) {
 				console.log("callback getOffersCrawlerPagination >> ");
 				var currentItem = 0;
 				saveOffersCrawler(currentItem,json,function(){
@@ -82,7 +82,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,n
 			async.waterfall([
 				// step_01 >> get offers pagination
 				function(callback){
-					call.getJson(url_offers,config.timeRequest,function(json,response,error){
+					call.getJson(url_offers,config.timeRequest,function(error,response,json){
 						console.log("callback getJson >> ");
 						callback(null,json);
 					});
@@ -200,7 +200,7 @@ var saveOffersCrawler = function(currentItem,data,next){
 				ean : data.productItems.productItem[currentItem].ean,
 				category :  data.productItems.productItem[currentItem].merchantCategory,
 				merchantProductId : data.productItems.productItem[currentItem].merchantProductId,
-				url : data.productItems.productItem[currentItem].trackingLinks.trackingLink[1].ppc,
+				url : data.productItems.productItem[currentItem].trackingLinks.trackingLink[0].ppc,
 				manufacturer: data.productItems.productItem[currentItem].manufacturer,
 				image_medium: data.productItems.productItem[currentItem].image.medium,
 				image_large: data.productItems.productItem[currentItem].image.large,

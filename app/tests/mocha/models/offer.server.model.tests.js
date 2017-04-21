@@ -127,37 +127,6 @@ describe('Offer Model Unit Tests:',function(){
 	});
 
 
-	describe('test get product from offer >>',function(){
-
-		before(function(done){
-			async.waterfall([
-	    		function(callback) {
-	    			product_01.save(function(err,product){
-	    				callback(null,product);
-					});
-	    		},
-	    		function(product,callback) {
-	    			offer_02.product = product._id;
-	    			offer_02.save(function(){
-	    				callback(null,'arg');
-					});
-	    		},
-			],
-			// optional callback
-			function(err, results) {
-				// console.log("results >>",results);
-				done();
-			    // results is now equal to ['one', 'two']
-			});
-		});
-
-		it('Should be able to get the product_01 name from offer_01',function(){
-			Offer.find({ean:7892597336616}).populate('product','name').exec(function(err,offers){
-				offers[1].product.name.should.be.equal('Smartphone Motorola Moto X 2ª Geracao Xt1097 Preto Android 4.4.4, Camera 13mp, Tela 5.2", Quadcore 2.5 Ghz, 32gb Memoria, 3g e 4g');
-			});
-		});
-	});
-
 
 	after(function(done){
 		Product.remove({ean:7892597336616},function(){

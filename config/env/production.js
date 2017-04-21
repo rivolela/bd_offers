@@ -7,6 +7,7 @@ module.exports = {
 	timeRequest:0,
 	searchtype:'contextual',
 	bdService: "https://bd-services.herokuapp.com/api/",
+	bdProductSrv: "https://da-product-srv.herokuapp.com/api/",
 };
 
 
