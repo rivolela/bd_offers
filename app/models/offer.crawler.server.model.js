@@ -39,6 +39,7 @@ var Offer_CrawlerSchema = new Schema({
   countHappy: Number,
   totalReviews: Number,
   departamentBD: String,
+  categoryBD: String,
   programGroup: String,
 });
 

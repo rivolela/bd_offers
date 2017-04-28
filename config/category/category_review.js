@@ -7,6 +7,7 @@ module.exports = {
 	//queries
 	query:'ipad apple',
 
+	departament:'informática',
 
 	dictionary:'merchantcategory=' + 'Tablets / iPads e Tablets / Tablets' + '&' +
 			'merchantcategory=' + 'Tablets / iPads e Tablets / iPads' + '&' +

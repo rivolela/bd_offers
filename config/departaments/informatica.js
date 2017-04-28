@@ -11,7 +11,7 @@ module.exports = {
 			'macbook apple' + ',' +
 			'impressoras' + ',' +
 			'multifuncionais' + ',' +
-			'GPS' + ',' +
+			'navegador GPS' + ',' +
 			'ipad apple',
 
 	// dictionaries 
@@ -87,6 +87,7 @@ module.exports = {
         this.macbook + '&' + 
         this.impressoras + '&' + 
         this.multifuncionais + '&' + 
+        this.ipad + '&' + 
         this.navegadoresGPS;
     },
 };

@@ -308,13 +308,13 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 				function(body, callback){
 					var idProduct;
 					console.log("body.total",body.total);
-					if(body.total == 1){
+					if(body.total === 1){
 						idProduct = body.docs[0]._id;
 						console.log("idProduct already exists >> ");
 						callback(null,idProduct);
 					}else{
-						createProduct(offer,function(error, response, body){
-							idProduct = body._id;
+						createProduct(offer,function(error, response, data){
+							idProduct = data._id;
 							console.log("new product created >> ",idProduct);
 							callback(null,idProduct);
 						});
@@ -344,7 +344,7 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 
 var createProduct = function(offer,next){
 
-	var url = 'https://da-product-srv-test.herokuapp.com/api/products?connectid=A3697E2455EA755B758F';
+	var url = Config.bdProductSrv + 'products?connectid=A3697E2455EA755B758F';
 
 	if(offer.image_medium !== undefined){
 		image = offer.image_medium;
@@ -371,8 +371,8 @@ var createProduct = function(offer,next){
 			console.log("error",error);
 			console.log("response",response);
 		}else{
-			// var data = JSON.parse(body);
-			return next(error, response, body);
+			var data = JSON.parse(body);
+			return next(error, response, data);
 		}
 	});
 };

@@ -44,6 +44,7 @@ var OfferSchema = new Schema({
   countHappy: Number,
   totalReviews: Number,
   departamentBD: String,
+  categoryBD: String,
   programGroup: String,
   minorPriceEAN:{
     type:String

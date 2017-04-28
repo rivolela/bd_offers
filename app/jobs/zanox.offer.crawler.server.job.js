@@ -25,9 +25,10 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
   var dateUtile = new DateUtile();	
   var url = null;
   start(url,
-  		CategoryReview.query,
-  		Zanox.programs,
-  		CategoryReview.dictionary,
+  		Informatica.departament,
+  		Informatica.query,
+   		Zanox.programs,
+  		Informatica.dictionary,
   		function(){
   			dateUtile.getJobTime(time_start,function(){
   				console.log(" end job_crawler !");
@@ -43,7 +44,7 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
  // }
 
 
-function start(urlSearchOffers,query,programs,dictionary,next){
+function start(urlSearchOffers,departament,query,programs,dictionary,next){
 
 	var currentPage = 0;
 	var currentItem = 0;
@@ -73,7 +74,7 @@ function start(urlSearchOffers,query,programs,dictionary,next){
 	    },
 	    // step_04 >> getOffersCrawlerPagination
 	    function(totalPaginacao,url,callback){
-	    	zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,function(){
+	    	zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,departament,query,function(){
 				console.log("callback getOffersPagination >>");
 				callback(null,'arg');
 			});

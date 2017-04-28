@@ -39,7 +39,7 @@ var getOffersContext = function(url,itemsByPage,next){
 };
 
 
-var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,next){
+var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departament,query,next){
 
 	try{
 		console.log("currentPage >>",currentPage);
@@ -53,9 +53,9 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,next){
 			call.getJson(url_offers,config.timeRequest,function(error,response,json) {
 				console.log("callback getOffersCrawlerPagination >> ");
 				var currentItem = 0;
-				saveOffersCrawler(currentItem,json,function(){
+				saveOffersCrawler(currentItem,json,departament,query,function(){
 					console.log("callback saveOffersCrawler >> ");
-					getOffersCrawlerPagination(currentPage+1,totalPaginacao,url,next);
+					getOffersCrawlerPagination(currentPage+1,totalPaginacao,url,departament,query,next);
 				});
 			});
 		}else{
@@ -188,7 +188,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,n
 };
 
 
-var saveOffersCrawler = function(currentItem,data,next){
+var saveOffersCrawler = function(currentItem,data,departament,query,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -207,6 +207,8 @@ var saveOffersCrawler = function(currentItem,data,next){
 				price: data.productItems.productItem[currentItem].price,
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
+				departamentBD:departament,
+				categoryBD:query,
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
@@ -221,7 +223,7 @@ var saveOffersCrawler = function(currentItem,data,next){
 			}
 
 			OfferCrawler.saveOfferBD(offer,function(){
-				saveOffersCrawler(currentItem+1,data,next);
+				saveOffersCrawler(currentItem+1,data,departament,query,next);
 			});
 
 		}else{
