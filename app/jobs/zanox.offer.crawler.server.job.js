@@ -17,23 +17,33 @@ var config = require('../../config/config.js'),
 	Informatica = require('../../config/departaments/informatica.js'),
 	CategoryReview = require('../../config/category/category_review.js'),
 	DateUtile = require('../utile/date.server.utile.js');
+	async = require('async');
 
 
 var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err){
-  console.log('starting job_crawler ...');
-  var time_start = new Date();
-  var dateUtile = new DateUtile();	
-  var url = null;
-  start(url,
-  		Informatica.departament,
-  		Informatica.query,
-   		Zanox.programs,
-  		Informatica.dictionary,
-  		function(){
-  			dateUtile.getJobTime(time_start,function(){
-  				console.log(" end job_crawler !");
-  			});
-   		});
+	console.log('starting job_crawler ...');
+  	var time_start = new Date();
+  	var dateUtile = new DateUtile();	
+  	var url = null;
+  	async.map(Informatica.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_crawler finished !");
+	});
+  // start(url,
+  // 		Informatica.departament,
+  // 		Informatica.query,
+  //  		Zanox.programs,
+  // 		Informatica.dictionary,
+  // 		function(){
+  // 			dateUtile.getJobTime(time_start,function(){
+  // 				console.log(" end job_crawler !");
+  // 			});
+  //  		});
 },false);
 
 
@@ -44,8 +54,12 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
  // }
 
 
-function start(urlSearchOffers,departament,query,programs,dictionary,next){
+function start(item,next){
 
+	var query = item.query;
+	var dictionary = item.dictionary;
+	var departament = item.departament;
+	var programs = item.programs;
 	var currentPage = 0;
 	var currentItem = 0;
 
@@ -60,6 +74,7 @@ function start(urlSearchOffers,departament,query,programs,dictionary,next){
 		},
 		// step_02 >> set offer's url
 		function(arg,callback){
+			var urlSearchOffers = null;
 			setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
 				console.log("callback setUrlOffers >> ",url);
 				callback(null,url);

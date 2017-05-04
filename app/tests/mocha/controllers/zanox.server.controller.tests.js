@@ -42,7 +42,8 @@ describe('Zanox Unit Tests:',function(done){
 			this.timeout(10000);
 			var currentItem = 0;
 			var offersArray = [];
-			zanox.parseJSONtoArrayOffers(currentItem,Context.json,Eletroportateis.name,offersArray,function(offersResult){
+			var category = "category";
+			zanox.parseJSONtoArrayOffers(currentItem,Context.json,Eletroportateis.name,category,offersArray,function(offersResult){
 				offersResult.length.should.be.above(20);
 				done();
 			});

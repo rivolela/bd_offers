@@ -174,6 +174,23 @@ var deleteCollectionOffersBD = function(departament,next){
 };
 
 
+
+var deleteCategoryOffersBD = function(category,next){
+
+	console.log("deleteCategoryBD >>",category,">>");
+
+  	Offer.remove({categoryBD:category},function(err){
+		if(err){
+			console.log(err);
+			return next(err);
+		}else{
+			console.log("all offers were removed:");
+			return next();
+		}
+	});
+};
+
+
 var getOffersBD = function(query,next){
 	console.log(query);
 	Offer.find(query,function(err,offers){
@@ -383,6 +400,7 @@ exports.saveOfferBD = saveOfferBD;
 exports.getOffersBD = getOffersBD;
 exports.deleteOfferBD = deleteOfferBD;
 exports.deleteCollectionOffersBD = deleteCollectionOffersBD;
+exports.deleteCategoryOffersBD = deleteCategoryOffersBD;
 exports.Offer = Offer;
 exports.setReviewsCounterOffer = setReviewsCounterOffer;
 exports.saveOfferWithReviews = saveOfferWithReviews;

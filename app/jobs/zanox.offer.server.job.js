@@ -13,82 +13,72 @@ var config = require('../../config/config.js'),
 	flatten2 = require('flat'),
 	urlTeste = "http://api.zanox.com/json/2011-03-01/products?connectid=43EEF0445509C7205827&q=ventilador&programs=12011,13212,16588&items=50",
 	cheerio = require('cheerio'),
-	async = require('async'),
 	cron = require('node-cron'),
 	DateUtile = require('../utile/date.server.utile.js'),
 	async = require('async');
 
 
 var job_eletrodomesticos = cron.schedule(JobConfig.schedule_eletrodomesticos, function(err){
-  console.log('starting job_eletrodomesticos ...');
-  var time_start = new Date();	
-  var dateUtile = new DateUtile();
-  var url = null;
-  start(url,
-  		Eletrodomesticos.query,
-  		Zanox.programs,
-  		Eletrodomesticos.name,
-  		Eletrodomesticos.dictionary,
-  		function(){
-  			dateUtile.getJobTime(time_start,function(){
-  				console.log(" job_eletrodomesticos finished !");
-  			});
-  		});
+	console.log('starting job_eletrodomesticos ...');
+  	var time_start = new Date();	
+  	var dateUtile = new DateUtile();
+  	async.map(Eletrodomesticos.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_eletrodomesticos finished !");
+	});
 },false);
 
 
-
 var job_eletroportateis = cron.schedule(JobConfig.schedule_eletroportateis, function(err){
-  console.log('starting job_eletroportateis ...');
-  var time_start = new Date();
-  var dateUtile = new DateUtile();
-  var url = null;
-  start(url,
-  		Eletroportateis.query,
-  		Zanox.programs,
-  		Eletroportateis.name,
-  		Eletroportateis.dictionary,
-  		function(){
-  			dateUtile.getJobTime(time_start,function(){
-  				console.log(" job_eletroportateis finished !");
-  			});
-  		});
+  	console.log('starting job_eletroportateis ...');
+  	var time_start = new Date();
+  	var dateUtile = new DateUtile();
+  	async.map(Eletroportateis.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_eletroportateis finished !");
+	});
 },false);
 
 
 var job_smartphones = cron.schedule(JobConfig.schedule_smartphones, function(err){
-  console.log('starting job >> ',Smartphones.name);
-  var time_start = new Date();
-  var dateUtile = new DateUtile();
-  var url = null;
-  start(url,
-  		Smartphones.query,
-  		Zanox.programs,
-  		Smartphones.name,
-  		Smartphones.dictionary,
-  		function(){
-  			dateUtile.getJobTime(time_start,function(){
-  				console.log(" job_smartphones finished !");
-  			});
-  		});
+  	console.log('starting job_smartphones ...');
+  	var time_start = new Date();
+  	var dateUtile = new DateUtile();
+	async.map(Smartphones.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_smartphones finished !");
+	});
 },false);
 
 
 var job_informatica = cron.schedule(JobConfig.schedule_informatica, function(err){
-  console.log('starting job >> ',Informatica.name);
-  var time_start = new Date();
-  var dateUtile = new DateUtile();
-  var url = null;
-  start(url,
-  		Informatica.query,
-  		Zanox.programs,
-  		Informatica.name,
-  		Informatica.dictionary,
-  		function(){
-  			dateUtile.getJobTime(time_start,function(){
-  				console.log(" job_informatica finished !");
-  			});
-  		});
+	console.log('starting job_informatica ...');
+  	var time_start = new Date();
+  	var dateUtile = new DateUtile();
+  	async.map(Informatica.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_informatica finished !");
+	});
 },false);
 
 
@@ -115,23 +105,33 @@ var job_informatica = cron.schedule(JobConfig.schedule_informatica, function(err
 	// });
  // }
 
+function getFullName(item, next) {
+    var fullname = [item.query,item.dictionary].join(" ");
+    console.log("fullname",fullname);
+    next();
+}
 
 
-function start(urlSearchOffers,query,programs,departament,dictionary,next){
+function start(item,next){
 
+	var query = item.query;
+	var dictionary = item.dictionary;
+	var departament = item.departament;
+	var programs = item.programs;
 	var currentPage = 0;
 	var currentItem = 0;
 
 	async.waterfall([
 		// step_01 >> delelte all offers
 		function(callback){
-			offerController.deleteCollectionOffersBD(departament,function(){
-				console.log("callback deleteCollectionOffersBD >>");
+			offerController.deleteCategoryOffersBD(query,function(){
+				console.log("callback deleteCategoryOffersBD>>");
 				callback(null, 'arg');
 			});
 		},
 		// step_02 >> set offer's url
 		function(arg,callback){
+			var urlSearchOffers = null;
 			setUrlOffers(urlSearchOffers,query,programs,dictionary,function(url){
 				console.log("callback setUrlOffers >> ",url);
 				callback(null,url);
@@ -147,14 +147,14 @@ function start(urlSearchOffers,query,programs,departament,dictionary,next){
 	    // step_04 >> getOffers BY Pagination
 	    function(totalPaginacao,url,callback){
 	    	var currentPage = 0;
-	    	zanoxController.saveOffersPagination(currentPage,totalPaginacao,url,departament,function(){
+	    	zanoxController.saveOffersPagination(currentPage,totalPaginacao,url,departament,query,function(){
 				console.log("callback get items by page >>");
 				callback(null,'arg');
 			});
 	    },
 	    // step_05 >> get offers
 	    function(arg,callback){
-	    	offerController.getOffersBD({departamentBD:departament},function(offersArray){
+	    	offerController.getOffersBD({categoryBD:query},function(offersArray){
 				console.log("offersArray >>",offersArray);
 				callback(null,offersArray);
 			});
@@ -171,7 +171,8 @@ function start(urlSearchOffers,query,programs,departament,dictionary,next){
 	    function(offersArray,callback){
 	    	var currentItem = 0;
 	    	offerController.saveProductsOffersArray(currentItem,offersArray,function(){
-				callback(null,'arg');
+	    		var result = "departament : " + departament + " | category : " + query + " | total of offers : " + offersArray.length;
+				callback(null,result);
 	    	});
 	    }
 	], function (err, result) {
@@ -179,7 +180,7 @@ function start(urlSearchOffers,query,programs,departament,dictionary,next){
 			console.log("err >>",err);
 			return next(err);
 		}else{
-			return next();
+			return next(result);
 		}
 	});
 }

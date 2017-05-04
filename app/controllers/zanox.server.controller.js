@@ -68,7 +68,7 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departa
 };
 
 
-var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,next){
+var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,category,next){
 	
 	try{
 		console.log("currentPage >>",currentPage);
@@ -90,7 +90,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,n
 				// step_02 >> parse offer from json to offer bd model
 				function(json,callback){
 					var offersArray = [];
-					parseJSONtoArrayOffers(currentItem,json,departament,offersArray,function(offersResult){
+					parseJSONtoArrayOffers(currentItem,json,departament,category,offersArray,function(offersResult){
 						console.log("callback parseJSONtoArrayOffers >> ");
 						console.log("total of offers pagination >> ",json.items);
 						console.log("total of offers com EAN >> ",offersResult.length);
@@ -122,7 +122,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,n
 					console.log("err >>",err);
 					return next(err);
 				}else{
-					saveOffersPagination(currentPage+1,totalPaginacao,url,departament,next);
+					saveOffersPagination(currentPage+1,totalPaginacao,url,departament,category,next);
 					// return next();
 				}
 			});
@@ -138,7 +138,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,n
 
 
 
-var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,next){
+var parseJSONtoArrayOffers = function(currentItem,data,departament,category,offersArray,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -158,6 +158,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,n
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				departamentBD: departament,
+				categoryBD: category,
 				nameURL: data.productItems.productItem[currentItem].name,
 			});
 
@@ -176,7 +177,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,offersArray,n
 				offersArray.push(offer);
 			}
 
-			parseJSONtoArrayOffers(currentItem+1,data,departament,offersArray,next);
+			parseJSONtoArrayOffers(currentItem+1,data,departament,category,offersArray,next);
 		
 		}else{
 		  return next(offersArray);

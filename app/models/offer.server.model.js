@@ -44,7 +44,10 @@ var OfferSchema = new Schema({
   countHappy: Number,
   totalReviews: Number,
   departamentBD: String,
-  categoryBD: String,
+  categoryBD: {
+    type:String,
+    index: true
+  },
   programGroup: String,
   minorPriceEAN:{
     type:String
@@ -79,9 +82,9 @@ OfferSchema.pre('save',function(next){
 
 // index used to text search
 OfferSchema.index(
-  {name: 'text',manufacturer:'text',category:'text'},
+  {name: 'text',manufacturer:'text',category:'text',categoryBD:'text'},
   {default_language: "portuguese"},
-  {name: 'My text index', weights: {name: 10, category: 2, manufacturer: 1}
+  {name: 'My text index', weights: {name: 10,categoryBD:3,category:2,manufacturer:1}
 });
 
 
