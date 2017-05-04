@@ -17,7 +17,7 @@ module.exports = {
 	schedule_games:'0 4 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'9 18 * * *',
+	schedule_offers_reviews:'0 16 * * *',
 };
 
 
