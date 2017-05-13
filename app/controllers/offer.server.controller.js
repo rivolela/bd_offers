@@ -318,9 +318,8 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 					console.log("urlService >>",urlService);
 					call.getJson(urlService,Config.timeRequest,function(error,response,body){
 						console.log("callback get json product >> ");
-						if(body.idProduct !== undefined){
-							var idProduct = body.docs[0]._id;
-							callback(null,idProduct);
+						if(body.total > 0){
+							callback(null,body);
 						}else{
 							callback("Product doesn't exist >>");
 						}
@@ -334,7 +333,7 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 
 					updateOffer(offer,updateFields,function(offerUpdated){
   						console.log("offer's product updated >> ",offerUpdated);
-						callback(null,'arg');
+						callback(null,'product ' + idProduct + 'updated in offer' + offer.ean);
   					});
 				},
 			], function (err, result) {
