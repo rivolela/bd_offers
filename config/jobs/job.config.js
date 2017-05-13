@@ -15,7 +15,7 @@ module.exports = {
 	schedule_eletroportateis:'0 1 * * *',
 	schedule_smartphones:'0 2 * * *',
 	schedule_informatica:'0 3 * * *',
-	schedule_games:'0 5 * * *',
+	schedule_games:'0 4 * * *',
 
 	// schedule offers reviews jobs
 	schedule_offers_reviews:'16 13 * * *',
