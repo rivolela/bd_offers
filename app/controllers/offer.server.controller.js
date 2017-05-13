@@ -318,35 +318,33 @@ var saveProductsOffersArray = function(currentItem,offersArray,next){
 					console.log("urlService >>",urlService);
 					call.getJson(urlService,Config.timeRequest,function(error,response,body){
 						console.log("callback get json product >> ");
-						callback(null,body);
+						if(body.idProduct !== undefined){
+							var idProduct = body.docs[0]._id;
+							callback(null,idProduct);
+						}else{
+							callback("Product doesn't exist >>");
+						}
 					});
 				},
-				// step_02 >> save new product
+				// step_02 >> save product in offer
 				function(body, callback){
-					var idProduct;
-					console.log("body.total",body.total);
-					if(body.total === 1){
-						idProduct = body.docs[0]._id;
-						console.log("idProduct already exists >> ");
-						callback(null,idProduct);
-					}else{
-						createProduct(offer,function(error, response, data){
-							idProduct = data._id;
-							console.log("new product created >> ",idProduct);
-							callback(null,idProduct);
-						});
-					}
-				},
-				// step_03 >> update offer
-				function(idProduct,callback){
+
+					var idProduct = body.docs[0]._id;
 					var updateFields = {product:idProduct};
-	  				updateOffer(offer,updateFields,function(offerUpdated){
-	  					console.log("offer's product saved >> ",offerUpdated);
-						callback(null);
-	  				});
+
+					updateOffer(offer,updateFields,function(offerUpdated){
+  						console.log("offer's product updated >> ",offerUpdated);
+						callback(null,'arg');
+  					});
 				},
 			], function (err, result) {
-			    saveProductsOffersArray(currentItem+1,offersArray,next);
+				if(err){
+					console.log("err >> ",err);
+					saveProductsOffersArray(currentItem+1,offersArray,next);
+				}else{
+					console.log("result >> ",result);
+					saveProductsOffersArray(currentItem+1,offersArray,next);
+				}
 			});
 
 		}else{

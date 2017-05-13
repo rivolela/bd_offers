@@ -82,22 +82,20 @@ var job_informatica = cron.schedule(JobConfig.schedule_informatica, function(err
 },false);
 
 
-// var job_games = cron.schedule(JobConfig.schedule_games, function(err){
-//   console.log('starting job >> ',Informatica.name);
-//   var time_start = new Date();
-//   var dateUtile = new DateUtile();
-//   var url = null;
-//   start(url,
-//   		Games.query,
-//   		Zanox.programs,
-//   		Games.name,
-//   		Games.dictionary,
-//   		function(){
-//   			dateUtile.getJobTime(time_start,function(){
-//   				console.log(" job_games finished !");
-//   			});
-//   		});
-// },false);
+var job_games = cron.schedule(JobConfig.schedule_games, function(err){
+	console.log('starting job_games ...');
+  	var time_start = new Date();
+  	var dateUtile = new DateUtile();
+  	async.map(Games.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_games finished !");
+	});
+},false);
 
  // if(process.env.NODE_ENV == 'test_job'){
 	// start(urlTeste,function(){
@@ -227,13 +225,13 @@ var startInformatica = function(next){
 	return (job_informatica.start());
 };
 
-// var startGames = function(next){
-// 	return (job_games.start());
-// };
+var startGames = function(next){
+	return (job_games.start());
+};
  
 exports.setUrlOffers = setUrlOffers;
 exports.startEletrodomesticos = startEletrodomesticos;
 exports.startEletroportateis = startEletroportateis;
 exports.startSmartphones = startSmartphones;
 exports.startInformatica = startInformatica;
-
+exports.startGames = startGames;
