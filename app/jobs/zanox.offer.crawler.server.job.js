@@ -26,7 +26,7 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
   	var time_start = new Date();
   	var dateUtile = new DateUtile();	
   	var url = null;
-  	async.map(Games.array, function(data,callback){
+  	async.map(Informatica.array, function(data,callback){
 		start(data,function(result){
 			// callback(null, data["query"]);
 			callback(null, result);
