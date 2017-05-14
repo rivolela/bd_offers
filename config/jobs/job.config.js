@@ -11,17 +11,10 @@ module.exports = {
 	
 	// schedule offers jobs
 	all_schedule:'0 10 * * *',
-<<<<<<< HEAD
 	schedule_eletrodomesticos:'30 16 * * *',
 	schedule_eletroportateis:'30 15 * * *',
 	schedule_smartphones:'30 14 * * *',
 	schedule_informatica:'30 13 * * *',
-=======
-	schedule_eletrodomesticos:'0 0 * * *',
-	schedule_eletroportateis:'0 1 * * *',
-	schedule_smartphones:'0 2 * * *',
-	schedule_informatica:'0 3 * * *',
->>>>>>> 1adadf40157847a949597260a12cc32013bade04
 	schedule_games:'0 4 * * *',
 
 	// schedule offers reviews jobs
