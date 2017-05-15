@@ -4,6 +4,7 @@ var config = require('../../config/config.js'),
 	Smartphones = require('../../config/departaments/smartphones.js'),
 	Informatica = require('../../config/departaments/informatica.js'),
 	Games = require('../../config/departaments/games.js'),
+	Fotografia = require('../../config/departaments/fotografias.js'),
 	Zanox = require('../../config/partners/zanox.js'),
 	JobConfig = require('../../config/jobs/job.config.js'),
  	offerController = require('../controllers/offer.server.controller.js'),
@@ -96,6 +97,23 @@ var job_games = cron.schedule(JobConfig.schedule_games, function(err){
     	console.log(" job_games finished !");
 	});
 },false);
+
+
+var job_fotografias = cron.schedule(JobConfig.schedule_fotografias, function(err){
+	console.log('starting job_fotografias ...');
+  	async.map(Fotografia.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_fotografias finished !");
+	});
+},false);
+
+
+
 
  // if(process.env.NODE_ENV == 'test_job'){
 	// start(urlTeste,function(){
@@ -228,6 +246,10 @@ var startInformatica = function(next){
 var startGames = function(next){
 	return (job_games.start());
 };
+
+var startFotografias = function(next){
+	return (job_fotografias.start());
+};
  
 exports.setUrlOffers = setUrlOffers;
 exports.startEletrodomesticos = startEletrodomesticos;
@@ -235,3 +257,4 @@ exports.startEletroportateis = startEletroportateis;
 exports.startSmartphones = startSmartphones;
 exports.startInformatica = startInformatica;
 exports.startGames = startGames;
+exports.startFotografias = startFotografias;

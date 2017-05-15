@@ -10,6 +10,7 @@ var mongoose = require('./config/mongoose'),
  	job_smartphones = require('./app/jobs/zanox.offer.server.job.js'),
  	job_informatica = require('./app/jobs/zanox.offer.server.job.js'),
  	job_games = require('./app/jobs/zanox.offer.server.job.js'),
+ 	job_fotografias = require('./app/jobs/zanox.offer.server.job.js'),
  	// jobs offer crawler
 	job_crawler = require('./app/jobs/zanox.offer.crawler.server.job.js');
 	allJobs = require('./app/jobs/all.offer.server.job.js');
@@ -38,6 +39,7 @@ job_eletroportateis.startEletroportateis();
 job_smartphones.startSmartphones();
 job_informatica.startInformatica();
 job_games.startGames();
+job_fotografias.startFotografias();
 
 // jobs offer crawler
 job_crawler.startCrawlerJob();
