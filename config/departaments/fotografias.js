@@ -12,7 +12,7 @@ module.exports = {
 						'merchantcategory=' + 'Fotografia' + '&' +
 						'merchantcategory=' + 'Câmeras profissionais' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -25,7 +25,7 @@ module.exports = {
 						'merchantcategory=' + 'Fotografia' + '&' +
 						'merchantcategory=' + 'Câmeras profissionais' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -35,13 +35,13 @@ module.exports = {
 						'merchantcategory=' + 'Esporte e Lazer / Camping e Aventura / Equipamentos' + '&' +
 						'merchantcategory=' + 'Brinquedos / Bonecos e Colecionáveis / Playsets de Bonecos' + '&' +
 						'merchantcategory=' + 'Binóculos',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
 			query : 'telescópios',
 			dictionary: '',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -60,7 +60,7 @@ module.exports = {
 		{	
 			query : 'instax',
 			dictionary: '',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -73,13 +73,13 @@ module.exports = {
 						'merchantcategory=' + 'Fotografia' + '&' +
 						'merchantcategory=' + 'Câmeras profissionais' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
 			query : 'drones',
 			dictionary: '',
-    		departament:"cameras",
+    		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 	]
