@@ -3,20 +3,7 @@ module.exports = {
 
 	array : [
 		{	
-			query : 'câmeras semi profissionais',
-			dictionary: 'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Lentes e Acessórios' + '&' +
-						'merchantcategory=' + 'Câmeras semi-profissionais' + '&' +
-						'merchantcategory=' + 'Acessórios Esportivos' + '&' +
-						'merchantcategory=' + 'Cine/Foto' + '&' +
-						'merchantcategory=' + 'Fotografia' + '&' +
-						'merchantcategory=' + 'Câmeras profissionais' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"câmeras",
-    		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
-		},
-		{	
-			query : 'câmeras profissionais',
+			query : 'câmeras',
 			dictionary: 'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Lentes e Acessórios' + '&' +
 						'merchantcategory=' + 'Câmeras semi-profissionais' + '&' +
@@ -45,40 +32,20 @@ module.exports = {
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
-			query : 'câmeras esportivas',
-			dictionary: 'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Lentes e Acessórios' + '&' +
-						'merchantcategory=' + 'Câmeras semi-profissionais' + '&' +
-						'merchantcategory=' + 'Acessórios Esportivos' + '&' +
-						'merchantcategory=' + 'Cine/Foto' + '&' +
-						'merchantcategory=' + 'Fotografia' + '&' +
-						'merchantcategory=' + 'Câmeras profissionais' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"cameras",
-    		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
-		},
-		{	
 			query : 'instax',
 			dictionary: '',
     		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
-			query : 'câmeras canon',
+			query : 'drones',
 			dictionary: 'merchantcategory=' + 'Câmeras e Drones / Câmeras Semiprofissionais e Compactas / Câmeras Semiprofissionais' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR' + '&' +
-						'merchantcategory=' + 'Acessórios Esportivos' + '&' +
-						'merchantcategory=' + 'Cine/Foto' + '&' +
-						'merchantcategory=' + 'Fotografia' + '&' +
-						'merchantcategory=' + 'Câmeras profissionais' + '&' +
-						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
-    		departament:"câmeras",
-    		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
-		},
-		{	
-			query : 'drones',
-			dictionary: '',
+						'merchantcategory=' + 'Brinquedos / Controle Remoto / Drones e Helicópteros' + '&' +
+						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes' + '&' +
+						'merchantcategory=' + 'Minidrones' + '&' +
+						'merchantcategory=' + 'Câmeras e Drones / Drones e Acessórios / Drones' + '&' +
+						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR',
     		departament:"câmeras",
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
