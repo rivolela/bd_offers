@@ -1,5 +1,7 @@
 
 module.exports = {
+	
+	// name: "fotografias",
 
 	array : [
 		{	

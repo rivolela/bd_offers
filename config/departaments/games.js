@@ -1,5 +1,7 @@
 module.exports = {
 
+		// name: "games",
+
 		array : [
 		{	
 			query : 'playstation',

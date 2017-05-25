@@ -1,6 +1,8 @@
 
 module.exports = {
 
+	// name: "eletroportáteis",
+
 	array : [
 		{	
 			query : 'ventilador',

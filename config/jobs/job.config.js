@@ -19,7 +19,7 @@ module.exports = {
 	schedule_fotografias:'0 5 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'10 10 * * *',
+	schedule_offers_reviews:'0 16 * * *',
 };
 
 

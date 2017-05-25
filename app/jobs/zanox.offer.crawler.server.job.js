@@ -20,32 +20,27 @@ var config = require('../../config/config.js'),
 	CategoryReview = require('../../config/category/category_review.js'),
 	DateUtile = require('../utile/date.server.utile.js');
 	async = require('async');
+	moment = require('moment');
 
 
 var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err){
 	console.log('starting job_crawler ...');
-  	var time_start = new Date();
-  	var dateUtile = new DateUtile();	
   	var url = null;
-  	async.map(Fotografia.array, function(data,callback){
-		start(data,function(result){
-			// callback(null, data["query"]);
-			callback(null, result);
+
+  	getDepartament('arg',function(departament){
+
+  		async.map(departament, function(data,callback){
+			start(data,function(result){
+				// callback(null, data["query"]);
+				callback(null, result);
+			});
+	    }, function(err, results) {
+	    	console.log('results : ' + results); // results : name1,name2,name3 
+	    	console.log(" job_crawler finished !");
 		});
-    }, function(err, results) {
-    	console.log('results : ' + results); // results : name1,name2,name3 
-    	console.log(" job_crawler finished !");
-	});
-  // start(url,
-  // 		Informatica.departament,
-  // 		Informatica.query,
-  //  		Zanox.programs,
-  // 		Informatica.dictionary,
-  // 		function(){
-  // 			dateUtile.getJobTime(time_start,function(){
-  // 				console.log(" end job_crawler !");
-  // 			});
-  //  		});
+
+  	});
+
 },false);
 
 
@@ -137,7 +132,144 @@ var startCrawlerJob = function(next){
 	return (job_crawler.start());
 };
 
+
+function getDepartament(argument,next) {
+
+	var departament;
+
+	console.log("data >> ",moment().date());
+
+	var day = Number(moment().date());
+
+	switch (day) {
+	    case 1:
+	    	console.log("set departament >> Eletrodomesticos");
+	    	departament = Eletrodomesticos.array;
+	    	break;
+	    case 2:
+			console.log("set departament >> Eletroportateis");
+	    	departament = Eletroportateis.array;
+	    	break;
+	    case 3:
+			console.log("set departament >> Fotografia");
+	    	departament = Fotografia.array;
+	    	break;
+	    case 4:
+			console.log("set departament >> Games");
+	    	departament = Games.array;
+	    	break;
+	    case 5:
+			console.log("set departament >> Informatica");
+	    	departament = Informatica.array;
+	    	break;
+	    case 6:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 7:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 8:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 9:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 10:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 11:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 12:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 13:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 14:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 15:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 16:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 17:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 18:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 19:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 20:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 21:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 22:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 23:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 24:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 25:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 26:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 27:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 28:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	   	case 29:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case 30:
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
+	    	break;
+	    case  31:
+	        day = "Saturday";
+	}
+
+	return next(departament);
+}
  
+
 exports.setUrlOffers = setUrlOffers;
 exports.startCrawlerJob = startCrawlerJob;
 

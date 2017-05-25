@@ -1,6 +1,8 @@
 
 module.exports = {
 
+	// name: "smartphones",
+
 	array : [
 		{
     		query : 'iphone',

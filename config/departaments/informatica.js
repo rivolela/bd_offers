@@ -1,5 +1,7 @@
 module.exports = {
 
+	// name: "informática",
+
 	array : [
     	{
     		query : "tablet", 

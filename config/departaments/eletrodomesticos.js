@@ -1,6 +1,8 @@
 
 module.exports = {
 
+	// name: "eletrodomésticos",
+
 	array : [
     	{
     		query : 'geladeira',
