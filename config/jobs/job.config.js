@@ -17,9 +17,10 @@ module.exports = {
 	schedule_informatica:'0 3 * * *',
 	schedule_games:'0 4 * * *',
 	schedule_fotografias:'0 5 * * *',
+	schedule_tv:'0 6 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'0 16 * * *',
+	schedule_offers_reviews:'10 0 * * *',
 };
 
 

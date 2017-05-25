@@ -113,6 +113,18 @@ var job_fotografias = cron.schedule(JobConfig.schedule_fotografias, function(err
 },false);
 
 
+var job_tv = cron.schedule(JobConfig.schedule_tv, function(err){
+	console.log('starting job_tv ...');
+  	async.map(tv.array, function(data,callback){
+		start(data,function(result){
+			// callback(null, data["query"]);
+			callback(null, result);
+		});
+    }, function(err, results) {
+    	console.log('results : ' + results); // results : name1,name2,name3 
+    	console.log(" job_tv finished !");
+	});
+},false);
 
 
  // if(process.env.NODE_ENV == 'test_job'){
@@ -250,6 +262,10 @@ var startGames = function(next){
 var startFotografias = function(next){
 	return (job_fotografias.start());
 };
+
+var startTV = function(next){
+	return (job_tv.start());
+};
  
 exports.setUrlOffers = setUrlOffers;
 exports.startEletrodomesticos = startEletrodomesticos;
@@ -258,3 +274,4 @@ exports.startSmartphones = startSmartphones;
 exports.startInformatica = startInformatica;
 exports.startGames = startGames;
 exports.startFotografias = startFotografias;
+exports.startTV = startTV;

@@ -14,6 +14,7 @@ var config = require('../../config/config.js'),
  	Smartphones = require('../../config/departaments/smartphones.js'),
  	Eletrodomesticos = require('../../config/departaments/eletrodomesticos.js'),
 	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
+	TV = require('../../config/departaments/tv.js'),
 	Fotografia = require('../../config/departaments/fotografias.js'),
 	Informatica = require('../../config/departaments/informatica.js'),
 	Games = require('../../config/departaments/games.js'),
@@ -29,7 +30,9 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
 
   	getDepartament('arg',function(departament){
 
-  		async.map(departament, function(data,callback){
+  		var departament_2 = TV.array;
+
+  		async.map(departament_2, function(data,callback){
 			start(data,function(result){
 				// callback(null, data["query"]);
 				callback(null, result);
@@ -167,8 +170,8 @@ function getDepartament(argument,next) {
 	    	departament = Smartphones.array;
 	    	break;
 	    case 7:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	   	case 8:
 			console.log("set departament >> Smartphones");
