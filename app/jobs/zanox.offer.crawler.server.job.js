@@ -32,7 +32,7 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
 
   		// var departament_2 = TV.array;
 
-  		async.map(departament_2, function(data,callback){
+  		async.map(departament, function(data,callback){
 			start(data,function(result){
 				// callback(null, data["query"]);
 				callback(null, result);
