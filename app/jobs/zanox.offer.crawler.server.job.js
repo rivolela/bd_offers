@@ -30,7 +30,7 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
 
   	getDepartament('arg',function(departament){
 
-  		var departament_2 = TV.array;
+  		// var departament_2 = TV.array;
 
   		async.map(departament_2, function(data,callback){
 			start(data,function(result){
@@ -246,20 +246,20 @@ function getDepartament(argument,next) {
 	    	departament = Smartphones.array;
 	    	break;
 	   	case 26:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	    case 27:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	    case 28:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	   	case 29:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	    case 30:
 			console.log("set departament >> Smartphones");
