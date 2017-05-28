@@ -3,6 +3,7 @@ var config = require('../../config/config.js'),
 	Eletroportateis = require('../../config/departaments/eletroportateis.js'),
 	Smartphones = require('../../config/departaments/smartphones.js'),
 	Informatica = require('../../config/departaments/informatica.js'),
+	TV = require('../../config/departaments/tv.js'),
 	Games = require('../../config/departaments/games.js'),
 	Fotografia = require('../../config/departaments/fotografias.js'),
 	Zanox = require('../../config/partners/zanox.js'),
@@ -115,7 +116,7 @@ var job_fotografias = cron.schedule(JobConfig.schedule_fotografias, function(err
 
 var job_tv = cron.schedule(JobConfig.schedule_tv, function(err){
 	console.log('starting job_tv ...');
-  	async.map(tv.array, function(data,callback){
+  	async.map(TV.array, function(data,callback){
 		start(data,function(result){
 			// callback(null, data["query"]);
 			callback(null, result);
