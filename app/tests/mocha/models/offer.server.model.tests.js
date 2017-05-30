@@ -87,6 +87,27 @@ describe('Offer Model Unit Tests:',function(){
   			totalReviews: 80,
 		});
 
+
+		offer_04 = new Offer({
+			urlOffer: '3703135/sk',
+			name: 'TV 70 LED LG UH6350 Ultra HD 4K, webOS 3.0, Dolby Vision, Ultra Luminância, Entradas HDMI 3 e USB 3, com Controle Smart Magic',
+			ean: 71717171717171717,
+			category: 'Eletrônicos / TVs / Smart TV',
+			merchantProductId: '3703135',
+			url: 'http://ad.zanox.com/ppc/?42246922C25572714&ULP=[[3703135/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[A3697E2455EA755B758F]]',
+			manufacturer: 'LG',
+			image_medium: 'https://static.wmobjects.com.br/imgres/arquivos/ids/10523687-250-250',
+			price: 9799,
+			price_display: "R$ 9.799,00",
+			advertiser: "Walmart BR",
+			departamentBD: "tv",
+			categoryBD: "ultra hd",
+			programGroup: "group_all",
+			countSad: 1,
+  			countHappy: 2,
+  			totalReviews: 3,
+		});
+
 		async.waterfall([
     		function(callback) {
     			offer_01.save(function(){
@@ -101,6 +122,11 @@ describe('Offer Model Unit Tests:',function(){
     		function(arg,callback) {
     			offer_03.save(function(){
     				callback(null,'offer 3 saved');
+				});
+    		},
+    		function(arg,callback) {
+    			offer_04.save(function(){
+    				callback(null,'offer 4 saved');
 				});
     		},
 		],
@@ -126,6 +152,15 @@ describe('Offer Model Unit Tests:',function(){
 		});
 	});
 
+
+	describe('Testing save text categoryBD >>',function(){
+		it('Testing the get categoryBD == ultra_hd ',function(){
+		    Offer.find({ean:71717171717171717},function (err, result) {
+		    	console.log(result);
+				result[0].categoryBD.should.be.equal("ultra_hd");	
+		    });
+		});
+	});
 
 
 	after(function(done){

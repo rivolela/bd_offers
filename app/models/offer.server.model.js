@@ -46,7 +46,8 @@ var OfferSchema = new Schema({
   departamentBD: String,
   categoryBD: {
     type:String,
-    index: true
+    index: true,
+    set: replaceWhiteSpace
   },
   programGroup: String,
   minorPriceEAN:{
@@ -87,6 +88,16 @@ OfferSchema.index(
   {name: 'My text index', weights: {name: 10,categoryBD:3,category:2,manufacturer:1}
 });
 
+
+/**
+ * [replaceWhiteSpace description >> from " " to '-']
+ * @param  {String} categoryBD [description]
+ * @return {String}            [description]
+ */
+function replaceWhiteSpace(categoryBD){
+  var resp =  categoryBD.replace(/\s/g,"_");
+  return resp;
+}
 
 module.exports = mongoose.model('Offer', OfferSchema);
 
