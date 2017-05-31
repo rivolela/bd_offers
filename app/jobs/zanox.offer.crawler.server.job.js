@@ -146,8 +146,8 @@ function getDepartament(argument,next) {
 
 	switch (day) {
 	    case 1:
-	    	console.log("set departament >> Eletrodomesticos");
-	    	departament = Eletrodomesticos.array;
+			console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	    case 2:
 			console.log("set departament >> Eletroportateis");
@@ -266,7 +266,8 @@ function getDepartament(argument,next) {
 	    	departament = Smartphones.array;
 	    	break;
 	    case  31:
-	        day = "Saturday";
+	        console.log("set departament >> TV");
+	    	departament = TV.array;
 	}
 
 	return next(departament);

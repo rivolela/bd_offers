@@ -54,8 +54,14 @@ module.exports = function(){
 		  return val;
 		}
 
+	function replaceWhiteSpaceByUnderline(val){
+  		var resp =  val.replace(/\s/g,"_");
+  		return resp;
+	}
+
 	return {
         makeslug: makeslug,
+        replaceWhiteSpaceByUnderline: replaceWhiteSpaceByUnderline
     };
 };
 
