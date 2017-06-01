@@ -20,7 +20,7 @@ module.exports = {
 	schedule_tv:'0 6 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'10 0 * * *',
+	schedule_offers_reviews:'0 10 * * *',
 };
 
 
