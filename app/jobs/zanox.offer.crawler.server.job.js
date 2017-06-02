@@ -150,8 +150,10 @@ function getDepartament(argument,next) {
 	    	departament = TV.array;
 	    	break;
 	    case 2:
-			console.log("set departament >> Eletroportateis");
-	    	departament = Eletroportateis.array;
+			// console.log("set departament >> Eletroportateis");
+	  //   	departament = Eletroportateis.array;
+	    	console.log("set departament >> TV");
+	    	departament = TV.array;
 	    	break;
 	    case 3:
 			console.log("set departament >> Fotografia");
