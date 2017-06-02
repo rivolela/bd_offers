@@ -12,15 +12,15 @@ module.exports = {
 	// schedule offers jobs
 	all_schedule:'0 10 * * *',
 	schedule_eletrodomesticos:'0 0 * * *',
-	schedule_eletroportateis:'0 1 * * *',
+	schedule_eletroportateis:'48 18 * * *',
 	schedule_smartphones:'0 2 * * *',
 	schedule_informatica:'0 3 * * *',
 	schedule_games:'0 4 * * *',
 	schedule_fotografias:'0 5 * * *',
-	schedule_tv:'30 16 * * *',
+	schedule_tv:'0 6 * * *',
 
 	// schedule offers reviews jobs
-	schedule_offers_reviews:'13 14 * * *',
+	schedule_offers_reviews:'0 10 * * *',
 };
 
 

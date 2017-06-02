@@ -39,7 +39,7 @@ var getOffersContext = function(url,itemsByPage,next){
 };
 
 
-var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departament,query,next){
+var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departament,categoryBD,next){
 
 	try{
 		console.log("currentPage >>",currentPage);
@@ -53,9 +53,9 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departa
 			call.getJson(url_offers,config.timeRequest,function(error,response,json) {
 				console.log("callback getOffersCrawlerPagination >> ");
 				var currentItem = 0;
-				saveOffersCrawler(currentItem,json,departament,query,function(){
+				saveOffersCrawler(currentItem,json,departament,categoryBD,function(){
 					console.log("callback saveOffersCrawler >> ");
-					getOffersCrawlerPagination(currentPage+1,totalPaginacao,url,departament,query,next);
+					getOffersCrawlerPagination(currentPage+1,totalPaginacao,url,departament,categoryBD,next);
 				});
 			});
 		}else{
@@ -68,7 +68,7 @@ var getOffersCrawlerPagination = function(currentPage,totalPaginacao,url,departa
 };
 
 
-var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,category,next){
+var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,categoryBD,next){
 	
 	try{
 		console.log("currentPage >>",currentPage);
@@ -90,7 +90,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,c
 				// step_02 >> parse offer from json to offer bd model
 				function(json,callback){
 					var offersArray = [];
-					parseJSONtoArrayOffers(currentItem,json,departament,category,offersArray,function(offersResult){
+					parseJSONtoArrayOffers(currentItem,json,departament,categoryBD,offersArray,function(offersResult){
 						console.log("callback parseJSONtoArrayOffers >> ");
 						console.log("total of offers pagination >> ",json.items);
 						console.log("total of offers com EAN >> ",offersResult.length);
@@ -122,7 +122,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,c
 					console.log("err >>",err);
 					return next(err);
 				}else{
-					saveOffersPagination(currentPage+1,totalPaginacao,url,departament,category,next);
+					saveOffersPagination(currentPage+1,totalPaginacao,url,departament,categoryBD,next);
 					// return next();
 				}
 			});
@@ -138,7 +138,7 @@ var saveOffersPagination = function(currentPage,totalPaginacao,url,departament,c
 
 
 
-var parseJSONtoArrayOffers = function(currentItem,data,departament,category,offersArray,next){
+var parseJSONtoArrayOffers = function(currentItem,data,departament,categoryBD,offersArray,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -158,7 +158,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,category,offe
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				departamentBD: departament,
-				categoryBD: category,
+				categoryBD: categoryBD,
 				nameURL: data.productItems.productItem[currentItem].name,
 			});
 
@@ -177,7 +177,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,category,offe
 				offersArray.push(offer);
 			}
 
-			parseJSONtoArrayOffers(currentItem+1,data,departament,category,offersArray,next);
+			parseJSONtoArrayOffers(currentItem+1,data,departament,categoryBD,offersArray,next);
 		
 		}else{
 		  return next(offersArray);
@@ -189,7 +189,7 @@ var parseJSONtoArrayOffers = function(currentItem,data,departament,category,offe
 };
 
 
-var saveOffersCrawler = function(currentItem,data,departament,query,next){
+var saveOffersCrawler = function(currentItem,data,departament,categoryBD,next){
 	
 	try{
 		if(currentItem < data.items){
@@ -224,7 +224,7 @@ var saveOffersCrawler = function(currentItem,data,departament,query,next){
 			}
 
 			OfferCrawler.saveOfferBD(offer,function(){
-				saveOffersCrawler(currentItem+1,data,departament,query,next);
+				saveOffersCrawler(currentItem+1,data,departament,categoryBD,next);
 			});
 
 		}else{

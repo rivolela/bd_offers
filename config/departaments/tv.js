@@ -14,6 +14,7 @@ module.exports = {
 						'merchantcategory=' + 'TV Curva' + '&' +
 						'merchantcategory=' + 'Eletrônicos / TVs / Smart TV',
     		departament:"tv",
+    		categoryBD : 'smart_tv',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{
@@ -26,6 +27,7 @@ module.exports = {
 						'merchantcategory=' + 'TV Tela Curva' + '&' +
 						'merchantcategory=' + 'TV Curva',
     		departament:"tv",
+    		categoryBD :'ultra_hd',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{
@@ -38,6 +40,7 @@ module.exports = {
 						'merchantcategory=' + 'TV Curva' + '&' +
 						'merchantcategory=' + 'Eletrônicos / TVs / Smart TV',
     		departament:"tv",
+    		categoryBD :'televisão',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{
@@ -46,6 +49,7 @@ module.exports = {
 						'merchantcategory=' + 'Home Theater' + '&' +
 						'merchantcategory=' + 'Eletrônicos & INATIVA / Home Theaters & INATIVA / Home Theaters & INATIVA',
     		departament:"tv",
+    		categoryBD :'home_theater',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{
@@ -55,6 +59,7 @@ module.exports = {
 						'merchantcategory=' + 'TV LED' + '&' +
 						'merchantcategory=' + 'Eletrônicos / TVs / TV Monitor',
     		departament:"tv",
+    		categoryBD :'tv_monitor',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 	]

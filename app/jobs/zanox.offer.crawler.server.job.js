@@ -57,6 +57,7 @@ var job_crawler = cron.schedule(JobConfig.schedule_offers_reviews,  function(err
 function start(item,next){
 
 	var query = item.query;
+	var categoryBD = item.categoryBD;
 	var dictionary = item.dictionary;
 	var departament = item.departament;
 	var programs = item.programs;
@@ -89,7 +90,7 @@ function start(item,next){
 	    },
 	    // step_04 >> getOffersCrawlerPagination
 	    function(totalPaginacao,url,callback){
-	    	zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,departament,query,function(){
+	    	zanoxController.getOffersCrawlerPagination(currentPage,totalPaginacao,url,departament,categoryBD,function(){
 				console.log("callback getOffersPagination >>");
 				callback(null,'arg');
 			});

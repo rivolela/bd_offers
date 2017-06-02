@@ -144,6 +144,7 @@ function getFullName(item, next) {
 function start(item,next){
 
 	var query = item.query;
+	var categoryBD = item.categoryBD;
 	var dictionary = item.dictionary;
 	var departament = item.departament;
 	var programs = item.programs;
@@ -153,7 +154,7 @@ function start(item,next){
 	async.waterfall([
 		// step_01 >> delelte all offers
 		function(callback){
-			offerController.deleteCategoryOffersBD(query,function(){
+			offerController.deleteCategoryOffersBD(categoryBD,function(){
 				console.log("callback deleteCategoryOffersBD>>");
 				callback(null, 'arg');
 			});
@@ -176,14 +177,14 @@ function start(item,next){
 	    // step_04 >> getOffers BY Pagination
 	    function(totalPaginacao,url,callback){
 	    	var currentPage = 0;
-	    	zanoxController.saveOffersPagination(currentPage,totalPaginacao,url,departament,query,function(){
+	    	zanoxController.saveOffersPagination(currentPage,totalPaginacao,url,departament,categoryBD,function(){
 				console.log("callback get items by page >>");
 				callback(null,'arg');
 			});
 	    },
 	    // step_05 >> get offers
 	    function(arg,callback){
-	    	offerController.getOffersBD({categoryBD:query},function(offersArray){
+	    	offerController.getOffersBD({categoryBD:categoryBD},function(offersArray){
 				console.log("offersArray >>",offersArray);
 				callback(null,offersArray);
 			});

@@ -47,7 +47,6 @@ var OfferSchema = new Schema({
   categoryBD: {
     type:String,
     index: true,
-    set: stringUtile.replaceWhiteSpaceByUnderline
   },
   programGroup: String,
   minorPriceEAN:{
