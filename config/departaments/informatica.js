@@ -19,6 +19,7 @@ module.exports = {
 						'merchantcategory=' + 'Eletronicos' + '&' +
 						'merchantcategory=' + 'Escolha por Marca',
 	    	departament:"informática",
+	    	categoryBD : 'tablet',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
     	{
@@ -28,6 +29,7 @@ module.exports = {
 						'merchantcategory=' + 'Informática' + '&' +
 						'merchantcategory=' + 'pad / Mini / Wi-fi / + / 3g / & / 4g',
     		departament:"informática",
+    		categoryBD : 'ipad_apple',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
     	},
     	{
@@ -48,6 +50,7 @@ module.exports = {
 						'merchantcategory=' + '2 / Em / 1 / - / Core / I7' + '&' +
 						'merchantcategory=' + 'pad / Mini / Wi-fi / + / 3g / & / 4g',
 	    	departament:"informática",
+	    	categoryBD : 'notebook',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'},
     	{	
     		query : "macbook apple", 
@@ -55,6 +58,7 @@ module.exports = {
 						'merchantcategory=' + 'Mochilas para Notebook' + '&' +
 						'merchantcategory=' + 'Notebook',
 	    	departament:"informática",
+	    	categoryBD : 'macbook_apple',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
     	{
@@ -68,6 +72,7 @@ module.exports = {
 						'merchantcategory=' + 'Informática / Impressão / Impressoras' + '&' +
 						'merchantcategory=' + 'Informatica / Impressoras / Impressora',
 	    	departament:"informática",
+	    	categoryBD : 'impressoras',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
     	// {
@@ -89,6 +94,7 @@ module.exports = {
 						'merchantcategory=' + 'Informática' + '&' +
 						'merchantcategory=' + 'GPS',
     		departament:"informática",
+    		categoryBD : 'navegador_gps',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
     	},
 

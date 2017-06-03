@@ -15,6 +15,7 @@ module.exports = {
 						'merchantcategory=' + 'Smartphones / Apple / iPhone 7' + '&' +
 						'merchantcategory=' + 'iOS%20%26%20iPhone',
 	    	departament:"smartphones",
+	    	categoryBD : 'iphone',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	    {
@@ -22,6 +23,7 @@ module.exports = {
     		dictionary: 'merchantcategory=' + 'Telefonia / Celulares e Smartphones / Smartphones' + '&' +
 						'merchantcategory=' + 'Telefonia / Celulares e Smartphones / Celulares',
 	    	departament:"smartphones",
+	    	categoryBD : 'motorola',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	    {
@@ -33,6 +35,7 @@ module.exports = {
 						'merchantcategory=' + 'Android' + '&' +
 						'merchantcategory=' + 'Telefonia',
 	    	departament:"smartphones",
+	    	categoryBD : 'zenfone',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	    {
@@ -46,6 +49,7 @@ module.exports = {
 						'merchantcategory=' + 'Premium' + '&' +
 						'merchantcategory=' + 'Telefonia',
 	    	departament:"smartphones",
+	    	categoryBD : 'sony',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	    {
@@ -57,6 +61,7 @@ module.exports = {
 						'merchantcategory=' + 'Outros / Smartphones' + '&' +
 						'merchantcategory=' + 'Telefonia',
 	    	departament:"smartphones",
+	    	categoryBD : 'lg',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	    {
@@ -70,6 +75,7 @@ module.exports = {
 						'merchantcategory=' + 'Smartphones / Samsung / Galaxy J' + '&' +
 						'merchantcategory=' + 'Smartphones / Samsung / Galaxy A',
 	    	departament:"smartphones",
+	    	categoryBD : 'samsung_galaxy',
 	    	programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 	    },
 	]
