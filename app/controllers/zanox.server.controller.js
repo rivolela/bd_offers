@@ -209,7 +209,7 @@ var saveOffersCrawler = function(currentItem,data,departament,categoryBD,next){
 				price_display: data.productItems.productItem[currentItem].price,
 				advertiser: data.productItems.productItem[currentItem].program.$,
 				departamentBD:departament,
-				categoryBD:query,
+				categoryBD:categoryBD,
 			});
 
 			// TO DO - the zanox api result, although of header response is configured to UTF-8
