@@ -173,8 +173,8 @@ function getDepartament(argument,next) {
 	    	departament = Smartphones.array;
 	    	break;
 	    case 7:
-			console.log("set departament >> TV");
-	    	departament = TV.array;
+			console.log("set departament >> Smartphones");
+	    	departament = Smartphones.array;
 	    	break;
 	   	case 8:
 			console.log("set departament >> Smartphones");

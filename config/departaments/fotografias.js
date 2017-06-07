@@ -15,6 +15,7 @@ module.exports = {
 						'merchantcategory=' + 'Câmeras profissionais' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Flashes',
     		departament:"câmeras",
+    		categoryBD : 'câmeras',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -25,18 +26,21 @@ module.exports = {
 						'merchantcategory=' + 'Brinquedos / Bonecos e Colecionáveis / Playsets de Bonecos' + '&' +
 						'merchantcategory=' + 'Binóculos',
     		departament:"câmeras",
+    		categoryBD : 'binóculos',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
 			query : 'telescópios',
 			dictionary: '',
     		departament:"câmeras",
+    		categoryBD : 'telescópios',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
 			query : 'instax',
 			dictionary: '',
     		departament:"câmeras",
+    		categoryBD : 'instax',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 		{	
@@ -49,6 +53,7 @@ module.exports = {
 						'merchantcategory=' + 'Câmeras e Drones / Drones e Acessórios / Drones' + '&' +
 						'merchantcategory=' + 'Câmeras e Drones / Câmeras Profissionais / Câmeras DSLR',
     		departament:"câmeras",
+    		categoryBD : 'drones',
     		programs:'12011,13212,16588,12781,12785,12784,13604,18878,13602'
 		},
 	]
