@@ -286,7 +286,7 @@ describe('Offer Unit Tests:',function(done){
 
 
 	describe('Testing getOfferCheaper >>',function(){
-		it('should get offers with minor price >>',function(done){
+		it('should get offer cheaper from EAN >>',function(done){
 			this.timeout(10000);
 			var ean = 7899466418121;
 			var price = 100.9;
