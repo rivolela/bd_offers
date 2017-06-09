@@ -320,6 +320,7 @@ var saveMinorPriceOffers = function(currentItem,offersArray,next){
      						url: OfferCheaperEAN.url,
      						advertiser: OfferCheaperEAN.advertiser,
      						price_display: OfferCheaperEAN.price_display,
+     						price: OfferCheaperEAN.price,
   						}
   					};
   					updateOffer(offer,updateFields,function(offerUpdated){
