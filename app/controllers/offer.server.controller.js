@@ -212,11 +212,12 @@ var getOffersBD = function(query,next){
  */
 var getMinorPrice = function(ean,next){
 
-	var getEan = Number(ean);
+	// var getEan = Number(ean);
 
     Offer.aggregate([
-		{$match : {ean:getEan}},
-		{$group : {_id : "$ean",menor_preco:{$min:"$price"}}}
+		{$match : {ean:ean}},
+		{$group : {_id : "$ean",menor_preco:{$min:"$price"}}},
+		{$project: {_id:0,menor_preco:1}}
 	],
 	function (err, minorPriceEan) {
         if(err){
@@ -229,6 +230,33 @@ var getMinorPrice = function(ean,next){
         console.log(minorPriceEan);
     });
 };
+
+
+/**
+ * [getOfferCheaper description]
+ * @param  {Number}   ean   [description]
+ * @param  {Number}   price [description]
+ * @param  {Function} next  [description]
+ * @return {OfferCheaper}   [description]
+ */
+var getOfferCheaper = function(ean,price,next){
+	
+	console.log("ean >> ",ean);
+	console.log("price >>",price);
+
+	Offer.find({
+      $and: [{ean: ean, price: price}] 
+  	}, function (err, offers) {
+  		if(err){
+			console.log(err);
+			return next(err);
+		}else{
+			// console.log(offers);
+			return next(offers);
+		}
+	}).limit(1);
+};
+
 
 
 /**
@@ -272,19 +300,28 @@ var saveMinorPriceOffers = function(currentItem,offersArray,next){
 				// step_01 >> get minor preco of EAN
 				function(callback){
 					getMinorPrice(offer.ean,function(minorPrice){
-						callback(null, minorPrice);
+						var price = minorPrice[0].menor_preco;
+						console.log("price >>",price);
+						callback(null, price);
 			   		});
 				},
-				// step_02 >> parse price in Real currency
-				function(minorPrice, callback){
-					var currencyUtile = new CurrencyUtile();
-					var price = minorPrice[0].menor_preco;
-					var brazilianPrice = currencyUtile.formatBrazilCurrency(price);
-					callback(null, brazilianPrice);
+				// // step_02 >> get offer from minor price EAN
+				function(price,callback){
+					getOfferCheaper(offer.ean,price,function(OfferCheaperEAN){
+						console.log("teste",OfferCheaperEAN);
+						callback(null, OfferCheaperEAN[0]);
+					});
 				},
-				// step_03 >> update offer with minor preco of EAN
-			    function(brazilianPrice, callback) {
-  					var updateFields = {minorPriceEAN:brazilianPrice};
+				// step_03 >> update offer with info of the OfferCheaperEAN
+			    function(OfferCheaperEAN, callback) {
+			    	console.log("OfferCheaperEAN",OfferCheaperEAN);
+  					var updateFields = {
+  						 lowerOfferEan: {
+     						url: OfferCheaperEAN.url,
+     						advertiser: OfferCheaperEAN.advertiser,
+     						price_display: OfferCheaperEAN.price_display,
+  						}
+  					};
   					updateOffer(offer,updateFields,function(offerUpdated){
 						callback(null, 'arg');
   					});
@@ -406,3 +443,4 @@ exports.saveMinorPriceOffers = saveMinorPriceOffers;
 exports.saveArrayOffers = saveArrayOffers;
 exports.updateOffer = updateOffer;
 exports.saveProductsOffersArray = saveProductsOffersArray;
+exports.getOfferCheaper = getOfferCheaper;

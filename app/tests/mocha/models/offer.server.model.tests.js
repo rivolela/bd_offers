@@ -154,10 +154,10 @@ describe('Offer Model Unit Tests:',function(){
 
 
 	describe('Testing save text categoryBD >>',function(){
-		it('Testing the get categoryBD == ultra_hd ',function(){
+		it('Testing the get categoryBD == ultra hd ',function(){
 		    Offer.find({ean:71717171717171717},function (err, result) {
 		    	console.log(result);
-				result[0].categoryBD.should.be.equal("ultra_hd");	
+				result[0].categoryBD.should.be.equal("ultra hd");	
 		    });
 		});
 	});

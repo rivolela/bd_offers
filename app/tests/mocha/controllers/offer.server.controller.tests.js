@@ -94,6 +94,20 @@ describe('Offer Unit Tests:',function(done){
 			departamentBD: Eletrodomesticos.name,
 		});
 
+		var data6 = new Object ({
+			name:'Fogao de Embutir 5 Bocas Brastemp Clean BYS5TAR Inox com Timer',
+  			ean:7899466418121,
+  			category:"Eletrodomésticos / Fogões / Embutir 5 Bocas",
+  			merchantProductId: 1109777,
+  			url:"http://ad.zanox.com/ppc/?25371034C45550273&ULP=[[1109777/sk?utm_medium=afiliados&utm_source=zanox&utm_campaign=xml_zanox&utm_term=zanox]]&zpar9=[[43EEF0445509C7205827]]",
+  			advertiser:"walmart",
+  			price: 100.9,
+  			price_display: 100.9,
+  			image_medium: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			image_large: "https://static.wmobjects.com.br/imgres/arquivos/ids/9884910-250-250",
+			departamentBD: Eletrodomesticos.name,
+		});
+
 
 		var arrayOffers = [];
 		arrayOffers.push(data1);
@@ -101,6 +115,7 @@ describe('Offer Unit Tests:',function(done){
 		arrayOffers.push(data3);
 		arrayOffers.push(data4);
 		arrayOffers.push(data5);
+		arrayOffers.push(data6);
 
 		Context.arrayOffers = arrayOffers; 
 
@@ -222,9 +237,9 @@ describe('Offer Unit Tests:',function(done){
 
 	describe('Testing saveArrayOffers >>',function(){
  		this.timeout(10000);
-		it('Should return offersArray === 5',function(done){
+		it('Should return offersArray === 6',function(done){
 			offerController.saveArrayOffers(0,Context.arrayOffers,function(offersArray){
-				offersArray.length.should.be.equal(5);
+				offersArray.length.should.be.equal(6);
 				done();
 			});
 		});
@@ -270,6 +285,19 @@ describe('Offer Unit Tests:',function(done){
 	});
 
 
+	describe('Testing getOfferCheaper >>',function(){
+		it('should get offers with minor price >>',function(done){
+			this.timeout(10000);
+			var ean = 7899466418121;
+			var price = 100.9;
+			offerController.getOfferCheaper(ean,price,function(offerCheaper){
+				console.log("offerCheaper >>",offerCheaper);
+				offerCheaper[0].price.should.be.equal(100.9);
+				done();
+			});
+		});
+	});
+
 	describe('Testing save product by offer',function(){
 		it('should not return error in save product by offer',function(done){
 			this.timeout(20000);
@@ -279,6 +307,7 @@ describe('Offer Unit Tests:',function(done){
 			});
 		});
 	});
+
 
 	after(function(){
 		this.timeout(4000);

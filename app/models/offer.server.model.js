@@ -59,6 +59,11 @@ var OfferSchema = new Schema({
   product:{
     type: Schema.ObjectId,
     ref: 'Product'
+  },
+  lowerOfferEan:{
+     url: String,
+     advertiser: String,
+     price_display: String
   }
 });
 
