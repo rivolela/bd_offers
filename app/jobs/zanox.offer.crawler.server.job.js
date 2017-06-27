@@ -253,20 +253,20 @@ function getDepartament(argument,next) {
 	    	departament = TV.array;
 	    	break;
 	    case 27:
-			console.log("set departament >> TV");
-	    	departament = TV.array;
+			console.log("set departament >> Eletrodomesticos");
+	    	departament = Eletrodomesticos.array;
 	    	break;
 	    case 28:
-			console.log("set departament >> TV");
-	    	departament = TV.array;
+			console.log("set departament >> Eletroportateis");
+	    	departament = Eletroportateis.array;
 	    	break;
 	   	case 29:
-			console.log("set departament >> TV");
-	    	departament = TV.array;
+			console.log("set departament >> Eletrodomesticos");
+	    	departament = Eletrodomesticos.array;
 	    	break;
 	    case 30:
-			console.log("set departament >> Smartphones");
-	    	departament = Smartphones.array;
+			console.log("set departament >> Eletroportateis");
+	    	departament = Eletroportateis.array;
 	    	break;
 	    case  31:
 	        console.log("set departament >> TV");
